@@ -17,3 +17,8 @@ void Nuwa::IndexBuffer::Unbind() const
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
+
+Nuwa::uint Nuwa::IndexBuffer::Count() const
+{
+	return count;
+}

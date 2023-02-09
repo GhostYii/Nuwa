@@ -13,6 +13,8 @@ namespace Nuwa
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
+		uint Count() const;
+
 	private:
 		uint count;
 	};

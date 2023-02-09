@@ -153,6 +153,7 @@
     <ClCompile Include="Source\Core\NwWindow.cpp" />
     <ClCompile Include="Source\Time.cpp" />
     <ClCompile Include="Source\Utils.cpp" />
+    <ClCompile Include="Source\Graphics\VertexLayout.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Graphics\Shader.h" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Source\EngineTypes.h" />
     <ClInclude Include="Source\Time.h" />
     <ClInclude Include="Source\Utils.h" />
+    <ClInclude Include="Source\Graphics\VertexLayout.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Default.shader" />
