@@ -145,14 +145,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Buffer\IndexBuffer.cpp" />
+    <ClCompile Include="Source\Renderer.cpp" />
     <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Source\Core\NwWindow.cpp" />
     <ClCompile Include="Source\Time.cpp" />
     <ClCompile Include="Source\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Buffer\IndexBuffer.h" />
+    <ClInclude Include="Source\Renderer.h" />
+    <ClInclude Include="Source\Buffer\BufferBase.h" />
+    <ClInclude Include="Source\Buffer\VertexBuffer.h" />
     <ClInclude Include="Source\Core\NwWindow.h" />
     <ClInclude Include="Source\EngineMacros.h" />
+    <ClInclude Include="Source\EngineTypes.h" />
     <ClInclude Include="Source\Time.h" />
     <ClInclude Include="Source\Utils.h" />
   </ItemGroup>
