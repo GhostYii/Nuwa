@@ -27,13 +27,16 @@
     <ClCompile Include="Source\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Buffer\VertexBuffer.cpp">
+    <ClCompile Include="Source\Graphics\IndexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Renderer.cpp">
+    <ClCompile Include="Source\Graphics\VertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Buffer\IndexBuffer.cpp">
+    <ClCompile Include="Source\Graphics\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,19 +53,22 @@
     <ClInclude Include="Source\Time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Buffer\VertexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EngineTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Buffer\BufferBase.h">
+    <ClInclude Include="Source\Graphics\IndexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Renderer.h">
+    <ClInclude Include="Source\Graphics\VertexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Buffer\IndexBuffer.h">
+    <ClInclude Include="Source\Graphics\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\IBindable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,13 +1,13 @@
 #pragma once
-#include "../Renderer.h"
+#include "Renderer.h"
 
 namespace Nuwa
 {
-	class BufferBase
+	class IBindable
 	{
 	public:
-		BufferBase() : rendererID(0) {}
-		virtual ~BufferBase() { glDeleteBuffers(1, &rendererID); }
+		IBindable() : rendererID(0) {}
+		virtual ~IBindable() {}
 
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
