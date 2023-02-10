@@ -6,7 +6,7 @@ namespace Nuwa
 	class Time
 	{
 	public:
-		static int GetTime();
+		static float GetTime();
 		static std::string GetLocalTimeStr();
 	//private:
 	//	Time();
