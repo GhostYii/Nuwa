@@ -2,6 +2,8 @@
 #include "../EngineTypes.h"
 #include <GLFW/glfw3.h>
 
+#include "../Graphics/Renderer.h"
+
 namespace Nuwa
 {
 	struct WindowConfig
@@ -21,6 +23,7 @@ namespace Nuwa
 		bool IsRun();
 
 		void InitImGui();
+		void Start();
 		void Update();
 		void Close();
 
@@ -31,8 +34,12 @@ namespace Nuwa
 	protected:
 		GLFWwindow* window;
 		WindowConfig config;
+		ToyRenderer* renderer = nullptr;
 
+		virtual void OnStart() {}
 		virtual void OnGUI() {}
+		virtual void OnUpdate() {}
+		virtual void OnRenderObject() {}
 	};
 }
 

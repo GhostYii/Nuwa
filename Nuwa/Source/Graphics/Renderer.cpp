@@ -1,15 +1,19 @@
 #include "Renderer.h"
+#include "VertexArray.h"
+#include "IndexBuffer.h"
+#include "Shader.h"
+#include "../EngineMacros.h"
 
-void Nuwa::ToyRenderer::Draw(const VertexArray& vao, const IndexBuffer& ibo, const Shader& shader) const
+void Nuwa::ToyRenderer::Draw(Nuwa::VertexArray* vao, Nuwa::IndexBuffer* ibo, Nuwa::Shader* shader) const
 {
-	shader.Bind();
-	vao.Bind();
-	ibo.Bind();
+	shader->Bind();
+	vao->Bind();
+	ibo->Bind();
 
-	glDrawElements(GL_TRIANGLES, ibo.Count(), GL_UNSIGNED_INT, nullptr);
+	GL_ASSERT(glDrawElements(GL_TRIANGLES, ibo->Count(), GL_UNSIGNED_INT, nullptr));
 }
 
 void Nuwa::ToyRenderer::Clear() const
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	GL_ASSERT(glClear(GL_COLOR_BUFFER_BIT));
 }

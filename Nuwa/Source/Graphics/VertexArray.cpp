@@ -1,13 +1,14 @@
 #include "VertexArray.h"
+#include "../EngineMacros.h"
 
 Nuwa::VertexArray::VertexArray()
 {
-	glGenVertexArrays(1, &rendererID);
+	GL_ASSERT(glGenVertexArrays(1, &rendererID));
 }
 
 Nuwa::VertexArray::~VertexArray()
 {
-	glDeleteVertexArrays(1, &rendererID);
+	GL_ASSERT(glDeleteVertexArrays(1, &rendererID));
 }
 
 void Nuwa::VertexArray::AddBuffer(const VertexBuffer& buffer, const VertexLayout& layout)
@@ -21,8 +22,8 @@ void Nuwa::VertexArray::AddBuffer(const VertexBuffer& buffer, const VertexLayout
 	for (uint i = 0; i < elements.size(); ++i)
 	{
 		const auto& elem = elements[i];
-		glEnableVertexAttribArray(i);
-		glVertexAttribPointer(i, elem.count, elem.type, elem.normalized, layout.Stride(), (const void*)offset);
+		GL_ASSERT(glEnableVertexAttribArray(i));
+		GL_ASSERT(glVertexAttribPointer(i, elem.count, elem.type, elem.normalized, layout.Stride(), (const void*)offset));
 
 		offset += elem.count * VertexElement::GetTypeSize(elem.type);
 	}	
@@ -30,10 +31,10 @@ void Nuwa::VertexArray::AddBuffer(const VertexBuffer& buffer, const VertexLayout
 
 void Nuwa::VertexArray::Bind() const
 {
-	glBindVertexArray(rendererID);
+	GL_ASSERT(glBindVertexArray(rendererID));
 }
 
 void Nuwa::VertexArray::Unbind() const
 {
-	glBindVertexArray(0);
+	GL_ASSERT(glBindVertexArray(0));
 }

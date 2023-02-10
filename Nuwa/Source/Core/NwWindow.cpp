@@ -1,13 +1,17 @@
 #include "NwWindow.h"
 #include <GL/glew.h>
-#include "../GUI/GUI.h"
 #include <spdlog/spdlog.h>
 
+#include "../GUI/GUI.h"
+#include "../EngineMacros.h"
+
 Nuwa::NwWindow::NwWindow()
-	:config({ 640, 480, "Nuwa Window", {0.5f,0.5f,0.5f,1.0f} }), window(nullptr)
+	:config({ 640, 480, "Nuwa Window", {1.0f,1.0f,1.0f,1.0f} }), window(nullptr)
 {
 	if (!glfwInit())
 		spdlog::error("glfw init failed.");
+
+	renderer = new ToyRenderer();
 }
 
 Nuwa::NwWindow::~NwWindow()
@@ -29,19 +33,29 @@ void Nuwa::NwWindow::InitImGui()
 	Nuwa::InitImGui(window);
 }
 
+void Nuwa::NwWindow::Start()
+{
+	OnStart();
+}
+
 void Nuwa::NwWindow::Update()
 {
 	if (!window)
 		return;
 
-	glfwPollEvents();
-	Nuwa::BeginImGui();
+	GL_ASSERT(glClearColor(config.backgroundColor.r, config.backgroundColor.g, config.backgroundColor.b, config.backgroundColor.a));
+	renderer->Clear();
 
+	OnUpdate();
+	OnRenderObject();
+
+	Nuwa::BeginImGui();
 	// gui code here
 	OnGUI();
+	Nuwa::RenderImGui(window, { config.backgroundColor.r, config.backgroundColor.g, config.backgroundColor.b, config.backgroundColor.a });
 
-	Nuwa::RenderImGui(window, { config.backgroundColor.x, config.backgroundColor.y, config.backgroundColor.z, config.backgroundColor.w });
 	glfwSwapBuffers(window);
+	glfwPollEvents();
 }
 
 void Nuwa::NwWindow::Close()

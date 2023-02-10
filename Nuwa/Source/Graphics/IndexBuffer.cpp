@@ -1,21 +1,22 @@
 #include "IndexBuffer.h"
+#include "../EngineMacros.h"
 
 Nuwa::IndexBuffer::IndexBuffer(const uint* data, uint count)
 	: count(count)
 {
-	glGenBuffers(1, &rendererID);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rendererID);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint), data, GL_STATIC_DRAW);
+	GL_ASSERT(glGenBuffers(1, &rendererID));
+	GL_ASSERT(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rendererID));
+	GL_ASSERT(glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint), data, GL_STATIC_DRAW));
 }
 
 void Nuwa::IndexBuffer::Bind() const
 {
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rendererID);
+	GL_ASSERT(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rendererID));
 }
 
 void Nuwa::IndexBuffer::Unbind() const
 {
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	GL_ASSERT(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 }
 
 Nuwa::uint Nuwa::IndexBuffer::Count() const

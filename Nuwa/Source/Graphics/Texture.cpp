@@ -9,16 +9,16 @@ Nuwa::Texture::Texture(const std::string& filepath)
 
 	localBuffer = stbi_load(filepath.c_str(), &width, &height, &channel, BPP_COUNT_RGBA);
 
-	glGenTextures(1, &rendererID);
-	glBindTexture(GL_TEXTURE_2D, rendererID);
+	GL_ASSERT(glGenTextures(1, &rendererID));
+	GL_ASSERT(glBindTexture(GL_TEXTURE_2D, rendererID));
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	GL_ASSERT(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+	GL_ASSERT(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	GL_ASSERT(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+	GL_ASSERT(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, localBuffer);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	GL_ASSERT(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, localBuffer));
+	GL_ASSERT(glBindTexture(GL_TEXTURE_2D, 0));
 
 	if (localBuffer)
 		stbi_image_free(localBuffer);
@@ -26,22 +26,22 @@ Nuwa::Texture::Texture(const std::string& filepath)
 
 Nuwa::Texture::~Texture()
 {
-	glDeleteTextures(1, &rendererID);
+	GL_ASSERT(glDeleteTextures(1, &rendererID));
 }
 
 void Nuwa::Texture::Bind() const
 {
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, rendererID);
+	GL_ASSERT(glActiveTexture(GL_TEXTURE0));
+	GL_ASSERT(glBindTexture(GL_TEXTURE_2D, rendererID));
 }
 
 void Nuwa::Texture::Unbind() const
 {
-	glBindTexture(GL_TEXTURE_2D, 0);
+	GL_ASSERT(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
 void Nuwa::Texture::Bind(uint slot) const
 {
-	glActiveTexture(GL_TEXTURE0 + slot);
-	glBindTexture(GL_TEXTURE_2D, rendererID);
+	GL_ASSERT(glActiveTexture(GL_TEXTURE0 + slot));
+	GL_ASSERT(glBindTexture(GL_TEXTURE_2D, rendererID));
 }

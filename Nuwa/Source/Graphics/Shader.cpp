@@ -4,6 +4,9 @@
 #include <iostream>
 
 #include <spdlog/spdlog.h>
+#include <glm/gtc/type_ptr.hpp>
+
+#include "../EngineMacros.h"
 
 Nuwa::Shader::Shader(const std::string& filepath)
 	: filepath(filepath)
@@ -14,17 +17,32 @@ Nuwa::Shader::Shader(const std::string& filepath)
 
 Nuwa::Shader::~Shader()
 {
-	glDeleteProgram(rendererID);
+	GL_ASSERT(glDeleteProgram(rendererID));
+}
+
+void Nuwa::Shader::SetInt(const std::string& name, int value)
+{
+	GL_ASSERT(glUniform1i(GetUniformLocation(name), value));
+}
+
+void Nuwa::Shader::SetColor(const std::string& name, Vector4 color)
+{
+	GL_ASSERT(glUniform4f(GetUniformLocation(name), color.r, color.g, color.b, color.a));
+}
+
+void Nuwa::Shader::SetMatrix4x4(const std::string& name, Matrix4x4 mat)
+{
+	GL_ASSERT(glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(mat)));
 }
 
 void Nuwa::Shader::Bind() const
 {
-	glUseProgram(rendererID);
+	GL_ASSERT(glUseProgram(rendererID));
 }
 
 void Nuwa::Shader::Unbind() const
 {
-	glUseProgram(NULL);
+	GL_ASSERT(glUseProgram(NULL));
 }
 
 Nuwa::ShaderSource Nuwa::Shader::Parse()
@@ -58,41 +76,43 @@ Nuwa::ShaderSource Nuwa::Shader::Parse()
 
 Nuwa::uint Nuwa::Shader::CreateShader(const std::string& vertex, const std::string& fragment)
 {
-	uint program = glCreateProgram();
+	uint program;
+	GL_ASSERT(program = glCreateProgram());
 	uint vs = Compile(GL_VERTEX_SHADER, vertex);
 	uint fs = Compile(GL_FRAGMENT_SHADER, fragment);
 
-	glAttachShader(program, vs);
-	glAttachShader(program, fs);
+	GL_ASSERT(glAttachShader(program, vs));
+	GL_ASSERT(glAttachShader(program, fs));
 
-	glLinkProgram(program);
-	glValidateProgram(program);
+	GL_ASSERT(glLinkProgram(program));
+	GL_ASSERT(glValidateProgram(program));
 
-	glDeleteShader(vs);
-	glDeleteShader(fs);
+	GL_ASSERT(glDeleteShader(vs));
+	GL_ASSERT(glDeleteShader(fs));
 
 	return program;
 }
 
 Nuwa::uint Nuwa::Shader::Compile(uint type, const std::string& source)
 {
-	uint id = glCreateShader(type);
+	uint id;
+	GL_ASSERT(id = glCreateShader(type));
 	const char* src = source.c_str();
-	glShaderSource(id, 1, &src, nullptr);
-	glCompileShader(id);
+	GL_ASSERT(glShaderSource(id, 1, &src, nullptr));
+	GL_ASSERT(glCompileShader(id));
 
 	int complieStatus;
-	glGetShaderiv(id, GL_COMPILE_STATUS, &complieStatus);
+	GL_ASSERT(glGetShaderiv(id, GL_COMPILE_STATUS, &complieStatus));
 	if (complieStatus == GL_FALSE)
 	{
 		int length;
-		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
+		GL_ASSERT(glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length));
 		char* msg = (char*)_malloca(length * sizeof(char));
 
-		glGetShaderInfoLog(id, length, &length, msg);
+		GL_ASSERT(glGetShaderInfoLog(id, length, &length, msg));
 
 		spdlog::error("Compile {} shader error: {}.\n", type, msg);
-		glDeleteShader(id);
+		GL_ASSERT(glDeleteShader(id));
 		return GL_FALSE;
 	}
 

@@ -3,6 +3,7 @@
 #include <string>
 #include <unordered_map>
 
+
 namespace Nuwa
 {
 	class Shader : public IBindable
@@ -16,8 +17,10 @@ namespace Nuwa
 		//template<typename T>
 		//void SetValue(const std::string& name, T value);
 
-		//void SetInt(const std::string& name, int value);
+		void SetInt(const std::string& name, int value);		
 		//void SetFloat(const std::string& name, float value);
+		void SetColor(const std::string& name, Vector4 color);
+		void SetMatrix4x4(const std::string& name, Matrix4x4 mat);
 
 		// Inherited via IBindable
 		virtual void Bind() const override;
