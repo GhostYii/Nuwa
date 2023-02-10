@@ -154,6 +154,7 @@
     <ClCompile Include="Source\Time.cpp" />
     <ClCompile Include="Source\Utils.cpp" />
     <ClCompile Include="Source\Graphics\VertexLayout.cpp" />
+    <ClCompile Include="Source\Graphics\Texture.cpp" />
     <ClCompile Include="ThirdParty\stb\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="Source\Time.h" />
     <ClInclude Include="Source\Utils.h" />
     <ClInclude Include="Source\Graphics\VertexLayout.h" />
+    <ClInclude Include="Source\Graphics\Texture.h" />
     <ClInclude Include="ThirdParty\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
