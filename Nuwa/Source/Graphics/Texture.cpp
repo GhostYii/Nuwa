@@ -1,5 +1,5 @@
 #include "Texture.h"
-#include "../../ThirdParty/stb/stb_image.h"
+#include "stb/stb_image.h"
 #include "../EngineMacros.h"
 
 Nuwa::Texture::Texture(const std::string& filepath)

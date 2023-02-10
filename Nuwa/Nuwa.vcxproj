@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Nuwa\ThirdParty;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,7 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Nuwa\ThirdParty;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -170,6 +170,29 @@
     <ClInclude Include="Source\Utils.h" />
     <ClInclude Include="Source\Graphics\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Texture.h" />
+    <ClInclude Include="ThirdParty\glm\common.hpp" />
+    <ClInclude Include="ThirdParty\glm\exponential.hpp" />
+    <ClInclude Include="ThirdParty\glm\ext.hpp" />
+    <ClInclude Include="ThirdParty\glm\fwd.hpp" />
+    <ClInclude Include="ThirdParty\glm\geometric.hpp" />
+    <ClInclude Include="ThirdParty\glm\glm.hpp" />
+    <ClInclude Include="ThirdParty\glm\integer.hpp" />
+    <ClInclude Include="ThirdParty\glm\mat2x2.hpp" />
+    <ClInclude Include="ThirdParty\glm\mat2x3.hpp" />
+    <ClInclude Include="ThirdParty\glm\mat2x4.hpp" />
+    <ClInclude Include="ThirdParty\glm\mat3x2.hpp" />
+    <ClInclude Include="ThirdParty\glm\mat3x3.hpp" />
+    <ClInclude Include="ThirdParty\glm\mat3x4.hpp" />
+    <ClInclude Include="ThirdParty\glm\mat4x2.hpp" />
+    <ClInclude Include="ThirdParty\glm\mat4x3.hpp" />
+    <ClInclude Include="ThirdParty\glm\mat4x4.hpp" />
+    <ClInclude Include="ThirdParty\glm\matrix.hpp" />
+    <ClInclude Include="ThirdParty\glm\packing.hpp" />
+    <ClInclude Include="ThirdParty\glm\trigonometric.hpp" />
+    <ClInclude Include="ThirdParty\glm\vec2.hpp" />
+    <ClInclude Include="ThirdParty\glm\vec3.hpp" />
+    <ClInclude Include="ThirdParty\glm\vec4.hpp" />
+    <ClInclude Include="ThirdParty\glm\vector_relational.hpp" />
     <ClInclude Include="ThirdParty\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
