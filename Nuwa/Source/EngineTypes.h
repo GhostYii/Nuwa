@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <glm/matrix.hpp>
 
 namespace Nuwa
 {
@@ -8,6 +10,13 @@ namespace Nuwa
 	typedef unsigned char uchar;
 	typedef unsigned short ushort;
 	typedef long long int64;
+
+	//typedef glm::vec4 Color;
+	typedef glm::vec4 Vector4;
+	typedef glm::vec3 Vector3;
+	typedef glm::vec2 Vector2;
+	typedef glm::mat3x3 Matrix3x3;
+	typedef glm::mat4x4 Matrix4x4;
 
 	struct ShaderSource
 	{

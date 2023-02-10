@@ -1,9 +1,38 @@
 #pragma once
+#include "../EngineTypes.h"
+#include <GLFW/glfw3.h>
 
 namespace Nuwa
 {
+	struct WindowConfig
+	{
+		int width;
+		int height;
+		std::string title;
+		Vector4 backgroundColor;
+	};
+
 	class NwWindow
 	{
+	public:
+		NwWindow();
+		virtual ~NwWindow();
+
+		bool IsRun();
+
+		void InitImGui();
+		void Update();
+		void Close();
+
+		inline int Width() const { return config.width; }
+		inline int Height() const { return config.height; }
+		inline std::string Title() const { return config.title; }
+
+	protected:
+		GLFWwindow* window;
+		WindowConfig config;
+
+		virtual void OnGUI() {}
 	};
 }
 
