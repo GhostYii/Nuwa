@@ -18,6 +18,7 @@ Nuwa::GameWindow::GameWindow(const WindowConfig& config)
 	}
 
 	glfwMakeContextCurrent(window);
+	glfwSetFramebufferSizeCallback(window, OnFrameBufferSizeChanged);
 
 	if (glewInit() != GLEW_OK)
 		spdlog::error("glew init failed.");
@@ -26,4 +27,9 @@ Nuwa::GameWindow::GameWindow(const WindowConfig& config)
 void Nuwa::GameWindow::OnGUI()
 {
 	//ImGui::ShowDemoWindow();
+}
+
+void Nuwa::GameWindow::OnFrameBufferSizeChanged(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
 }

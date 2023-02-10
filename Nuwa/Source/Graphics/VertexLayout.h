@@ -38,6 +38,9 @@ namespace Nuwa
 			stride += VertexElement::GetTypeSize(GL_UNSIGNED_BYTE) * count;
 		}
 
+		inline const std::vector<VertexElement> Elements() const { return elements; }
+		inline uint Stride() const { return stride; }
+
 	private:
 		uint stride;
 		std::vector<VertexElement> elements;

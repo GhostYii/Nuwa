@@ -165,6 +165,7 @@
     <ClCompile Include="ThirdParty\imgui\imgui_tables.cpp" />
     <ClCompile Include="ThirdParty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="ThirdParty\stb\stb_image.cpp" />
+    <ClCompile Include="Source\Graphics\VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameWindow.h" />
@@ -214,6 +215,7 @@
     <ClInclude Include="ThirdParty\imgui\imstb_textedit.h" />
     <ClInclude Include="ThirdParty\imgui\imstb_truetype.h" />
     <ClInclude Include="ThirdParty\stb\stb_image.h" />
+    <ClInclude Include="Source\Graphics\VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Default.shader" />

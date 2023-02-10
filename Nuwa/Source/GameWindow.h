@@ -11,6 +11,8 @@ namespace Nuwa
 
 	protected:
 		virtual void OnGUI() override;
+
+		static void OnFrameBufferSizeChanged(GLFWwindow* window, int width, int height);
 	};
 
 }

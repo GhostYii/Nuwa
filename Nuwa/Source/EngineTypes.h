@@ -34,17 +34,16 @@ namespace Nuwa
 	struct VertexElement
 	{
 		uint type;
-		uint count;
-		//bool isNormalized;
+		uint count;		
 		uchar normalized;
 
 		static uint GetTypeSize(uint type)
 		{
 			switch (type)
 			{
-			case GL_FLOAT: return 4;
-			case GL_UNSIGNED_INT: return 4;
-			case GL_UNSIGNED_BYTE: return 1;
+			case GL_FLOAT: return sizeof(float);
+			case GL_UNSIGNED_INT: return sizeof(uint);
+			case GL_UNSIGNED_BYTE: return sizeof(uchar);
 			}
 			return 0;
 		}
