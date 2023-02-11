@@ -15,5 +15,5 @@ void Nuwa::ToyRenderer::Draw(Nuwa::VertexArray* vao, Nuwa::IndexBuffer* ibo, Nuw
 
 void Nuwa::ToyRenderer::Clear() const
 {
-	GL_ASSERT(glClear(GL_COLOR_BUFFER_BIT));
+	GL_ASSERT(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 }

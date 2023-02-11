@@ -4,8 +4,13 @@
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 #include "EngineMacros.h"
+
+#include "Mesh.h"
+#include "Component/MeshRenderer.h"
+#include "Component/Camera.h"
 
 Nuwa::GameWindow::GameWindow(const WindowConfig& config)
 {
@@ -31,44 +36,76 @@ Nuwa::GameWindow::GameWindow(const WindowConfig& config)
 
 void Nuwa::GameWindow::OnStart()
 {
-	float positions[] =
+	// create camera
+	camera = new GameObject();
+	camera->name = "camera";
+	camera->transform.position.z = 10.0f;		
+
+	cam = new Camera();
+	
+	camera->AddComponent(cam);
+
+	testGO = new GameObject();
+	testGO->name = "test game object";
+
+	std::vector<MeshVertex> vertices =
+	//{
+	//	{ {  0.5f,  0.5f, 0 }, { 1.0f, 1.0f } },  // top right
+	//	{ {  0.5f, -0.5f, 0 }, { 1.0f, 0.0f } }, // bottom right
+	//	{ { -0.5f, -0.5f, 0 }, { 0.0f, 0.0f } }, // bottom left
+	//	{ { -0.5f,  0.5f, 0 }, { 0.0f, 1.0f } }  // top left 
+	//};
 	{
-		100.0f, 100.0f, 0.0f, 0.0f,  // 0
-		200.0f, 100.0f, 1.0f, 0.0f,  // 1
-		200.0f, 200.0f, 1.0f, 1.0f,  // 2
-		100.0f, 200.0f, 0.0f, 1.0f   // 3
+		{ { -1.0f, -1.0f, 0.0f }, { 0.0f, 0.0f } },
+		{ {  1.0f, -1.0f, 0.0f }, { 1.0f, 0.0f } },
+		{ {  1.0f,  1.0f, 0.0f }, { 1.0f, 1.0f } },
+		{ { -1.0f,  1.0f, 0.0f }, { 0.0f, 1.0f } }
 	};
 
-	uint indices[] =
+	std::vector<uint> indices =
+	//{
+	//	0, 1, 2,
+	//	1, 2, 3
+	//};
 	{
 		0, 1, 2,
 		2, 3, 0
 	};
 
-	GL_ASSERT(glEnable(GL_BLEND));
-	GL_ASSERT(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+	//testGO->AddComponent()
+	Mesh* mesh = new Mesh();
+	mesh->SetMeshVertices(vertices, indices);
 
-	vao = new VertexArray();
-	vbo = new VertexBuffer(positions, sizeof(positions));
+	mr = new MeshRenderer();
+	mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/opengl.png");
 
-	VertexLayout layout;
-	layout.Push<float>(2);
-	layout.Push<float>(2);
-
-	vao->AddBuffer(*vbo, layout);
-
-	ibo = new IndexBuffer(indices, sizeof(indices));
-
-	shader = new Shader("Resources/Shaders/Default.shader");
-	shader->Bind();	
-	shader->SetInt("tex", 0);
-
-	texture = new Texture("Resources/Textures/nuwa.png");
+	testGO->AddComponent(mr);
 }
 
 void Nuwa::GameWindow::OnGUI()
 {
-	//ImGui::ShowDemoWindow();
+	ImGui::Begin(camera->name.c_str());
+	ImGui::DragFloat3("Position##cam", glm::value_ptr(camera->transform.position));
+	auto camEuler = glm::eulerAngles(camera->transform.rotation);
+	camEuler.x = glm::degrees(camEuler.x);
+	camEuler.y = glm::degrees(camEuler.y);
+	camEuler.z = glm::degrees(camEuler.z);
+	ImGui::DragFloat3("Rotation##cam", glm::value_ptr(camEuler));
+	camera->transform.rotation = Quaternion(glm::radians(camEuler));
+	ImGui::End();
+
+	ImGui::Begin(testGO->name.c_str());
+	ImGui::DragFloat3("Position##go", glm::value_ptr(testGO->transform.position));
+	auto euler = glm::eulerAngles(testGO->transform.rotation);
+	euler.x = glm::degrees(euler.x);
+	euler.y = glm::degrees(euler.y);
+	euler.z = glm::degrees(euler.z);
+	ImGui::DragFloat3("Rotation##go", glm::value_ptr(euler));
+
+	testGO->transform.rotation = Quaternion(glm::radians(euler));
+
+	ImGui::DragFloat3("Scale", glm::value_ptr(testGO->transform.scale));
+	ImGui::End();
 }
 
 void Nuwa::GameWindow::OnUpdate()
@@ -77,16 +114,14 @@ void Nuwa::GameWindow::OnUpdate()
 
 void Nuwa::GameWindow::OnRenderObject()
 {
-	texture->Bind();
+	if (mr)
+		mr->Draw(*cam);
 
-	glm::mat4 mvp = glm::ortho(0.0f, 960.0f, 0.0f, 720.0f, -1.0f, 1.0f) * 
-					glm::translate(glm::mat4(1.0f), glm::vec3(-100, 0, 0)) * 
-					glm::translate(glm::mat4(1.0f), glm::vec3(200, 200, 0));
-
-	shader->Bind();
-	shader->SetMatrix4x4("mvp", mvp);
-
-	renderer->Draw(vao, ibo, shader);
+	//auto render = testGO->GetComponent<MeshRenderer>();
+	//if (render)
+	//{
+	//	render->Draw(*camera->GetComponent<Camera>());
+	//}
 }
 
 void Nuwa::GameWindow::OnFrameBufferSizeChanged(GLFWwindow* window, int width, int height)

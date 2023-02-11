@@ -2,17 +2,13 @@
 #include "Basic/NwWindow.h"
 #include <memory>
 
-// for test
-#include "Graphics/Renderer.h"
-#include "Graphics/Texture.h"
-#include "Graphics/VertexLayout.h"
-#include "Graphics/Shader.h"
-#include "Graphics/VertexBuffer.h"
-#include "Graphics/VertexArray.h"
-#include "Graphics/IndexBuffer.h"
+#include "GameObject.h"
 
 namespace Nuwa
 {
+	class MeshRenderer;
+	class Camera;
+
 	class GameWindow : public NwWindow
 	{
 	public:
@@ -28,12 +24,12 @@ namespace Nuwa
 		static void OnFrameBufferSizeChanged(GLFWwindow* window, int width, int height);
 
 	private:
-		// for test
-		VertexArray* vao;
-		VertexBuffer* vbo;
-		IndexBuffer* ibo;
-		Shader* shader;
-		Texture* texture;
+		// for test		
+		GameObject* testGO;
+		GameObject* camera;
+
+		MeshRenderer* mr;
+		Camera* cam;
 	};
 
 }

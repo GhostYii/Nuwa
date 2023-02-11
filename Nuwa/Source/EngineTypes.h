@@ -38,7 +38,7 @@ namespace Nuwa
 	struct VertexElement
 	{
 		uint type;
-		uint count;		
+		uint count;
 		uchar normalized;
 
 		static uint GetTypeSize(uint type)

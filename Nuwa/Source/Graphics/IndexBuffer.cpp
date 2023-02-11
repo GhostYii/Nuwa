@@ -1,7 +1,7 @@
 #include "IndexBuffer.h"
 #include "../EngineMacros.h"
 
-Nuwa::IndexBuffer::IndexBuffer(const uint* data, uint count)
+Nuwa::IndexBuffer::IndexBuffer(uint* data, uint count)
 	: count(count)
 {
 	GL_ASSERT(glGenBuffers(1, &rendererID));

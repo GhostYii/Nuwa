@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "../Mesh.h"
 #include "../Graphics/Renderer.h"
+#include "Camera.h"
 
 namespace Nuwa
 {
@@ -19,12 +20,12 @@ namespace Nuwa
 
 		void SetMesh(Mesh* mesh, const std::string& shaderPath, const std::string& texturePath);
 
-		void Draw();
+		void Draw(const Camera& camera);
 
 	private:
 		ToyRenderer renderer;
 
-		std::shared_ptr<Mesh> mesh;		
+		std::shared_ptr<Mesh> mesh;
 
 		std::unique_ptr<VertexArray> vao;
 		std::unique_ptr<VertexBuffer> vbo;

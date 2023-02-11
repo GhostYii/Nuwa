@@ -6,7 +6,7 @@ namespace Nuwa
 	class IndexBuffer : public IBindable
 	{
 	public:
-		IndexBuffer(const uint* data, uint count);
+		IndexBuffer(uint* data, uint count);
 		virtual ~IndexBuffer() { glDeleteBuffers(1, &rendererID); }
 
 		// Inherited via IBindable

@@ -55,7 +55,7 @@ Nuwa::ShaderSource Nuwa::Shader::Parse()
 	std::string line;
 	while (getline(stream, line))
 	{
-		if (line.find("%Subshader") != std::string::npos)
+		if (line.find("$Subshader") != std::string::npos)
 		{
 			if (line.find("Vertex") != std::string::npos)
 				stype = ShaderType::Vertex;

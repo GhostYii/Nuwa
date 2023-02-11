@@ -6,7 +6,7 @@ namespace Nuwa
 	class VertexBuffer : public IBindable
 	{
 	public:
-		VertexBuffer(const void* data, uint size);
+		VertexBuffer(void* data, uint size);
 		virtual ~VertexBuffer() { glDeleteBuffers(1, &rendererID); }
 
 		// Inherited via IBindable

@@ -15,6 +15,9 @@ Nuwa::GameObject::~GameObject()
 
 void Nuwa::GameObject::AddComponent(Component* component)
 {
+	component->gameObject = this;
+	component->transform = &(this->transform);
+
 	// TODO: ÷ÿ∏¥ºÏ≤‚
-	components.push_back(std::make_shared<Component>(component));
+	components.push_back(std::make_shared<Component>(*component));	
 }

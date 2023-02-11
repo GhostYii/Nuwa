@@ -1,7 +1,7 @@
 #include "VertexBuffer.h"
 #include "../EngineMacros.h"
 
-Nuwa::VertexBuffer::VertexBuffer(const void* data, uint size)
+Nuwa::VertexBuffer::VertexBuffer(void* data, uint size)
 {
 	GL_ASSERT(glGenBuffers(1, &rendererID));
 	GL_ASSERT(glBindBuffer(GL_ARRAY_BUFFER, rendererID));
