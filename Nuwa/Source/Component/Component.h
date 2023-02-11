@@ -1,6 +1,7 @@
 #pragma once
 #include "../EngineMacros.h"
 #include "../EngineTypes.h"
+#include "../GameObject.h"
 
 namespace Nuwa
 {
@@ -8,10 +9,12 @@ namespace Nuwa
 	{
 	public:
 		Component();
-		virtual ~Component() = default;
+		virtual ~Component() = default;		
+
+		GameObject* gameObject;
 
 	protected:
-		uint64 instanceID;
+		uint64 instanceID;		
 	};
 }
 
