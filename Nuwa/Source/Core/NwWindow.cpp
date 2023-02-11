@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <spdlog/spdlog.h>
 
-#include "../GUI/GUI.h"
+#include "../GUI.h"
 #include "../EngineMacros.h"
 
 Nuwa::NwWindow::NwWindow()
