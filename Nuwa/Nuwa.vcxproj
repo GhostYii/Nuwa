@@ -146,14 +146,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Component\Component.cpp" />
-    <ClCompile Include="Source\Core\UUID.cpp" />
+    <ClCompile Include="Source\Basic\UUID.cpp" />
     <ClCompile Include="Source\GameWindow.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
     <ClCompile Include="Source\Graphics\IndexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Renderer.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Graphics\VertexBuffer.cpp" />
-    <ClCompile Include="Source\Core\NwWindow.cpp" />
+    <ClCompile Include="Source\Basic\NwWindow.cpp" />
     <ClCompile Include="Source\GUI.cpp" />
     <ClCompile Include="Source\Time.cpp" />
     <ClCompile Include="Source\Utils.cpp" />
@@ -172,14 +172,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Component\Component.h" />
-    <ClInclude Include="Source\Core\UUID.h" />
+    <ClInclude Include="Source\Basic\UUID.h" />
     <ClInclude Include="Source\GameWindow.h" />
     <ClInclude Include="Source\Graphics\Shader.h" />
     <ClInclude Include="Source\Graphics\IndexBuffer.h" />
     <ClInclude Include="Source\Graphics\Renderer.h" />
     <ClInclude Include="Source\Graphics\IBindable.h" />
     <ClInclude Include="Source\Graphics\VertexBuffer.h" />
-    <ClInclude Include="Source\Core\NwWindow.h" />
+    <ClInclude Include="Source\Basic\NwWindow.h" />
     <ClInclude Include="Source\EngineMacros.h" />
     <ClInclude Include="Source\EngineTypes.h" />
     <ClInclude Include="Source\GUI.h" />

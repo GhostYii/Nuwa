@@ -1,4 +1,5 @@
 #pragma once
+#include "../EngineTypes.h"
 
 namespace Nuwa
 {
@@ -6,11 +7,11 @@ namespace Nuwa
 	{
 	public:
 		UUID();
-		UUID(uint64_t uuid);
+		UUID(uint64 uuid);
 		UUID(const UUID&) = default;
 
-		operator uint64_t() const { return uuid; }
+		operator uint64() const { return uuid; }
 	private:
-		uint64_t uuid;
+		uint64 uuid;
 	};
 }

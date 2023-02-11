@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/NwWindow.h"
+#include "Basic/NwWindow.h"
 #include <memory>
 
 // for test

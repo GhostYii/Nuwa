@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/matrix.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 namespace Nuwa
 {
@@ -18,6 +19,8 @@ namespace Nuwa
 	typedef glm::vec2 Vector2;
 	typedef glm::mat3x3 Matrix3x3;
 	typedef glm::mat4x4 Matrix4x4;
+
+	typedef glm::quat Quaternion;
 
 	struct ShaderSource
 	{
