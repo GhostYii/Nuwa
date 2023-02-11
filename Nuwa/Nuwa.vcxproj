@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\Component\Component.cpp" />
     <ClCompile Include="Source\Basic\UUID.cpp" />
     <ClCompile Include="Source\GameWindow.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Source\Component\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\Component\Component.h" />
     <ClInclude Include="Source\Basic\UUID.h" />
     <ClInclude Include="Source\GameWindow.h" />

@@ -15,3 +15,8 @@ Nuwa::UUID::UUID(Nuwa::uint64 uuid)
 	: uuid(uuid)
 {
 }
+
+Nuwa::uint64 Nuwa::UUID::Generate()
+{
+	return uniformDistribution(engine);
+}

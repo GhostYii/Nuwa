@@ -11,6 +11,9 @@ namespace Nuwa
 		UUID(const UUID&) = default;
 
 		operator uint64() const { return uuid; }
+
+		static uint64 Generate();
+
 	private:
 		uint64 uuid;
 	};
