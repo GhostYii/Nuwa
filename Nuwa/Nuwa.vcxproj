@@ -145,6 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Component\Component.cpp" />
+    <ClCompile Include="Source\Core\UUID.cpp" />
     <ClCompile Include="Source\GameWindow.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
     <ClCompile Include="Source\Graphics\IndexBuffer.cpp" />
@@ -166,8 +168,11 @@
     <ClCompile Include="ThirdParty\imgui\imgui_widgets.cpp" />
     <ClCompile Include="ThirdParty\stb\stb_image.cpp" />
     <ClCompile Include="Source\Graphics\VertexArray.cpp" />
+    <ClCompile Include="Source\Component\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Component\Component.h" />
+    <ClInclude Include="Source\Core\UUID.h" />
     <ClInclude Include="Source\GameWindow.h" />
     <ClInclude Include="Source\Graphics\Shader.h" />
     <ClInclude Include="Source\Graphics\IndexBuffer.h" />
@@ -216,6 +221,7 @@
     <ClInclude Include="ThirdParty\imgui\imstb_truetype.h" />
     <ClInclude Include="ThirdParty\stb\stb_image.h" />
     <ClInclude Include="Source\Graphics\VertexArray.h" />
+    <ClInclude Include="Source\Component\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Default.shader" />

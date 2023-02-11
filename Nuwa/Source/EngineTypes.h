@@ -10,6 +10,7 @@ namespace Nuwa
 	typedef unsigned char uchar;
 	typedef unsigned short ushort;
 	typedef long long int64;
+	typedef unsigned long long uint64;
 
 	//typedef glm::vec4 Color;
 	typedef glm::vec4 Vector4;
