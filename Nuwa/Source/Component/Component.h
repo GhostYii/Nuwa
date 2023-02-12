@@ -11,15 +11,17 @@ namespace Nuwa
 	{
 	public:
 		Component();
-		virtual ~Component() = default;		
+		virtual ~Component() = default;
 
 		GameObject* gameObject;
 		Transform* transform;
 
 		void AttachToGameObject(GameObject* gameObject);
 
+		const uint64 GetInstanceID() const;
+
 	protected:
-		uint64 instanceID;		
+		uint64 instanceID;
 	};
 }
 

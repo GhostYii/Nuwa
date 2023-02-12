@@ -1,23 +1,35 @@
 #include "GameObject.h"
 #include "Basic/UUID.h"
 
-Nuwa::GameObject::GameObject()
-	: name("game object"), uuid(UUID::Generate()), transform(Transform())
+namespace Nuwa
 {
+	GameObject::GameObject()
+		: name("game object"), uuid(UUID::Generate()), transform(Transform())
+	{
 
-}
+	}
 
-Nuwa::GameObject::~GameObject()
-{
-	//for (auto& pCom : components)
-	//	pCom.reset();
-}
+	GameObject::~GameObject()
+	{
+		//for (auto& pCom : components)
+		//	pCom.reset();
+	}
 
-void Nuwa::GameObject::AddComponent(Component* component)
-{
-	component->gameObject = this;
-	component->transform = &(this->transform);
+	void GameObject::AddComponent(Component* component)
+	{
+		const std::string typeName = typeid(*component).name();
+		for (auto iter = components.find(typeName); iter != components.end() && iter->first == typeName; iter++)
+		{
+			if (iter->second->GetInstanceID() == component->GetInstanceID())
+				return;
+		}
 
-	// TODO: ÷ÿ∏¥ºÏ≤‚
-	components.push_back(std::make_shared<Component>(*component));	
+		component->gameObject = this;
+		component->transform = &(this->transform);
+		components.emplace(typeid(*component).name(), component);
+	}
+
+	
+
+	
 }

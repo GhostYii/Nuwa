@@ -31,6 +31,7 @@ namespace Nuwa
 		// [RT.y][UP.y][BK.y][POS.y]
 		// [RT.z][UP.z][BK.z][POS.Z]
 		// [ 0  ][ 0  ][  0 ][  US ]
+
 		Matrix4x4 GetModelMatrix() const;
 	};
 }

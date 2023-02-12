@@ -10,7 +10,7 @@
 
 #include "Mesh.h"
 #include "Component/MeshRenderer.h"
-#include "Component/Camera.h"
+//#include "Component/Camera.h"
 
 Nuwa::GameWindow::GameWindow(const WindowConfig& config)
 {
@@ -41,7 +41,7 @@ void Nuwa::GameWindow::OnStart()
 	camera->name = "camera";
 	camera->transform.position.z = 10.0f;		
 
-	cam = new Camera();
+	Camera* cam = new Camera();
 	
 	camera->AddComponent(cam);
 
@@ -49,12 +49,6 @@ void Nuwa::GameWindow::OnStart()
 	testGO->name = "test game object";
 
 	std::vector<MeshVertex> vertices =
-	//{
-	//	{ {  0.5f,  0.5f, 0 }, { 1.0f, 1.0f } },  // top right
-	//	{ {  0.5f, -0.5f, 0 }, { 1.0f, 0.0f } }, // bottom right
-	//	{ { -0.5f, -0.5f, 0 }, { 0.0f, 0.0f } }, // bottom left
-	//	{ { -0.5f,  0.5f, 0 }, { 0.0f, 1.0f } }  // top left 
-	//};
 	{
 		{ { -1.0f, -1.0f, 0.0f }, { 0.0f, 0.0f } },
 		{ {  1.0f, -1.0f, 0.0f }, { 1.0f, 0.0f } },
@@ -63,20 +57,15 @@ void Nuwa::GameWindow::OnStart()
 	};
 
 	std::vector<uint> indices =
-	//{
-	//	0, 1, 2,
-	//	1, 2, 3
-	//};
 	{
 		0, 1, 2,
 		2, 3, 0
 	};
 
-	//testGO->AddComponent()
 	Mesh* mesh = new Mesh();
 	mesh->SetMeshVertices(vertices, indices);
 
-	mr = new MeshRenderer();
+	MeshRenderer* mr = new MeshRenderer();
 	mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/opengl.png");
 
 	testGO->AddComponent(mr);
@@ -114,14 +103,11 @@ void Nuwa::GameWindow::OnUpdate()
 
 void Nuwa::GameWindow::OnRenderObject()
 {
-	if (mr)
-		mr->Draw(*cam);
-
-	//auto render = testGO->GetComponent<MeshRenderer>();
-	//if (render)
-	//{
-	//	render->Draw(*camera->GetComponent<Camera>());
-	//}
+	auto render = testGO->GetComponent<MeshRenderer>();
+	if (render)
+	{
+		render->Draw(*camera->GetComponent<Camera>());
+	}
 }
 
 void Nuwa::GameWindow::OnFrameBufferSizeChanged(GLFWwindow* window, int width, int height)

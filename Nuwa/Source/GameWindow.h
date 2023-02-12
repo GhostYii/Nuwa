@@ -6,9 +6,6 @@
 
 namespace Nuwa
 {
-	class MeshRenderer;
-	class Camera;
-
 	class GameWindow : public NwWindow
 	{
 	public:
@@ -27,9 +24,6 @@ namespace Nuwa
 		// for test		
 		GameObject* testGO;
 		GameObject* camera;
-
-		MeshRenderer* mr;
-		Camera* cam;
 	};
 
 }

@@ -2,15 +2,23 @@
 #include "../GameObject.h"
 #include "../Basic/UUID.h"
 
-Nuwa::Component::Component()
-	: instanceID((Nuwa::UUID::Generate())), gameObject(nullptr), transform(nullptr)
+namespace Nuwa
 {
-}
+	Component::Component()
+		: instanceID((Nuwa::UUID::Generate())), gameObject(nullptr), transform(nullptr)
+	{
+	}
 
-void Nuwa::Component::AttachToGameObject(GameObject* gameObject)
-{
-	if (!gameObject)
-		return;
+	void Component::AttachToGameObject(GameObject* gameObject)
+	{
+		if (!gameObject)
+			return;
 
-	gameObject->AddComponent(this);
+		gameObject->AddComponent(this);
+	}
+
+	const uint64 Component::GetInstanceID() const
+	{
+		return instanceID;
+	}
 }

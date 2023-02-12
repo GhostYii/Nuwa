@@ -19,23 +19,38 @@ namespace Nuwa
 		template<typename T>
 		T* GetComponent();
 
+		template<typename T>
+		std::vector<T*> GetComponents();
+
+		inline const uint64 GetInstanceID() const { return uuid; }
+
 	private:
 		uint64 uuid;
-		std::vector<std::shared_ptr<Component>> components;
+		//std::vector<Component*> components;
+		std::unordered_multimap<std::string, Component*> components;
 	};
-
 
 	template<typename T>
 	inline T* GameObject::GetComponent()
 	{
-		for (const auto& iter : components)
-		{			
-			//spdlog::info("type1 {}, type2 {}", typeid(*iter).name(), typeid(T).name());
+		const std::string typeName = typeid(T).name();
+		if (components.count(typeName))
+			return dynamic_cast<T*>(components.find(typeName)->second);
 
-			if (typeid(*iter) == typeid(T))
-				return static_cast<T*>(iter.get());
-		}
 		return nullptr;
 	}
+
+	template<typename T>
+	inline std::vector<T*> GameObject::GetComponents()
+	{
+		std::vector<T*> res;
+
+		const std::string typeName = typeid(T).name();
+		for (auto iter = components.find(typeName); iter != components.end() && iter->first == typeName; iter++)
+			res.push_back(dynamic_cast<T*>(iter->second));
+
+		return res;
+	}
+
 }
 
