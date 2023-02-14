@@ -2,7 +2,7 @@
 #include "Basic/NwWindow.h"
 #include <memory>
 
-#include "GameObject.h"
+#include "GameScene.h"
 
 namespace Nuwa
 {
@@ -21,9 +21,7 @@ namespace Nuwa
 		static void OnFrameBufferSizeChanged(GLFWwindow* window, int width, int height);
 
 	private:
-		// for test		
-		GameObject* testGO;
-		GameObject* camera;
+		GameScene* scene;
 	};
 
 }

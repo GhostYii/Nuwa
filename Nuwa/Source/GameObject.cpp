@@ -9,6 +9,12 @@ namespace Nuwa
 
 	}
 
+	GameObject::GameObject(std::string name)
+		: name(name), uuid(UUID::Generate()), transform(Transform())
+	{
+
+	}
+
 	GameObject::~GameObject()
 	{
 		//for (auto& pCom : components)
@@ -28,8 +34,4 @@ namespace Nuwa
 		component->transform = &(this->transform);
 		components.emplace(typeid(*component).name(), component);
 	}
-
-	
-
-	
 }

@@ -64,7 +64,7 @@ namespace Nuwa
 
 	void MeshRenderer::SetCamera(const Camera* camera)
 	{
-		drawCamera = std::make_shared<Camera>(camera);
+		drawCamera = std::make_shared<Camera>(*camera);
 	}
 
 	void MeshRenderer::InternalRender()

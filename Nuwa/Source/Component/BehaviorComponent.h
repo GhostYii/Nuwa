@@ -5,6 +5,7 @@ namespace Nuwa
 {
 	class BehaviorComponent : public Component
 	{
+		friend class GameScene;
 	public:
 		BehaviorComponent() = default;
 		virtual ~BehaviorComponent() = default;

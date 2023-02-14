@@ -6,8 +6,10 @@ namespace Nuwa
 {
 	class GameObject
 	{
+		friend class GameScene;
 	public:
 		GameObject();
+		GameObject(std::string name);
 		//GameObject(const GameObject& other);
 		virtual ~GameObject();
 

@@ -38,112 +38,120 @@ Nuwa::GameWindow::GameWindow(const WindowConfig& config)
 
 void Nuwa::GameWindow::OnStart()
 {
-	// create camera
-	camera = new GameObject();
-	camera->name = "camera";
-	camera->transform.position.z = 10.0f;
+	if (!scene)
+		scene = new GameScene("Default Scene");
 
-	Camera* cam = new Camera();
-
-	camera->AddComponent(cam);
-
-	testGO = new GameObject();
-	testGO->name = "test game object";
-
-	std::vector<MeshVertex> vertices =
+	// for test
+	if (scene)
 	{
-		{ { -1.0f, -1.0f, 0.0f }, { 0.0f, 0.0f } },
-		{ {  1.0f, -1.0f, 0.0f }, { 1.0f, 0.0f } },
-		{ {  1.0f,  1.0f, 0.0f }, { 1.0f, 1.0f } },
-		{ { -1.0f,  1.0f, 0.0f }, { 0.0f, 1.0f } }
-	};
+		// create camera
+		GameObject* camera = new GameObject("camera");
+		camera->transform.position.z = 10.0f;
 
-	std::vector<uint> indices =
-	{
-		0, 1, 2,
-		2, 3, 0
-	};
+		Camera* cam = new Camera();
+		camera->AddComponent(cam);
 
-	Mesh* mesh = new Mesh();
-	mesh->SetMeshVertices(vertices, indices);
+		// create test game object
+		GameObject* testGO = new GameObject("test game object");
 
-	MeshRenderer* mr = new MeshRenderer();
-	mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");
+		std::vector<MeshVertex> vertices =
+		{
+			{ { -1.0f, -1.0f, 0.0f }, { 0.0f, 0.0f } },
+			{ {  1.0f, -1.0f, 0.0f }, { 1.0f, 0.0f } },
+			{ {  1.0f,  1.0f, 0.0f }, { 1.0f, 1.0f } },
+			{ { -1.0f,  1.0f, 0.0f }, { 0.0f, 1.0f } }
+		};
 
-	testGO->AddComponent(mr);
+		std::vector<uint> indices =
+		{
+			0, 1, 2,
+			2, 3, 0
+		};
+
+		Mesh* mesh = new Mesh();
+		mesh->SetMeshVertices(vertices, indices);
+
+		MeshRenderer* mr = new MeshRenderer();
+		mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");
+		mr->SetCamera(cam);
+
+		testGO->AddComponent(mr);
+
+		scene->AddGameObject(camera);
+		scene->AddGameObject(testGO);
+	}
 }
 
 void Nuwa::GameWindow::OnGUI()
 {
-	ImGui::Begin(camera->name.c_str());
-	ImGui::DragFloat3("Position##cam", glm::value_ptr(camera->transform.position));
-	auto camEuler = glm::eulerAngles(camera->transform.rotation);
-	camEuler.x = glm::degrees(camEuler.x);
-	camEuler.y = glm::degrees(camEuler.y);
-	camEuler.z = glm::degrees(camEuler.z);
-	ImGui::DragFloat3("Rotation##cam", glm::value_ptr(camEuler));
-	camera->transform.rotation = Quaternion(glm::radians(camEuler));
+	//ImGui::Begin(camera->name.c_str());
+	//ImGui::DragFloat3("Position##cam", glm::value_ptr(camera->transform.position));
+	//auto camEuler = glm::eulerAngles(camera->transform.rotation);
+	//camEuler.x = glm::degrees(camEuler.x);
+	//camEuler.y = glm::degrees(camEuler.y);
+	//camEuler.z = glm::degrees(camEuler.z);
+	//ImGui::DragFloat3("Rotation##cam", glm::value_ptr(camEuler));
+	//camera->transform.rotation = Quaternion(glm::radians(camEuler));
 
-	ImGui::ShowDemoWindow();
-
-
-	if (ImGui::CollapsingHeader("Projection##projection1"))
-	{
-		Camera* cam = camera->GetComponent<Camera>();
-		int val = cam->orthographic ? 1 : 0;
-		const char* items[] = { "Perspective", "Orthographic" };
-		ImGui::Combo("Projection##projection2", &val, items, 2);
-		cam->orthographic = val;
-
-		if (!cam->orthographic)
-		{
-			ImGui::DragInt("FOV", &cam->fieldOfView, 1, 1, 179);
-		}
-		else
-		{
-			ImGui::DragFloat("Size", &cam->orthoSize, 0.1f);
-		}
-
-		float zNear = cam->GetNearClipPlane();
-		float zFar = cam->GetFarClipPlane();
-
-		ImGui::Text("Clipping Planes");
-		ImGui::Indent();
-		ImGui::DragFloat("Near", &zNear);
-		ImGui::DragFloat("Far", &zFar);
-		ImGui::Unindent();
-
-		cam->SetClipPlane(zNear, zFar);
-	}
+	//ImGui::ShowDemoWindow();
 
 
-	ImGui::End();
+	//if (ImGui::CollapsingHeader("Projection##projection1"))
+	//{
+	//	Camera* cam = camera->GetComponent<Camera>();
+	//	int val = cam->orthographic ? 1 : 0;
+	//	const char* items[] = { "Perspective", "Orthographic" };
+	//	ImGui::Combo("Projection##projection2", &val, items, 2);
+	//	cam->orthographic = val;
 
-	ImGui::Begin(testGO->name.c_str());
-	ImGui::DragFloat3("Position##go", glm::value_ptr(testGO->transform.position));
-	auto euler = glm::eulerAngles(testGO->transform.rotation);
-	euler.x = glm::degrees(euler.x);
-	euler.y = glm::degrees(euler.y);
-	euler.z = glm::degrees(euler.z);
-	ImGui::DragFloat3("Rotation##go", glm::value_ptr(euler));
+	//	if (!cam->orthographic)
+	//	{
+	//		ImGui::DragInt("FOV", &cam->fieldOfView, 1, 1, 179);
+	//	}
+	//	else
+	//	{
+	//		ImGui::DragFloat("Size", &cam->orthoSize, 0.1f);
+	//	}
 
-	testGO->transform.rotation = Quaternion(glm::radians(euler));
+	//	float zNear = cam->GetNearClipPlane();
+	//	float zFar = cam->GetFarClipPlane();
 
-	ImGui::DragFloat3("Scale", glm::value_ptr(testGO->transform.scale));
-	ImGui::End();
+	//	ImGui::Text("Clipping Planes");
+	//	ImGui::Indent();
+	//	ImGui::DragFloat("Near", &zNear);
+	//	ImGui::DragFloat("Far", &zFar);
+	//	ImGui::Unindent();
+
+	//	cam->SetClipPlane(zNear, zFar);
+	//}
+
+
+	//ImGui::End();
+
+	//ImGui::Begin(testGO->name.c_str());
+	//ImGui::DragFloat3("Position##go", glm::value_ptr(testGO->transform.position));
+	//auto euler = glm::eulerAngles(testGO->transform.rotation);
+	//euler.x = glm::degrees(euler.x);
+	//euler.y = glm::degrees(euler.y);
+	//euler.z = glm::degrees(euler.z);
+	//ImGui::DragFloat3("Rotation##go", glm::value_ptr(euler));
+
+	//testGO->transform.rotation = Quaternion(glm::radians(euler));
+
+	//ImGui::DragFloat3("Scale", glm::value_ptr(testGO->transform.scale));
+	//ImGui::End();
 }
 
 void Nuwa::GameWindow::OnUpdate()
 {
+	if (scene)
+		scene->Update();
 }
 
 void Nuwa::GameWindow::OnRenderObject()
 {
-	auto render = testGO->GetComponent<MeshRenderer>();
-	if (render)
-	{
-		//render->Draw(*camera->GetComponent<Camera>());
-	}
+	if (scene)
+		scene->Render();
 }
 
 void Nuwa::GameWindow::OnFrameBufferSizeChanged(GLFWwindow* window, int width, int height)
