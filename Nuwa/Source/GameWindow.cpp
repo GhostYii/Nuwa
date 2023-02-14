@@ -12,149 +12,169 @@
 #include "Component/MeshRenderer.h"
 //#include "Component/Camera.h"
 
-Nuwa::GameWindow::GameWindow(const WindowConfig& config)
+namespace Nuwa
 {
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	this->config = config;
-	window = glfwCreateWindow(config.width, config.height, config.title.c_str(), nullptr, nullptr);
-
-	if (!window)
+	GameWindow::GameWindow(const WindowConfig& config)
 	{
-		spdlog::error("Window \"{}\" create failed.", config.title);
-		return;
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+		this->config = config;
+		window = glfwCreateWindow(config.width, config.height, config.title.c_str(), nullptr, nullptr);
+
+		if (!window)
+		{
+			spdlog::error("Window \"{}\" create failed.", config.title);
+			return;
+		}
+
+		glfwMakeContextCurrent(window);
+		glfwSetFramebufferSizeCallback(window, OnFrameBufferSizeChanged);
+
+		if (glewInit() != GLEW_OK)
+			spdlog::error("glew init failed.");
+
+		GL_ASSERT(glEnable(GL_DEPTH_TEST));
 	}
 
-	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, OnFrameBufferSizeChanged);
-
-	if (glewInit() != GLEW_OK)
-		spdlog::error("glew init failed.");
-
-	GL_ASSERT(glEnable(GL_DEPTH_TEST));
-}
-
-void Nuwa::GameWindow::OnStart()
-{
-	if (!scene)
-		scene = new GameScene("Default Scene");
-
-	// for test
-	if (scene)
+	void GameWindow::OnStart()
 	{
-		// create camera
-		GameObject* camera = new GameObject("camera");
-		camera->transform.position.z = 10.0f;
-
-		Camera* cam = new Camera();
-		camera->AddComponent(cam);
-
-		// create test game object
-		GameObject* testGO = new GameObject("test game object");
-
-		std::vector<MeshVertex> vertices =
+		if (!scene)
 		{
-			{ { -1.0f, -1.0f, 0.0f }, { 0.0f, 0.0f } },
-			{ {  1.0f, -1.0f, 0.0f }, { 1.0f, 0.0f } },
-			{ {  1.0f,  1.0f, 0.0f }, { 1.0f, 1.0f } },
-			{ { -1.0f,  1.0f, 0.0f }, { 0.0f, 1.0f } }
-		};
+			scene = new GameScene("Default Scene");
 
-		std::vector<uint> indices =
+#ifdef NUWA_EDITOR
+			spdlog::info("Editor Mode On.");
+			scene->AddEditorGUI(new Editor::Inspector());
+			scene->AddEditorGUI(new Editor::Hierarchy());
+#endif // NUWA_EDITOR
+		}
+
+		// for test
+		if (scene)
 		{
-			0, 1, 2,
-			2, 3, 0
-		};
+			// create camera
+			GameObject* camera = new GameObject("camera");
+			camera->transform.position.z = 10.0f;
 
-		Mesh* mesh = new Mesh();
-		mesh->SetMeshVertices(vertices, indices);
+			Camera* cam = new Camera();
+			camera->AddComponent(cam);
 
-		MeshRenderer* mr = new MeshRenderer();
-		mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");
-		mr->SetCamera(cam);
+			// create test game object
+			GameObject* testGO = new GameObject("test game object");
 
-		testGO->AddComponent(mr);
+			std::vector<MeshVertex> vertices =
+			{
+				{ { -1.0f, -1.0f, 0.0f }, { 0.0f, 0.0f } },
+				{ {  1.0f, -1.0f, 0.0f }, { 1.0f, 0.0f } },
+				{ {  1.0f,  1.0f, 0.0f }, { 1.0f, 1.0f } },
+				{ { -1.0f,  1.0f, 0.0f }, { 0.0f, 1.0f } }
+			};
 
-		scene->AddGameObject(camera);
-		scene->AddGameObject(testGO);
+			std::vector<uint> indices =
+			{
+				0, 1, 2,
+				2, 3, 0
+			};
+
+			Mesh* mesh = new Mesh();
+			mesh->SetMeshVertices(vertices, indices);
+
+			MeshRenderer* mr = new MeshRenderer();
+			mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");
+			mr->SetCamera(cam);
+
+			testGO->AddComponent(mr);
+
+			scene->AddGameObject(camera);
+			scene->AddGameObject(testGO);
+		}
 	}
-}
 
-void Nuwa::GameWindow::OnGUI()
-{
-	//ImGui::Begin(camera->name.c_str());
-	//ImGui::DragFloat3("Position##cam", glm::value_ptr(camera->transform.position));
-	//auto camEuler = glm::eulerAngles(camera->transform.rotation);
-	//camEuler.x = glm::degrees(camEuler.x);
-	//camEuler.y = glm::degrees(camEuler.y);
-	//camEuler.z = glm::degrees(camEuler.z);
-	//ImGui::DragFloat3("Rotation##cam", glm::value_ptr(camEuler));
-	//camera->transform.rotation = Quaternion(glm::radians(camEuler));
-
-	//ImGui::ShowDemoWindow();
+	void GameWindow::OnGUI()
+	{
+#ifdef NUWA_EDITOR
+		if (scene)
+		{
+			scene->OnEditorGUI();
+		}
+#endif // NUWA_EDITOR
 
 
-	//if (ImGui::CollapsingHeader("Projection##projection1"))
-	//{
-	//	Camera* cam = camera->GetComponent<Camera>();
-	//	int val = cam->orthographic ? 1 : 0;
-	//	const char* items[] = { "Perspective", "Orthographic" };
-	//	ImGui::Combo("Projection##projection2", &val, items, 2);
-	//	cam->orthographic = val;
+		//ImGui::Begin(camera->name.c_str());
+		//ImGui::DragFloat3("Position##cam", glm::value_ptr(camera->transform.position));
+		//auto camEuler = glm::eulerAngles(camera->transform.rotation);
+		//camEuler.x = glm::degrees(camEuler.x);
+		//camEuler.y = glm::degrees(camEuler.y);
+		//camEuler.z = glm::degrees(camEuler.z);
+		//ImGui::DragFloat3("Rotation##cam", glm::value_ptr(camEuler));
+		//camera->transform.rotation = Quaternion(glm::radians(camEuler));
 
-	//	if (!cam->orthographic)
-	//	{
-	//		ImGui::DragInt("FOV", &cam->fieldOfView, 1, 1, 179);
-	//	}
-	//	else
-	//	{
-	//		ImGui::DragFloat("Size", &cam->orthoSize, 0.1f);
-	//	}
-
-	//	float zNear = cam->GetNearClipPlane();
-	//	float zFar = cam->GetFarClipPlane();
-
-	//	ImGui::Text("Clipping Planes");
-	//	ImGui::Indent();
-	//	ImGui::DragFloat("Near", &zNear);
-	//	ImGui::DragFloat("Far", &zFar);
-	//	ImGui::Unindent();
-
-	//	cam->SetClipPlane(zNear, zFar);
-	//}
+		//ImGui::ShowDemoWindow();
 
 
-	//ImGui::End();
+		//if (ImGui::CollapsingHeader("Projection##projection1"))
+		//{
+		//	Camera* cam = camera->GetComponent<Camera>();
+		//	int val = cam->orthographic ? 1 : 0;
+		//	const char* items[] = { "Perspective", "Orthographic" };
+		//	ImGui::Combo("Projection##projection2", &val, items, 2);
+		//	cam->orthographic = val;
 
-	//ImGui::Begin(testGO->name.c_str());
-	//ImGui::DragFloat3("Position##go", glm::value_ptr(testGO->transform.position));
-	//auto euler = glm::eulerAngles(testGO->transform.rotation);
-	//euler.x = glm::degrees(euler.x);
-	//euler.y = glm::degrees(euler.y);
-	//euler.z = glm::degrees(euler.z);
-	//ImGui::DragFloat3("Rotation##go", glm::value_ptr(euler));
+		//	if (!cam->orthographic)
+		//	{
+		//		ImGui::DragInt("FOV", &cam->fieldOfView, 1, 1, 179);
+		//	}
+		//	else
+		//	{
+		//		ImGui::DragFloat("Size", &cam->orthoSize, 0.1f);
+		//	}
 
-	//testGO->transform.rotation = Quaternion(glm::radians(euler));
+		//	float zNear = cam->GetNearClipPlane();
+		//	float zFar = cam->GetFarClipPlane();
 
-	//ImGui::DragFloat3("Scale", glm::value_ptr(testGO->transform.scale));
-	//ImGui::End();
-}
+		//	ImGui::Text("Clipping Planes");
+		//	ImGui::Indent();
+		//	ImGui::DragFloat("Near", &zNear);
+		//	ImGui::DragFloat("Far", &zFar);
+		//	ImGui::Unindent();
 
-void Nuwa::GameWindow::OnUpdate()
-{
-	if (scene)
-		scene->Update();
-}
+		//	cam->SetClipPlane(zNear, zFar);
+		//}
 
-void Nuwa::GameWindow::OnRenderObject()
-{
-	if (scene)
-		scene->Render();
-}
 
-void Nuwa::GameWindow::OnFrameBufferSizeChanged(GLFWwindow* window, int width, int height)
-{
-	GL_ASSERT(glViewport(0, 0, width, height));
+		//ImGui::End();
+
+		//ImGui::Begin(testGO->name.c_str());
+		//ImGui::DragFloat3("Position##go", glm::value_ptr(testGO->transform.position));
+		//auto euler = glm::eulerAngles(testGO->transform.rotation);
+		//euler.x = glm::degrees(euler.x);
+		//euler.y = glm::degrees(euler.y);
+		//euler.z = glm::degrees(euler.z);
+		//ImGui::DragFloat3("Rotation##go", glm::value_ptr(euler));
+
+		//testGO->transform.rotation = Quaternion(glm::radians(euler));
+
+		//ImGui::DragFloat3("Scale", glm::value_ptr(testGO->transform.scale));
+		//ImGui::End();
+	}
+
+	void GameWindow::OnUpdate()
+	{
+		if (scene)
+			scene->Update();
+	}
+
+	void GameWindow::OnRenderObject()
+	{
+		if (scene)
+			scene->Render();
+	}
+
+	void GameWindow::OnFrameBufferSizeChanged(GLFWwindow* window, int width, int height)
+	{
+		GL_ASSERT(glViewport(0, 0, width, height));
+	}
 }

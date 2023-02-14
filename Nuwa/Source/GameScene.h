@@ -1,10 +1,16 @@
 #pragma once
 #include "GameObject.h"
 
+#ifdef NUWA_EDITOR
+#include "Editor/Inspector.h"
+#include "Editor/Hierarchy.h"
+#endif
+
 namespace Nuwa
 {
 	class GameScene
 	{
+		friend class GameWindow;
 	public:
 		GameScene();
 		GameScene(std::string name);
@@ -25,10 +31,19 @@ namespace Nuwa
 		void Update();
 		void Render();
 
+
 	private:		
 		uint64 id;
 
 		//std::vector<GameObject*> objs;
 		std::unordered_map<uint64, GameObject*> objMap;
+
+#ifdef NUWA_EDITOR
+		void AddEditorGUI(Editor::EditorGUI* editorGUI);
+		std::vector<Editor::EditorGUI*> editorGUIs;
+
+		void OnEditorGUI();
+
+#endif // NUWA_EDITOR
 	};
 }
