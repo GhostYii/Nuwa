@@ -32,6 +32,8 @@ Nuwa::GameWindow::GameWindow(const WindowConfig& config)
 
 	if (glewInit() != GLEW_OK)
 		spdlog::error("glew init failed.");
+
+	GL_ASSERT(glEnable(GL_DEPTH_TEST));
 }
 
 void Nuwa::GameWindow::OnStart()
@@ -140,7 +142,7 @@ void Nuwa::GameWindow::OnRenderObject()
 	auto render = testGO->GetComponent<MeshRenderer>();
 	if (render)
 	{
-		render->Draw(*camera->GetComponent<Camera>());
+		//render->Draw(*camera->GetComponent<Camera>());
 	}
 }
 

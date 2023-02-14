@@ -45,23 +45,33 @@ namespace Nuwa
 		}
 	}
 
-	void MeshRenderer::Draw(const Camera& camera)
+	void MeshRenderer::Draw()
 	{
-		if (!mesh)
-			return;
-
 		if (texture)
 			texture->Bind();
 
 		shader->Bind();
 		//shader->SetMatrix4x4("cameraMatrix", camera.GetMatrix());
 
-		Matrix4x4 mvp = camera.GetProjectMatrix() * camera.GetViewMatrix() * transform->GetModelMatrix();		
+		Matrix4x4 mvp = drawCamera->GetProjectMatrix() * drawCamera->GetViewMatrix() * transform->GetModelMatrix();
 		shader->SetMatrix4x4("mvp", mvp);
 
 		vao->Bind();
 		ibo->Bind();
 
 		GL_ASSERT(glDrawElements(GL_TRIANGLES, ibo->Count(), GL_UNSIGNED_INT, nullptr));
+	}
+
+	void MeshRenderer::SetCamera(const Camera* camera)
+	{
+		drawCamera = std::make_shared<Camera>(camera);
+	}
+
+	void MeshRenderer::InternalRender()
+	{
+		if (!drawCamera || !mesh)
+			return;
+
+		Draw();
 	}
 }

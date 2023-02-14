@@ -1,5 +1,5 @@
 #pragma once
-#include "Component.h"
+#include "BehaviorComponent.h"
 #include "../Mesh.h"
 #include "../Graphics/Renderer.h"
 #include "Camera.h"
@@ -12,19 +12,22 @@ namespace Nuwa
 	class Shader;
 	class Texture;
 
-	class MeshRenderer : public Component
+	class MeshRenderer : public BehaviorComponent
 	{
 	public:
 		MeshRenderer();
 		virtual ~MeshRenderer() = default;
 
 		void SetMesh(Mesh* mesh, const std::string& shaderPath, const std::string& texturePath);
+		void SetCamera(const Camera* camera);
 
-		void Draw(const Camera& camera);
+	protected:
+		virtual void InternalRender() override;
 
 	private:
 		ToyRenderer renderer;
 
+		std::shared_ptr<Camera> drawCamera;
 		std::shared_ptr<Mesh> mesh;
 
 		std::unique_ptr<VertexArray> vao;
@@ -32,5 +35,7 @@ namespace Nuwa
 		std::unique_ptr<IndexBuffer> ibo;
 		std::unique_ptr<Shader> shader;
 		std::unique_ptr<Texture> texture;
+
+		void Draw();
 	};
 }
