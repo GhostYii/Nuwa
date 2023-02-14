@@ -26,7 +26,7 @@ namespace Nuwa
 
 	private:
 		uint64 uuid;
-		//std::vector<Component*> components;
+		// <typename, component>
 		std::unordered_multimap<std::string, Component*> components;
 	};
 

@@ -39,10 +39,10 @@ void Nuwa::GameWindow::OnStart()
 	// create camera
 	camera = new GameObject();
 	camera->name = "camera";
-	camera->transform.position.z = 10.0f;		
+	camera->transform.position.z = 10.0f;
 
 	Camera* cam = new Camera();
-	
+
 	camera->AddComponent(cam);
 
 	testGO = new GameObject();
@@ -66,7 +66,7 @@ void Nuwa::GameWindow::OnStart()
 	mesh->SetMeshVertices(vertices, indices);
 
 	MeshRenderer* mr = new MeshRenderer();
-	mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/opengl.png");
+	mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");
 
 	testGO->AddComponent(mr);
 }
@@ -81,6 +81,40 @@ void Nuwa::GameWindow::OnGUI()
 	camEuler.z = glm::degrees(camEuler.z);
 	ImGui::DragFloat3("Rotation##cam", glm::value_ptr(camEuler));
 	camera->transform.rotation = Quaternion(glm::radians(camEuler));
+
+	ImGui::ShowDemoWindow();
+
+
+	if (ImGui::CollapsingHeader("Projection##projection1"))
+	{
+		Camera* cam = camera->GetComponent<Camera>();
+		int val = cam->orthographic ? 1 : 0;
+		const char* items[] = { "Perspective", "Orthographic" };
+		ImGui::Combo("Projection##projection2", &val, items, 2);
+		cam->orthographic = val;
+
+		if (!cam->orthographic)
+		{
+			ImGui::DragInt("FOV", &cam->fieldOfView, 1, 1, 179);
+		}
+		else
+		{
+			ImGui::DragFloat("Size", &cam->orthoSize, 0.1f);
+		}
+
+		float zNear = cam->GetNearClipPlane();
+		float zFar = cam->GetFarClipPlane();
+
+		ImGui::Text("Clipping Planes");
+		ImGui::Indent();
+		ImGui::DragFloat("Near", &zNear);
+		ImGui::DragFloat("Far", &zFar);
+		ImGui::Unindent();
+
+		cam->SetClipPlane(zNear, zFar);
+	}
+
+
 	ImGui::End();
 
 	ImGui::Begin(testGO->name.c_str());

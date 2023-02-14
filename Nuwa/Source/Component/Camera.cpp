@@ -10,12 +10,18 @@
 namespace Nuwa
 {
 	Camera::Camera()
-		: orthographic(false), fieldOfView(60), nearClipPlane(0.3f), farClipPlane(1000)
+		: orthographic(false), fieldOfView(60), orthoSize(1.0),
+		orthoClipPlane({ 0, 1000 }), perspClipPlane(Vector2(0.01f, 1000.0f))
 	{
+		float left = -1366.0f / 768.0f * orthoSize;
+		float right = 1366.0f / 768.0f * orthoSize;
+		float bottom = -orthoSize;
+		float top = orthoSize;
+
 		// TODO: width & height & radio
 		projectionMatrix = orthographic ?
-			glm::ortho(0.0f, 1366.0f, 0.0f, 768.0f, nearClipPlane, farClipPlane) :
-			glm::perspective(glm::radians((float)fieldOfView), 1366.0f / 768.0f, nearClipPlane, farClipPlane);
+			glm::ortho(left, right, bottom, top, orthoClipPlane.x, orthoClipPlane.y) :
+			glm::perspective(glm::radians((float)fieldOfView), 1366.0f / 768.0f, perspClipPlane.x, perspClipPlane.y);
 	}
 
 	Matrix4x4 Camera::GetViewMatrix() const
@@ -27,8 +33,15 @@ namespace Nuwa
 
 	Matrix4x4 Camera::GetProjectMatrix() const
 	{
-		return orthographic ?
-			glm::ortho(0.0f, 1366.0f, 0.0f, 768.0f, nearClipPlane, farClipPlane) :
-			glm::perspective(glm::radians((float)fieldOfView), 1366.0f / 768.0f, nearClipPlane, farClipPlane);
+		float left = -1366.0f / 768.0f * orthoSize;
+		float right = 1366.0f / 768.0f * orthoSize;
+		float bottom = -orthoSize;
+		float top = orthoSize;
+
+		projectionMatrix = orthographic ?
+			glm::ortho(left, right, bottom, top, orthoClipPlane.x, orthoClipPlane.y) :
+			glm::perspective(glm::radians((float)fieldOfView), 1366.0f / 768.0f, perspClipPlane.x, perspClipPlane.y);
+
+		return projectionMatrix;
 	}
 }

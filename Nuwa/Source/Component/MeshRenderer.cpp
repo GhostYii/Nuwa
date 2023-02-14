@@ -56,7 +56,7 @@ namespace Nuwa
 		shader->Bind();
 		//shader->SetMatrix4x4("cameraMatrix", camera.GetMatrix());
 
-		Matrix4x4 mvp = camera.GetProjectMatrix() * camera.GetViewMatrix() * transform->GetModelMatrix();
+		Matrix4x4 mvp = camera.GetProjectMatrix() * camera.GetViewMatrix() * transform->GetModelMatrix();		
 		shader->SetMatrix4x4("mvp", mvp);
 
 		vao->Bind();
