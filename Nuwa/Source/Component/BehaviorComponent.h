@@ -30,6 +30,7 @@ namespace Nuwa
 		virtual void InternalUpdate() { Update(); }
 		virtual void InternalLateUpdate() { LateUpdate(); }
 		virtual void InternalRender() {}
+
 		virtual void InternalOnInspectorGUI();
 
 		virtual void OnInspectorGUI() {}

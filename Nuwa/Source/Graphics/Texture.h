@@ -18,6 +18,8 @@ namespace Nuwa
 
 		inline int Width() { return width; }
 		inline int Height() { return height; }
+
+		inline std::string Filepath() const { return filepath; }
 	private:
 		std::string filepath;
 		uchar* localBuffer;

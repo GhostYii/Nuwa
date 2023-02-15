@@ -23,6 +23,7 @@ namespace Nuwa
 
 	protected:
 		virtual void InternalRender() override;
+		virtual void OnInspectorGUI() override;
 
 	private:
 		ToyRenderer renderer;

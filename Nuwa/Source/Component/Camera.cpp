@@ -44,9 +44,35 @@ namespace Nuwa
 
 		return projectionMatrix;
 	}
-	
+
 	void Camera::OnInspectorGUI()
 	{
-		
+		if (ImGui::CollapsingHeader("Projection##projection1", ImGuiTreeNodeFlags_DefaultOpen))
+		{
+			int val = orthographic ? 1 : 0;
+			const char* items[] = { "Perspective", "Orthographic" };
+			ImGui::Combo("Projection##projection2", &val, items, 2);
+			this->orthographic = val;
+
+			if (!orthographic)
+			{
+				ImGui::SliderInt("FOV", &fieldOfView, 1, 179);
+			}
+			else
+			{
+				ImGui::DragFloat("Size", &orthoSize, 0.1f);
+			}
+
+			float zNear = GetNearClipPlane();
+			float zFar = GetFarClipPlane();
+
+			ImGui::Text("Clipping Planes");
+			ImGui::Indent();
+			ImGui::DragFloat("Near", &zNear);
+			ImGui::DragFloat("Far", &zFar);
+			ImGui::Unindent();
+
+			SetClipPlane(zNear, zFar);
+		}
 	}
 }

@@ -26,6 +26,8 @@ namespace Nuwa
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
+		inline std::string Filepath() const { return filepath; }
+
 	private:
 		std::string filepath;
 		mutable std::unordered_map<std::string, int> uniformLocationMap;

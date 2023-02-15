@@ -112,7 +112,7 @@ namespace Nuwa
 		//ImGui::DragFloat3("Rotation##cam", glm::value_ptr(camEuler));
 		//camera->transform.rotation = Quaternion(glm::radians(camEuler));
 
-		ImGui::ShowDemoWindow();
+		//ImGui::ShowDemoWindow();
 
 
 		//if (ImGui::CollapsingHeader("Projection##projection1"))

@@ -35,6 +35,7 @@ namespace Nuwa
 			return;
 
 		objMap[gameObject->GetInstanceID()] = gameObject;
+		allObjs.push_back(gameObject);
 
 		for (auto iter = objMap.begin(); iter != objMap.end(); iter++)
 		{
@@ -104,33 +105,11 @@ namespace Nuwa
 
 	std::vector<GameObject*> GameScene::GetAllGameObjects() const
 	{
-		auto res = std::vector<GameObject*>();
+		//auto res = std::vector<GameObject*>();
 
-		for (auto iter : objMap)		
-			res.push_back(iter.second);		
+		//for (auto iter : objMap)
+		//	res.push_back(iter.second);
 
-		return res;
+		return allObjs;
 	}
-
-//#ifdef NUWA_EDITOR
-//	void GameScene::AddEditorGUI(Editor::EditorGUI* editorGUI)
-//	{
-//		if (!editorGUI)
-//			return;
-//
-//		// 编辑器性能优化？
-//		if (std::find(editorGUIs.begin(), editorGUIs.end(), editorGUI) != editorGUIs.end())
-//			return;
-//
-//		editorGUI->Start();
-//		editorGUIs.push_back(editorGUI);
-//	}
-//
-//	void GameScene::OnEditorGUI()
-//	{
-//		for (auto iter : editorGUIs)
-//			iter->RenderGUI();
-//	}
-//
-//#endif // NUWA_EDITOR
 }

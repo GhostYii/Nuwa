@@ -74,4 +74,16 @@ namespace Nuwa
 
 		Draw();
 	}
+
+	void MeshRenderer::OnInspectorGUI()
+	{
+		//const char* spath = shader ? shader->Filepath().c_str() : "no shader";
+		//const char* tpath = texture ? texture->Filepath().c_str() : "no texture";
+
+		ImGui::LabelText("Shader", "%s", shader->Filepath().c_str());
+		ImGui::LabelText("Texture", "%s", texture->Filepath().c_str());
+
+		//ImGui::Text("Shader Path: %s", spath);
+		//ImGui::Text("Texture Path: %s", tpath);
+	}
 }
