@@ -48,7 +48,10 @@ namespace Nuwa
 #ifdef NUWA_EDITOR
 			spdlog::info("Editor Mode On.");
 			scene->AddEditorGUI(new Editor::Inspector());
-			scene->AddEditorGUI(new Editor::Hierarchy());
+
+			auto hierarchy = new Editor::Hierarchy();
+			hierarchy->SetCurrentScene(scene);
+			scene->AddEditorGUI(hierarchy);
 #endif // NUWA_EDITOR
 		}
 
@@ -112,7 +115,7 @@ namespace Nuwa
 		//ImGui::DragFloat3("Rotation##cam", glm::value_ptr(camEuler));
 		//camera->transform.rotation = Quaternion(glm::radians(camEuler));
 
-		//ImGui::ShowDemoWindow();
+		ImGui::ShowDemoWindow();
 
 
 		//if (ImGui::CollapsingHeader("Projection##projection1"))

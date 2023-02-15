@@ -90,6 +90,16 @@ namespace Nuwa
 
 	}
 
+	std::vector<GameObject*> GameScene::GetAllGameObjects() const
+	{
+		auto res = std::vector<GameObject*>();
+
+		for (auto iter : objMap)		
+			res.push_back(iter.second);		
+
+		return res;
+	}
+
 #ifdef NUWA_EDITOR
 	void GameScene::AddEditorGUI(Editor::EditorGUI* editorGUI)
 	{

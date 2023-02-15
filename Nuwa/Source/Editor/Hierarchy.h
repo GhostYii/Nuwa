@@ -3,6 +3,7 @@
 
 namespace Nuwa
 {
+	class GameScene;
 	namespace Editor
 	{
 		class Hierarchy : public EditorGUI
@@ -12,6 +13,16 @@ namespace Nuwa
 			~Hierarchy() = default;
 
 			virtual void OnGUI() override;
+
+			void SetCurrentScene(Nuwa::GameScene* scene);
+
+		private:
+			Nuwa::GameScene* currentScene;
+
+			//std::unordered_map<uint64, bool> selection;
+			uint64 currentSelectionID;
+
+			bool isSceneTreeOpen;
 		};
 	}
 }

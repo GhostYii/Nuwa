@@ -31,6 +31,7 @@ namespace Nuwa
 		void Update();
 		void Render();
 
+		std::vector<GameObject*> GetAllGameObjects() const;
 
 	private:		
 		uint64 id;

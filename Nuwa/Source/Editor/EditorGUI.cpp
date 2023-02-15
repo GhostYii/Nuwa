@@ -16,9 +16,18 @@ namespace Nuwa
 
 		void EditorGUI::RenderGUI()
 		{
-			ImGui::Begin(title.c_str(), &isOpen);
-			OnGUI();
-			ImGui::End();
+			if (isOpen)
+			{
+				if (!ImGui::Begin(title.c_str(), &isOpen, ImGuiWindowFlags_NoCollapse))
+				{
+					ImGui::End();
+				}
+				else
+				{
+					OnGUI();
+					ImGui::End();
+				}
+			}
 		}
 	}
 }
