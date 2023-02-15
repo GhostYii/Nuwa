@@ -3,6 +3,7 @@
 
 namespace Nuwa
 {
+	class GameObject;
 	namespace Editor
 	{
 		class Inspector : public EditorGUI
@@ -11,8 +12,12 @@ namespace Nuwa
 			Inspector();
 			~Inspector() = default;
 
-
 			virtual void OnGUI() override;
+
+			void SetGameObject(GameObject* obj);
+
+		private:
+			GameObject* currentGameObject;
 		};
 	}
 }

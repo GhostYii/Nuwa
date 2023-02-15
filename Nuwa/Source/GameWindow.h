@@ -4,6 +4,12 @@
 
 #include "GameScene.h"
 
+#ifdef NUWA_EDITOR
+#include "Editor/Editor.h"
+
+using namespace Nuwa::Editor;
+#endif //NUWA_EDITOR
+
 namespace Nuwa
 {
 	class GameWindow : public NwWindow
@@ -22,6 +28,10 @@ namespace Nuwa
 
 	private:
 		GameScene* scene;
+
+#ifdef NUWA_EDITOR
+		EditorMode* editor;
+#endif // NUWA_EDITOR
 	};
 
 }

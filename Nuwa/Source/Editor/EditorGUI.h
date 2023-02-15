@@ -1,6 +1,7 @@
 #pragma once
-#include "Editor.h"
 #include "../GUI.h"
+#include "../EngineTypes.h"
+#include "../Basic/UUID.h"
 
 namespace Nuwa
 {
@@ -8,7 +9,7 @@ namespace Nuwa
 	{
 		class EditorGUI
 		{
-			friend class GameScene;
+			friend class EditorMode;
 		public:
 			EditorGUI();
 			virtual ~EditorGUI();

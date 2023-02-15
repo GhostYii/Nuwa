@@ -27,13 +27,6 @@ namespace Nuwa
 				}
 			}
 		}
-
-#ifdef NUWA_EDITOR
-		for (auto iter : editorGUIs)
-		{
-			iter->Destory();
-		}
-#endif // NUWA_EDITOR
 	}
 
 	void GameScene::AddGameObject(GameObject* gameObject)
@@ -100,25 +93,25 @@ namespace Nuwa
 		return res;
 	}
 
-#ifdef NUWA_EDITOR
-	void GameScene::AddEditorGUI(Editor::EditorGUI* editorGUI)
-	{
-		if (!editorGUI)
-			return;
-
-		// 编辑器性能优化？
-		if (std::find(editorGUIs.begin(), editorGUIs.end(), editorGUI) != editorGUIs.end())
-			return;
-
-		editorGUI->Start();
-		editorGUIs.push_back(editorGUI);
-	}
-
-	void GameScene::OnEditorGUI()
-	{
-		for (auto iter : editorGUIs)
-			iter->RenderGUI();
-	}
-
-#endif // NUWA_EDITOR
+//#ifdef NUWA_EDITOR
+//	void GameScene::AddEditorGUI(Editor::EditorGUI* editorGUI)
+//	{
+//		if (!editorGUI)
+//			return;
+//
+//		// 编辑器性能优化？
+//		if (std::find(editorGUIs.begin(), editorGUIs.end(), editorGUI) != editorGUIs.end())
+//			return;
+//
+//		editorGUI->Start();
+//		editorGUIs.push_back(editorGUI);
+//	}
+//
+//	void GameScene::OnEditorGUI()
+//	{
+//		for (auto iter : editorGUIs)
+//			iter->RenderGUI();
+//	}
+//
+//#endif // NUWA_EDITOR
 }

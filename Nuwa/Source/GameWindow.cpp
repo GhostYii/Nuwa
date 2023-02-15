@@ -47,11 +47,13 @@ namespace Nuwa
 
 #ifdef NUWA_EDITOR
 			spdlog::info("Editor Mode On.");
-			scene->AddEditorGUI(new Editor::Inspector());
+			editor = new Editor::EditorMode();
+
+			editor->AddEditorGUI(new Editor::Inspector());
 
 			auto hierarchy = new Editor::Hierarchy();
 			hierarchy->SetCurrentScene(scene);
-			scene->AddEditorGUI(hierarchy);
+			editor->AddEditorGUI(hierarchy);
 #endif // NUWA_EDITOR
 		}
 
@@ -99,10 +101,8 @@ namespace Nuwa
 	void GameWindow::OnGUI()
 	{
 #ifdef NUWA_EDITOR
-		if (scene)
-		{
-			scene->OnEditorGUI();
-		}
+		if (editor)
+			editor->OnEditorGUI();
 #endif // NUWA_EDITOR
 
 

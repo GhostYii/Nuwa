@@ -39,12 +39,12 @@ namespace Nuwa
 		//std::vector<GameObject*> objs;
 		std::unordered_map<uint64, GameObject*> objMap;
 
-#ifdef NUWA_EDITOR
-		void AddEditorGUI(Editor::EditorGUI* editorGUI);
-		std::vector<Editor::EditorGUI*> editorGUIs;
-
-		void OnEditorGUI();
-
-#endif // NUWA_EDITOR
+//#ifdef NUWA_EDITOR
+//		void AddEditorGUI(Editor::EditorGUI* editorGUI);
+//		std::vector<Editor::EditorGUI*> editorGUIs;
+//
+//		void OnEditorGUI();
+//
+//#endif // NUWA_EDITOR
 	};
 }

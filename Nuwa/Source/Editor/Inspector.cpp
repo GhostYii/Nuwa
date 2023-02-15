@@ -11,7 +11,16 @@ namespace Nuwa
 
 		void Inspector::OnGUI()
 		{
-			ImGui::Text("this is a text in inspector tab.");
+			if (!currentGameObject)
+				return;
+
+
+
+		}
+
+		void Inspector::SetGameObject(GameObject* obj)
+		{
+			currentGameObject = obj;
 		}
 	}
 }
