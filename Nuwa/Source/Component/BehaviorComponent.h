@@ -13,7 +13,7 @@ namespace Nuwa
 	{
 		friend class GameScene;
 #ifdef NUWA_EDITOR
-		friend class EditorMode;
+		friend class Inspector;
 #endif // NUWA_EDITOR
 	public:
 		BehaviorComponent() = default;
@@ -30,6 +30,7 @@ namespace Nuwa
 		virtual void InternalUpdate() { Update(); }
 		virtual void InternalLateUpdate() { LateUpdate(); }
 		virtual void InternalRender() {}
+		virtual void InternalOnInspectorGUI();
 
 		virtual void OnInspectorGUI() {}
 	};

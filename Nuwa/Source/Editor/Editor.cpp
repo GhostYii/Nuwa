@@ -38,22 +38,7 @@ namespace Nuwa
 		void EditorMode::OnEditorGUI()
 		{
 			for (auto iter : editorGUIs)
-				iter->RenderGUI();
-
-			if (currentScene)
-			{
-				for (const auto gameObject : currentScene->GetAllGameObjects())
-				{
-					for (const auto iter : gameObject->components)
-					{
-						if (typeid(iter.second) == typeid(BehaviorComponent*))
-						{
-							const auto comp = dynamic_cast<BehaviorComponent*>(iter.second);
-							comp->OnInspectorGUI();
-						}
-					}
-				}
-			}
+				iter->RenderGUI();			
 		}
 
 		void EditorMode::SetCurrentScene(Nuwa::GameScene* scene)

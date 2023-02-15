@@ -1,9 +1,9 @@
 #pragma once
-#include "Component.h"
+#include "BehaviorComponent.h"
 
 namespace Nuwa
 {
-	class Camera : public Component
+	class Camera : public BehaviorComponent
 	{
 	public:
 		Camera();
@@ -32,6 +32,9 @@ namespace Nuwa
 			else
 				perspClipPlane = Vector2(zNear, zFar);
 		}
+
+	protected:
+		virtual void OnInspectorGUI() override;
 
 	private:
 		Vector2 orthoClipPlane;

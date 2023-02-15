@@ -44,4 +44,9 @@ namespace Nuwa
 
 		return projectionMatrix;
 	}
+	
+	void Camera::OnInspectorGUI()
+	{
+		
+	}
 }

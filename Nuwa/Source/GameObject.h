@@ -3,12 +3,19 @@
 #include "Component/Component.h"
 
 namespace Nuwa
-{
+{	
+#ifdef NUWA_EDITOR					
+	namespace Editor
+	{
+		class Inspector;
+	}
+#endif // NUWA_EDITOR
+
 	class GameObject
 	{
 		friend class GameScene;
-#ifdef NUWA_EDITOR
-		friend class Editor::EditorMode;
+#ifdef NUWA_EDITOR					
+		friend class Editor::Inspector;
 #endif // NUWA_EDITOR
 
 	public:

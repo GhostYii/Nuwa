@@ -14,8 +14,6 @@ namespace Nuwa
 
 			virtual void OnGUI() override;
 
-			void SetGameObject(GameObject* obj);
-
 		private:
 			GameObject* currentGameObject;
 		};
