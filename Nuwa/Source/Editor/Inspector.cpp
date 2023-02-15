@@ -1,4 +1,6 @@
+#include "Editor.h"
 #include "Inspector.h"
+#include "../GameScene.h"
 
 namespace Nuwa
 {
@@ -11,8 +13,14 @@ namespace Nuwa
 
 		void Inspector::OnGUI()
 		{
+			if (!EditorMode::currentScene)
+				return;
+
+			currentGameObject = EditorMode::currentScene->Find(EditorMode::currentSelectionID);
+
 			if (!currentGameObject)
 				return;
+
 
 
 

@@ -1,11 +1,20 @@
 #pragma once
 #include "Component.h"
 
+#ifdef NUWA_EDITOR
+#include "../Editor/Editor.h"
+using namespace Nuwa::Editor;
+#endif // NUWA_EDITOR
+
+
 namespace Nuwa
 {
 	class BehaviorComponent : public Component
 	{
 		friend class GameScene;
+#ifdef NUWA_EDITOR
+		friend class EditorMode;
+#endif // NUWA_EDITOR
 	public:
 		BehaviorComponent() = default;
 		virtual ~BehaviorComponent() = default;
@@ -21,5 +30,7 @@ namespace Nuwa
 		virtual void InternalUpdate() { Update(); }
 		virtual void InternalLateUpdate() { LateUpdate(); }
 		virtual void InternalRender() {}
+
+		virtual void OnInspectorGUI() {}
 	};
 }

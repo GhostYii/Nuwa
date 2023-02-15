@@ -1,10 +1,17 @@
 #include "Editor.h"
+#include "../GameScene.h"
+#include "../Component/BehaviorComponent.h"
+
 namespace Nuwa
 {
 	namespace Editor
 	{
+		Nuwa::GameScene* EditorMode::currentScene = nullptr;
+		uint64 EditorMode::currentSelectionID = 0;
+
 		EditorMode::EditorMode()
 		{
+			spdlog::info("Editor Mode On.");
 		}
 
 		EditorMode::~EditorMode()
@@ -32,6 +39,26 @@ namespace Nuwa
 		{
 			for (auto iter : editorGUIs)
 				iter->RenderGUI();
+
+			if (currentScene)
+			{
+				for (const auto gameObject : currentScene->GetAllGameObjects())
+				{
+					for (const auto iter : gameObject->components)
+					{
+						if (typeid(iter.second) == typeid(BehaviorComponent*))
+						{
+							const auto comp = dynamic_cast<BehaviorComponent*>(iter.second);
+							comp->OnInspectorGUI();
+						}
+					}
+				}
+			}
+		}
+
+		void EditorMode::SetCurrentScene(Nuwa::GameScene* scene)
+		{
+			EditorMode::currentScene = scene;
 		}
 	}
 }

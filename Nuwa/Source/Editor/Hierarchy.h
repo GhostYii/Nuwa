@@ -14,14 +14,7 @@ namespace Nuwa
 
 			virtual void OnGUI() override;
 
-			void SetCurrentScene(Nuwa::GameScene* scene);
-
 		private:
-			Nuwa::GameScene* currentScene;
-
-			//std::unordered_map<uint64, bool> selection;
-			uint64 currentSelectionID;
-
 			bool isSceneTreeOpen;
 		};
 	}

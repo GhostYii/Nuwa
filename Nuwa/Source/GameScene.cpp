@@ -50,6 +50,25 @@ namespace Nuwa
 		}
 	}
 
+	GameObject* GameScene::Find(const uint64 id)
+	{
+		if (objMap.find(id) != objMap.end())
+			return objMap.find(id)->second;
+
+		return nullptr;
+	}
+
+	GameObject* GameScene::Find(const std::string name)
+	{
+		for (auto iter : objMap)
+		{
+			if (iter.second->name == name)
+				return iter.second;
+		}
+
+		return nullptr;
+	}
+
 	void GameScene::Update()
 	{
 		for (auto iter = objMap.begin(); iter != objMap.end(); iter++)

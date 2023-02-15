@@ -7,6 +7,10 @@ namespace Nuwa
 	class GameObject
 	{
 		friend class GameScene;
+#ifdef NUWA_EDITOR
+		friend class Editor::EditorMode;
+#endif // NUWA_EDITOR
+
 	public:
 		GameObject();
 		GameObject(std::string name);

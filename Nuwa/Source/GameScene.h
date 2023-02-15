@@ -20,6 +20,9 @@ namespace Nuwa
 
 		void AddGameObject(GameObject* gameObject);
 
+		GameObject* Find(const uint64 id);
+		GameObject* Find(const std::string name);
+
 		//void RemoveGameObject(const GameObject* gameObject);
 		//void RemoveGameObject(const uint64 gameObjectID);
 
@@ -32,6 +35,8 @@ namespace Nuwa
 		void Render();
 
 		std::vector<GameObject*> GetAllGameObjects() const;
+		
+
 
 	private:		
 		uint64 id;

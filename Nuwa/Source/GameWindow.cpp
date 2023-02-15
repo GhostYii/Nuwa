@@ -45,15 +45,12 @@ namespace Nuwa
 		{
 			scene = new GameScene("Default Scene");
 
-#ifdef NUWA_EDITOR
-			spdlog::info("Editor Mode On.");
+#ifdef NUWA_EDITOR			
 			editor = new Editor::EditorMode();
+			EditorMode::SetCurrentScene(scene);
 
 			editor->AddEditorGUI(new Editor::Inspector());
-
-			auto hierarchy = new Editor::Hierarchy();
-			hierarchy->SetCurrentScene(scene);
-			editor->AddEditorGUI(hierarchy);
+			editor->AddEditorGUI(new Editor::Hierarchy());
 #endif // NUWA_EDITOR
 		}
 
