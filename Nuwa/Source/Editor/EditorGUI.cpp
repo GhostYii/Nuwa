@@ -110,7 +110,7 @@ namespace Nuwa
 			ImGui::PopID();
 		}
 
-		void EditorGUI::DrawText(std::string name, char* buf, size_t buf_size)
+		void EditorGUI::DrawInputText(std::string name, char* buf, size_t bufSize)
 		{
 			ImGui::PushID(name.c_str());
 
@@ -119,7 +119,22 @@ namespace Nuwa
 			ImGui::Text(name.c_str());
 			ImGui::NextColumn();
 
-			ImGui::InputText(("##" + name).c_str(), buf, buf_size);
+			ImGui::InputText(("##" + name).c_str(), buf, bufSize);
+
+			ImGui::Columns();
+			ImGui::PopID();
+		}
+
+		void EditorGUI::DrawCombo(std::string name, int* currentItem, const char* const items[], int itemsCount)
+		{
+			ImGui::PushID(name.c_str());
+
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, EDITOR_DEFAULT_TITLE_WIDTH);
+			ImGui::Text(name.c_str());
+			ImGui::NextColumn();
+
+			ImGui::Combo(("##" + name).c_str(), currentItem, items, itemsCount);
 
 			ImGui::Columns();
 			ImGui::PopID();

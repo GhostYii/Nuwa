@@ -7,6 +7,10 @@
 #include<glm/gtx/rotate_vector.hpp>
 #include<glm/gtx/vector_angle.hpp>
 
+#ifdef NUWA_EDITOR
+#include "../Editor/EditorGUI.h"
+#endif // NUWA_EDITOR
+
 namespace Nuwa
 {
 	Camera::Camera()
@@ -51,16 +55,17 @@ namespace Nuwa
 		{
 			int val = orthographic ? 1 : 0;
 			const char* items[] = { "Perspective", "Orthographic" };
-			ImGui::Combo("Projection##projection2", &val, items, 2);
+			//ImGui::Combo("Projection##projection2", &val, items, 2);
+			Editor::EditorGUI::DrawCombo("Projection", &val, items, 2);
 			this->orthographic = val;
 
 			if (!orthographic)
 			{
-				ImGui::SliderInt("FOV", &fieldOfView, 1, 179);
+				Editor::EditorGUI::DrawSlideInt("FOV", fieldOfView, 1, 179);
 			}
 			else
 			{
-				ImGui::DragFloat("Size", &orthoSize, 0.1f);
+				Editor::EditorGUI::DrawDragFloat("Size", orthoSize);
 			}
 
 			float zNear = GetNearClipPlane();
@@ -68,8 +73,8 @@ namespace Nuwa
 
 			ImGui::Text("Clipping Planes");
 			ImGui::Indent();
-			ImGui::DragFloat("Near", &zNear);
-			ImGui::DragFloat("Far", &zFar);
+			Editor::EditorGUI::DrawDragFloat("Near", zNear);
+			Editor::EditorGUI::DrawDragFloat("Far", zFar);
 			ImGui::Unindent();
 
 			SetClipPlane(zNear, zFar);
