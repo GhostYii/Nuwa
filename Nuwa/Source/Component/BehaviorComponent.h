@@ -16,8 +16,10 @@ namespace Nuwa
 		friend class Inspector;
 #endif // NUWA_EDITOR
 	public:
-		BehaviorComponent() = default;
+		BehaviorComponent() : enable(true) {};
 		virtual ~BehaviorComponent() = default;
+
+		bool enable;
 
 		virtual void Awake() {}
 		virtual void Start() {}
