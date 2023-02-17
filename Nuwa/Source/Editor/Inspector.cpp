@@ -4,6 +4,8 @@
 #include "../Component/BehaviorComponent.h"
 #include<glm/gtc/type_ptr.hpp>
 
+#include "../Component/Camera.h"
+
 namespace Nuwa
 {
 	namespace Editor
@@ -40,7 +42,7 @@ namespace Nuwa
 				ImGui::Unindent();
 			}
 
-			for (auto iter : currentGameObject->components)
+			for (auto& iter : currentGameObject->components)
 			{
 				if (dynamic_cast<BehaviorComponent*>(iter.second))
 				{

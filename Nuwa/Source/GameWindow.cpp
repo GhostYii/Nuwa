@@ -62,7 +62,7 @@ namespace Nuwa
 			camera->transform.position.z = 10.0f;
 
 			Camera* cam = new Camera();
-			camera->AddComponent(cam);
+			camera->AddComponent(cam);			
 
 			// create test game object
 			GameObject* testGO = new GameObject("test game object");
@@ -85,8 +85,8 @@ namespace Nuwa
 			mesh->SetMeshVertices(vertices, indices);
 
 			MeshRenderer* mr = new MeshRenderer();
-			mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");
-			mr->SetCamera(cam);
+			mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");			
+			mr->SetCamera(cam);			
 
 			testGO->AddComponent(mr);
 
@@ -101,6 +101,9 @@ namespace Nuwa
 		if (editor)
 			editor->OnEditorGUI();
 #endif // NUWA_EDITOR
+
+		auto obj = scene->Find("camera")->GetComponent<Camera>();
+		ImGui::DragInt("fov", &obj->fieldOfView);
 
 
 		//ImGui::Begin(camera->name.c_str());

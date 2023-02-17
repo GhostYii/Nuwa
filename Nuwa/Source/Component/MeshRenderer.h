@@ -19,7 +19,9 @@ namespace Nuwa
 		virtual ~MeshRenderer() = default;
 
 		void SetMesh(Mesh* mesh, const std::string& shaderPath, const std::string& texturePath);
-		void SetCamera(const Camera* camera);
+		void SetCamera(Camera* camera);
+
+		//Camera* drawCamera;
 
 	protected:
 		virtual void InternalRender() override;

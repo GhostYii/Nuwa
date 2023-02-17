@@ -62,9 +62,9 @@ namespace Nuwa
 		GL_ASSERT(glDrawElements(GL_TRIANGLES, ibo->Count(), GL_UNSIGNED_INT, nullptr));
 	}
 
-	void MeshRenderer::SetCamera(const Camera* camera)
-	{
-		drawCamera = std::make_shared<Camera>(*camera);
+	void MeshRenderer::SetCamera(Camera* camera)
+	{		
+		drawCamera = std::shared_ptr<Camera>(camera);
 	}
 
 	void MeshRenderer::InternalRender()
