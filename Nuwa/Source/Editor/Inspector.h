@@ -4,6 +4,7 @@
 namespace Nuwa
 {
 	class GameObject;
+	class Transform;
 	namespace Editor
 	{
 		class Inspector : public EditorGUI
@@ -16,6 +17,8 @@ namespace Nuwa
 
 		private:
 			GameObject* currentGameObject;
+
+			void DrawTransform(Transform& transform);			
 		};
 	}
 }

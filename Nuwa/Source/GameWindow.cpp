@@ -101,6 +101,8 @@ namespace Nuwa
 		if (editor)
 			editor->OnEditorGUI();
 #endif // NUWA_EDITOR
+
+		ImGui::ShowDemoWindow();
 	}
 
 	void GameWindow::OnUpdate()
