@@ -96,7 +96,8 @@ namespace Nuwa
 				if (dynamic_cast<BehaviorComponent*>(comIter->second))
 				{
 					BehaviorComponent* behavior = dynamic_cast<BehaviorComponent*>(comIter->second);
-					behavior->InternalRender();
+					if (behavior->enable)
+						behavior->InternalRender();
 				}
 			}
 		}
