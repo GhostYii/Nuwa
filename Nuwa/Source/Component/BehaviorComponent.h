@@ -29,8 +29,8 @@ namespace Nuwa
 
 	protected:
 		virtual void InternalStart() { Start(); }
-		virtual void InternalUpdate() { Update(); }
-		virtual void InternalLateUpdate() { LateUpdate(); }
+		virtual void InternalUpdate() { if (enable) Update(); }
+		virtual void InternalLateUpdate() { if (enable) LateUpdate(); }
 		virtual void InternalRender() {}
 
 		virtual void InternalOnInspectorGUI();
