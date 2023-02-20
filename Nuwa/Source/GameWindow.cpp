@@ -62,17 +62,17 @@ namespace Nuwa
 			camera->transform.position.z = 10.0f;
 
 			Camera* cam = new Camera();
-			camera->AddComponent(cam);			
+			camera->AddComponent(cam);
 
 			// create test game object
 			GameObject* testGO = new GameObject("test game object");
 
 			std::vector<MeshVertex> vertices =
 			{
-				{ { -1.0f, -1.0f, 0.0f }, { 0.0f, 0.0f } },
-				{ {  1.0f, -1.0f, 0.0f }, { 1.0f, 0.0f } },
-				{ {  1.0f,  1.0f, 0.0f }, { 1.0f, 1.0f } },
-				{ { -1.0f,  1.0f, 0.0f }, { 0.0f, 1.0f } }
+				{ { -1.0f, -1.0f, 0.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f } },
+				{ {  1.0f, -1.0f, 0.0f }, { 1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f } },
+				{ {  1.0f,  1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f, 1.0f } },
+				{ { -1.0f,  1.0f, 0.0f }, { 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f } }
 			};
 
 			std::vector<uint> indices =
@@ -82,11 +82,12 @@ namespace Nuwa
 			};
 
 			Mesh* mesh = new Mesh();
-			mesh->SetMeshVertices(vertices, indices);
+			//mesh->SetMeshVertices(vertices, indices);
+			mesh->LoadFromObj("Resources/Models/wall_block.obj");
 
 			MeshRenderer* mr = new MeshRenderer();
-			mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");			
-			mr->SetCamera(cam);			
+			mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");
+			mr->SetCamera(cam);
 
 			testGO->AddComponent(mr);
 

@@ -29,8 +29,9 @@ namespace Nuwa
 		vbo = std::make_unique<VertexBuffer>(mesh->GetVertices().data(), mesh->GetVerticesSize());
 
 		VertexLayout layout;
-		layout.Push<float>(3);
-		layout.Push<float>(2);
+		layout.Push<float>(3);	//pos
+		layout.Push<float>(2);	//uv
+		layout.Push<float>(3);	//norm
 
 		vao->AddBuffer(*vbo, layout);
 
@@ -82,7 +83,22 @@ namespace Nuwa
 
 	void MeshRenderer::OnInspectorGUI()
 	{
-		Editor::EditorGUI::DrawLabel("Shader", shader->Filepath());
-		Editor::EditorGUI::DrawLabel("Texture", texture->Filepath());
+		if (ImGui::CollapsingHeader("Mesh Information", ImGuiTreeNodeFlags_DefaultOpen))
+		{
+			ImGui::Indent();
+			if (mesh->GetModelPath() != "")
+				EditorGUI::DrawLabel("Model Path", mesh->GetModelPath());
+			EditorGUI::DrawLabel("Vertex Size", std::to_string(mesh->GetVerticesSize()));
+			//EditorGUI::DrawLabel("Index Size", std::to_string(mesh->GetIndicesSize()));
+			ImGui::Unindent();
+		}
+
+		if (ImGui::CollapsingHeader("Material Information (temp)", ImGuiTreeNodeFlags_DefaultOpen))
+		{
+			ImGui::Indent();
+			EditorGUI::DrawLabel("Shader", shader->Filepath());
+			EditorGUI::DrawLabel("Texture", texture->Filepath());
+			ImGui::Unindent();
+		}
 	}
 }
