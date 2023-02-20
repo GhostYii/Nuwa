@@ -1,4 +1,5 @@
 #include "EditorGUI.h"
+#include "glm/gtc/type_ptr.hpp"
 
 namespace Nuwa
 {
@@ -24,6 +25,7 @@ namespace Nuwa
 				}
 				else
 				{
+					ImGui::AlignTextToFramePadding();
 					OnGUI();
 					ImGui::End();
 				}
@@ -45,6 +47,25 @@ namespace Nuwa
 			ImGui::PopID();
 		}
 
+		void EditorGUI::DrawSlideFloat(std::string name, float& value, float min, float max)
+		{
+			ImGui::PushID(name.c_str());
+
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, EDITOR_DEFAULT_TITLE_WIDTH);
+			ImGui::Text(name.c_str());
+			ImGui::NextColumn();
+			
+			ImGui::AlignTextToFramePadding();
+			ImGui::SliderFloat(("##" + name).c_str(), &value, min, max);			
+			ImGui::Columns();
+			ImGui::PopID();
+
+			ImGui::SameLine();
+			ImGui::SetNextItemWidth(EDITOR_DEFAULT_DRAG_WIDTH);
+			ImGui::DragFloat(("##" + name).c_str(), &value, 0.1f, min, max, "%.2f");			
+		}
+
 		void EditorGUI::DrawSlideInt(std::string name, int& value, int min, int max)
 		{
 			ImGui::PushID(name.c_str());
@@ -58,6 +79,10 @@ namespace Nuwa
 
 			ImGui::Columns();
 			ImGui::PopID();
+
+			ImGui::SameLine();
+			ImGui::SetNextItemWidth(EDITOR_DEFAULT_DRAG_WIDTH);
+			ImGui::DragInt(("##" + name).c_str(), &value, 1.0f, min, max);
 		}
 
 		void EditorGUI::DrawDragVector3(std::string name, Vector3& value)
@@ -135,6 +160,36 @@ namespace Nuwa
 			ImGui::NextColumn();
 
 			ImGui::Combo(("##" + name).c_str(), currentItem, items, itemsCount);
+
+			ImGui::Columns();
+			ImGui::PopID();
+		}
+
+		void EditorGUI::DrawEditColor3(std::string name, Vector3& color)
+		{
+			ImGui::PushID(name.c_str());
+
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, EDITOR_DEFAULT_TITLE_WIDTH);
+			ImGui::Text(name.c_str());
+			ImGui::NextColumn();
+
+			ImGui::ColorEdit3(("##" + name).c_str(), glm::value_ptr(color));
+
+			ImGui::Columns();
+			ImGui::PopID();
+		}
+
+		void EditorGUI::DrawPickColor3(std::string name, Vector3& color)
+		{
+			ImGui::PushID(name.c_str());
+
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, EDITOR_DEFAULT_TITLE_WIDTH);
+			ImGui::Text(name.c_str());
+			ImGui::NextColumn();
+
+			ImGui::ColorPicker3(("##" + name).c_str(), glm::value_ptr(color));
 
 			ImGui::Columns();
 			ImGui::PopID();

@@ -3,6 +3,26 @@
 
 namespace Nuwa
 {
+	void BehaviorComponent::InternalUpdate()
+	{
+		if (enable)
+			Update();
+
+		if (prevEnable != enable)
+		{
+			if (enable)	OnEnable();
+			else OnDisable();
+		}
+	}
+
+	void BehaviorComponent::InternalLateUpdate()
+	{
+		if (enable)
+			LateUpdate();
+
+		prevEnable = enable;
+	}
+
 	void BehaviorComponent::InternalOnInspectorGUI()
 	{
 		ImGui::Indent();

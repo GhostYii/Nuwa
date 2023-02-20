@@ -149,6 +149,7 @@
     <ClCompile Include="Source\Component\Camera.cpp" />
     <ClCompile Include="Source\Component\Light.cpp" />
     <ClCompile Include="Source\Component\MeshRenderer.cpp" />
+    <ClCompile Include="Source\Component\Renderer.cpp" />
     <ClCompile Include="Source\Editor\Editor.cpp" />
     <ClCompile Include="Source\Editor\EditorGUI.cpp" />
     <ClCompile Include="Source\Editor\Hierarchy.cpp" />
@@ -161,7 +162,7 @@
     <ClCompile Include="Source\GameWindow.cpp" />
     <ClCompile Include="Source\Graphics\Shader.cpp" />
     <ClCompile Include="Source\Graphics\IndexBuffer.cpp" />
-    <ClCompile Include="Source\Graphics\Renderer.cpp" />
+    <ClCompile Include="Source\Graphics\ToyRenderer.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="Source\Basic\NwWindow.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="Source\Component\Camera.h" />
     <ClInclude Include="Source\Component\Light.h" />
     <ClInclude Include="Source\Component\MeshRenderer.h" />
+    <ClInclude Include="Source\Component\Renderer.h" />
     <ClInclude Include="Source\Editor\Editor.h" />
     <ClInclude Include="Source\Editor\EditorGUI.h" />
     <ClInclude Include="Source\Editor\Hierarchy.h" />
@@ -201,7 +203,7 @@
     <ClInclude Include="Source\Graphics\MeshVertex.h" />
     <ClInclude Include="Source\Graphics\Shader.h" />
     <ClInclude Include="Source\Graphics\IndexBuffer.h" />
-    <ClInclude Include="Source\Graphics\Renderer.h" />
+    <ClInclude Include="Source\Graphics\ToyRenderer.h" />
     <ClInclude Include="Source\Graphics\IBindable.h" />
     <ClInclude Include="Source\Graphics\VertexBuffer.h" />
     <ClInclude Include="Source\Basic\NwWindow.h" />
@@ -252,6 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Default.shader" />
+    <None Include="Resources\Shaders\Light.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

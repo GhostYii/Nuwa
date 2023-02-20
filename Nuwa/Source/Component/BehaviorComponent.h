@@ -16,7 +16,7 @@ namespace Nuwa
 		friend class Inspector;
 #endif // NUWA_EDITOR
 	public:
-		BehaviorComponent() : enable(true) {};
+		BehaviorComponent() : enable(true), prevEnable(false) {};
 		virtual ~BehaviorComponent() = default;
 
 		bool enable;
@@ -27,14 +27,20 @@ namespace Nuwa
 		virtual void LateUpdate() {}
 		virtual void Destory() {}
 
+		virtual void OnEnable() {}
+		virtual void OnDisable() {}
+
 	protected:
 		virtual void InternalStart() { Start(); }
-		virtual void InternalUpdate() { if (enable) Update(); }
-		virtual void InternalLateUpdate() { if (enable) LateUpdate(); }
+		virtual void InternalUpdate();
+		virtual void InternalLateUpdate();
 		virtual void InternalRender() {}
 
 		virtual void InternalOnInspectorGUI();
 
 		virtual void OnInspectorGUI() {}
+
+	private:
+		bool prevEnable;
 	};
 }

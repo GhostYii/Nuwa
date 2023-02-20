@@ -3,12 +3,17 @@
 
 namespace Nuwa
 {
+	//class Shader;
+	class GameScene;
+
 	class Light : public BehaviorComponent
 	{
 		// 简单模拟冯氏光照模型（phong light model）
-	public:		
+	public:
 		Light();
 		virtual ~Light() = default;
+
+		LightType type;
 
 		// 环境光
 		float ambient;
@@ -19,7 +24,21 @@ namespace Nuwa
 
 		float intensity;
 
+		Vector3 color;
+
+		//virtual void Awake() override;
+		void SetGameScene(GameScene* gameScene);
+
 	private:
+		//std::unique_ptr<Shader> shader;
+
+	protected:
+		std::unique_ptr<GameScene> scene;
+
+		virtual void InternalRender() override;
+		virtual void OnInspectorGUI() override;
+		
+		virtual void OnDisable() override;
 	};
 
 }

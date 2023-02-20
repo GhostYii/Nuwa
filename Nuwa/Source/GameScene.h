@@ -8,8 +8,10 @@
 
 namespace Nuwa
 {
+	class Light;
+
 	class GameScene
-	{
+	{		
 		friend class GameWindow;
 	public:
 		GameScene();
@@ -38,6 +40,6 @@ namespace Nuwa
 		uint64 id;
 
 		std::vector<GameObject*> allObjs;
-		std::unordered_map<uint64, GameObject*> objMap;
+		std::unordered_map<uint64, GameObject*> objMap;		
 	};
 }

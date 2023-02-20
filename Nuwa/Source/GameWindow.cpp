@@ -10,6 +10,7 @@
 
 #include "Mesh.h"
 #include "Component/MeshRenderer.h"
+#include "Component/Light.h"
 //#include "Component/Camera.h"
 
 namespace Nuwa
@@ -65,8 +66,8 @@ namespace Nuwa
 			camera->AddComponent(cam);
 
 			// create test game object
-			GameObject* testGO = new GameObject("sphere");
-			testGO->transform.rotation = Quaternion(glm::radians(Vector3(-90, 45, 0)));
+			GameObject* test = new GameObject("sphere");
+			test->transform.rotation = Quaternion(glm::radians(Vector3(-90, 45, 0)));
 
 			//std::vector<MeshVertex> vertices =
 			//{
@@ -90,10 +91,20 @@ namespace Nuwa
 			mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");
 			mr->SetCamera(cam);
 
-			testGO->AddComponent(mr);
+			test->AddComponent(mr);
+
+			// create light gameobject
+			GameObject* light = new GameObject("light");
+
+			auto lightComp = new Light();
+			lightComp->SetGameScene(scene);
+
+			light->AddComponent(lightComp);
+			
 
 			scene->AddGameObject(camera);
-			scene->AddGameObject(testGO);
+			scene->AddGameObject(light);
+			scene->AddGameObject(test);
 		}
 	}
 

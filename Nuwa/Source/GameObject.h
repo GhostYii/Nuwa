@@ -35,6 +35,9 @@ namespace Nuwa
 		template<typename T>
 		std::vector<T*> GetComponents();
 
+		template<typename T>
+		std::vector<T*> GetBaseComponents();
+
 		inline const uint64 GetInstanceID() const { return uuid; }
 
 	private:
@@ -61,6 +64,21 @@ namespace Nuwa
 		const std::string typeName = typeid(T).name();
 		for (auto iter = components.find(typeName); iter != components.end() && iter->first == typeName; iter++)
 			res.push_back(dynamic_cast<T*>(iter->second));
+
+		return res;
+	}
+
+	template<typename T>
+	inline std::vector<T*> GameObject::GetBaseComponents()
+	{
+		std::vector<T*> res;
+
+		for (auto iter : components)
+		{
+			auto com = dynamic_cast<T*>(iter.second);
+			if (com)
+				res.push_back(com);
+		}
 
 		return res;
 	}

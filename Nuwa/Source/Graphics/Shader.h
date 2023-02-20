@@ -22,6 +22,9 @@ namespace Nuwa
 		void SetColor(const std::string& name, Vector4 color);
 		void SetMatrix4x4(const std::string& name, Matrix4x4 mat);
 
+		int GetInt(const std::string& name) const;
+		Vector3 GetColor(const std::string& name) const;
+
 		// Inherited via IBindable
 		virtual void Bind() const override;
 		virtual void Unbind() const override;

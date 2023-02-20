@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "Basic/UUID.h"
-#include "Component/BehaviorComponent.h"
+//#include "Component/BehaviorComponent.h"
+#include "Component/Light.h"
 
 namespace Nuwa
 {
@@ -37,18 +38,17 @@ namespace Nuwa
 		objMap[gameObject->GetInstanceID()] = gameObject;
 		allObjs.push_back(gameObject);
 
-		for (auto iter = objMap.begin(); iter != objMap.end(); iter++)
+
+		for (auto comIter = gameObject->components.begin(); comIter != gameObject->components.end(); comIter++)
 		{
-			for (auto comIter = iter->second->components.begin(); comIter != iter->second->components.end(); comIter++)
+			if (dynamic_cast<BehaviorComponent*>(comIter->second))
 			{
-				if (dynamic_cast<BehaviorComponent*>(comIter->second))
-				{
-					BehaviorComponent* behavior = dynamic_cast<BehaviorComponent*>(comIter->second);
-					behavior->Awake();
-					behavior->InternalStart();
-				}
+				BehaviorComponent* behavior = dynamic_cast<BehaviorComponent*>(comIter->second);
+				behavior->Awake();
+				behavior->InternalStart();
 			}
 		}
+
 	}
 
 	GameObject* GameScene::Find(const uint64 id)

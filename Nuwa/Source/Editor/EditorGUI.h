@@ -8,6 +8,7 @@ namespace Nuwa
 	namespace Editor
 	{
 #define EDITOR_DEFAULT_TITLE_WIDTH 100
+#define EDITOR_DEFAULT_DRAG_WIDTH 60
 	}
 }
 
@@ -42,7 +43,7 @@ namespace Nuwa
 
 		public:
 			static void DrawDragFloat(std::string name, float& value);
-			//static void DrawSlideFloat(std::string name, float& value, float min, float max);
+			static void DrawSlideFloat(std::string name, float& value, float min, float max);
 			//static void DrawDragInt(std::string name, int& value);
 			static void DrawSlideInt(std::string name, int& value, int min, int max);
 
@@ -53,6 +54,9 @@ namespace Nuwa
 			static void DrawInputText(std::string name, char* buf, size_t bufSize = 1024);
 
 			static void DrawCombo(std::string name, int* currentItem, const char* const items[], int itemsCount);
+
+			static void DrawEditColor3(std::string name, Vector3& color);
+			static void DrawPickColor3(std::string name, Vector3& color);
 
 		};
 	}

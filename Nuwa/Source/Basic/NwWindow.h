@@ -2,7 +2,7 @@
 #include "../EngineTypes.h"
 #include <GLFW/glfw3.h>
 
-#include "../Graphics/Renderer.h"
+#include "../Graphics/ToyRenderer.h"
 
 namespace Nuwa
 {

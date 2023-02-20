@@ -14,7 +14,6 @@
 namespace Nuwa
 {
 	MeshRenderer::MeshRenderer()
-		: renderer(ToyRenderer())
 	{
 	}
 
@@ -49,36 +48,6 @@ namespace Nuwa
 		{
 			texture = std::make_unique<Texture>(texturePath);
 		}
-	}
-
-	void MeshRenderer::Draw()
-	{
-		if (texture)
-			texture->Bind();
-
-		shader->Bind();
-		//shader->SetMatrix4x4("cameraMatrix", camera.GetMatrix());
-
-		Matrix4x4 mvp = drawCamera->GetProjectMatrix() * drawCamera->GetViewMatrix() * transform->GetModelMatrix();
-		shader->SetMatrix4x4("mvp", mvp);
-
-		vao->Bind();
-		ibo->Bind();
-
-		GL_ASSERT(glDrawElements(GL_TRIANGLES, ibo->Count(), GL_UNSIGNED_INT, nullptr));
-	}
-
-	void MeshRenderer::SetCamera(Camera* camera)
-	{		
-		drawCamera = std::shared_ptr<Camera>(camera);
-	}
-
-	void MeshRenderer::InternalRender()
-	{
-		if (!drawCamera || !mesh)
-			return;
-
-		Draw();
 	}
 
 	void MeshRenderer::OnInspectorGUI()

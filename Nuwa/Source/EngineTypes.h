@@ -52,4 +52,11 @@ namespace Nuwa
 			return 0;
 		}
 	};
+
+	enum class LightType
+	{
+		Environment = 0,
+		Direction,
+		Point
+	};
 }

@@ -25,9 +25,8 @@ in vec2 uv;
 in vec3 normal;
 
 uniform vec4 lightColor;
-uniform sampler2D tex;
 
 void main()
 {
-	fragColor = lightColor * texture(tex, uv);
+	fragColor = lightColor;
 }
