@@ -59,13 +59,14 @@ namespace Nuwa
 		{
 			// create camera
 			GameObject* camera = new GameObject("camera");
-			camera->transform.position.z = 10.0f;
+			camera->transform.position.z = 2.0f;
 
 			Camera* cam = new Camera();
 			camera->AddComponent(cam);
 
 			// create test game object
-			GameObject* testGO = new GameObject("cube");
+			GameObject* testGO = new GameObject("sphere");
+			testGO->transform.rotation = Quaternion(glm::radians(Vector3(-90, 45, 0)));
 
 			//std::vector<MeshVertex> vertices =
 			//{
@@ -83,10 +84,10 @@ namespace Nuwa
 
 			Mesh* mesh = new Mesh();
 			//mesh->SetMeshVertices(vertices, indices);
-			mesh->LoadFromObj("Resources/Geometry/cube.obj");
+			mesh->LoadFromObj("Resources/Geometry/sphere.obj");
 
 			MeshRenderer* mr = new MeshRenderer();
-			mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa_outline.png");
+			mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");
 			mr->SetCamera(cam);
 
 			testGO->AddComponent(mr);
