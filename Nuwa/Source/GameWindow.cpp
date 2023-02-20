@@ -65,28 +65,28 @@ namespace Nuwa
 			camera->AddComponent(cam);
 
 			// create test game object
-			GameObject* testGO = new GameObject("test game object");
+			GameObject* testGO = new GameObject("cube");
 
-			std::vector<MeshVertex> vertices =
-			{
-				{ { -1.0f, -1.0f, 0.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f } },
-				{ {  1.0f, -1.0f, 0.0f }, { 1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f } },
-				{ {  1.0f,  1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f, 1.0f } },
-				{ { -1.0f,  1.0f, 0.0f }, { 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f } }
-			};
+			//std::vector<MeshVertex> vertices =
+			//{
+			//	{ { -1.0f, -1.0f, 0.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f } },
+			//	{ {  1.0f, -1.0f, 0.0f }, { 1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f } },
+			//	{ {  1.0f,  1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f, 1.0f } },
+			//	{ { -1.0f,  1.0f, 0.0f }, { 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f } }
+			//};
 
-			std::vector<uint> indices =
-			{
-				0, 1, 2,
-				2, 3, 0
-			};
+			//std::vector<uint> indices =
+			//{
+			//	0, 1, 2,
+			//	2, 3, 0
+			//};
 
 			Mesh* mesh = new Mesh();
 			//mesh->SetMeshVertices(vertices, indices);
-			mesh->LoadFromObj("Resources/Models/wall_block.obj");
+			mesh->LoadFromObj("Resources/Geometry/cube.obj");
 
 			MeshRenderer* mr = new MeshRenderer();
-			mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");
+			mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa_outline.png");
 			mr->SetCamera(cam);
 
 			testGO->AddComponent(mr);
@@ -103,7 +103,7 @@ namespace Nuwa
 			editor->OnEditorGUI();
 #endif // NUWA_EDITOR
 
-		ImGui::ShowDemoWindow();
+		//ImGui::ShowDemoWindow();
 	}
 
 	void GameWindow::OnUpdate()

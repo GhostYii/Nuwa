@@ -34,37 +34,50 @@ namespace Nuwa
 		for (auto i = 0; i < shapes.size(); ++i)
 			vertexIndexSize += shapes[i].mesh.indices.size();
 
-		//vertices.reserve(vertexIndexSize);
-		//indices.reserve(vertexIndexSize);
+		vertices.reserve(vertexIndexSize);
+		indices.reserve(vertexIndexSize);
 
 		size_t indexOffset = 0;
-		//for (auto m = 0; m < materials.size(); ++m)
+		size_t materialSize = materials.empty() ? 1 : materials.size();
+		for (auto m = 0; m < materialSize; ++m)
 		{
 			for (auto i = 0; i < shapes.size(); ++i)
 			{
 				size_t offset = 0;
 				for (size_t j = 0; j < shapes[i].mesh.num_face_vertices.size(); ++j)
 				{
-					//if (shapes[i].mesh.material_ids[j] != m)
-					//	continue;
+					if (!materials.empty() && shapes[i].mesh.material_ids[j] != m)
+						continue;
 
 					uchar faceCount = shapes[i].mesh.num_face_vertices[j];
 					for (uchar k = 0; k < faceCount; ++k)
 					{
 						tinyobj::index_t index = shapes[i].mesh.indices[k + indexOffset];
 
-						tinyobj::real_t vx = attribs.vertices[index.vertex_index * 3 + 0];
-						tinyobj::real_t vy = attribs.vertices[index.vertex_index * 3 + 1];
-						tinyobj::real_t vz = attribs.vertices[index.vertex_index * 3 + 2];
+						Vector3 position = { 0, 0, 0 };
+						if (index.vertex_index != -1)
+						{
+							position.x = attribs.vertices[index.vertex_index * 3 + 0];
+							position.y = attribs.vertices[index.vertex_index * 3 + 1];
+							position.z = attribs.vertices[index.vertex_index * 3 + 2];
+						}
 
-						tinyobj::real_t u = attribs.texcoords[index.texcoord_index * 2 + 0];
-						tinyobj::real_t v = attribs.texcoords[index.texcoord_index * 2 + 1];
+						Vector2 uv = { 0, 0 };
+						if (index.texcoord_index != -1)
+						{
+							uv.x = attribs.texcoords[index.texcoord_index * 2 + 0];
+							uv.y = attribs.texcoords[index.texcoord_index * 2 + 1];
+						}
 
-						tinyobj::real_t nx = attribs.normals[index.normal_index * 3 + 0];
-						tinyobj::real_t ny = attribs.normals[index.normal_index * 3 + 1];
-						tinyobj::real_t nz = attribs.normals[index.normal_index * 3 + 2];
+						Vector3 normal = { 0, 0, 0 };
+						if (index.normal_index != -1)
+						{
+							normal.x = attribs.normals[index.normal_index * 3 + 0];
+							normal.y = attribs.normals[index.normal_index * 3 + 1];
+							normal.z = attribs.normals[index.normal_index * 3 + 2];
+						}
 
-						vertices.push_back({ Vector3(vx, vy, vz), Vector2(u, v), Vector3(nx,ny,nz) });
+						vertices.push_back({ position, uv, normal });
 						indices.push_back(k + indexOffset);
 					}
 					offset += faceCount;

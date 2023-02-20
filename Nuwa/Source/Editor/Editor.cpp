@@ -37,8 +37,30 @@ namespace Nuwa
 
 		void EditorMode::OnEditorGUI()
 		{
+			if (ImGui::IsKeyPressed(ImGuiKey::ImGuiKey_H))
+			{
+				for (auto iter : editorGUIs)
+					if (iter->title == "Hierarchy")
+						iter->isOpen = !iter->isOpen;
+			}
+			else if (ImGui::IsKeyPressed(ImGuiKey::ImGuiKey_I))
+			{
+				for (auto iter : editorGUIs)
+					if (iter->title == "Inspector")
+						iter->isOpen = !iter->isOpen;
+			}
+			else if (ImGui::IsKeyPressed(ImGuiKey::ImGuiKey_C))
+			{
+				static bool isOpen = false;
+				for (auto iter : editorGUIs)
+					iter->isOpen = isOpen;
+				isOpen = !isOpen;
+			}
+
 			for (auto iter : editorGUIs)
-				iter->RenderGUI();			
+				iter->RenderGUI();
+
+
 		}
 
 		void EditorMode::SetCurrentScene(Nuwa::GameScene* scene)
