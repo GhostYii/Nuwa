@@ -27,6 +27,9 @@ namespace Nuwa
 		std::string name;
 		Transform transform;
 
+		void SetActive(bool active);
+		bool IsActive() const;
+
 		void AddComponent(Component* component);
 
 		template<typename T>
@@ -42,6 +45,7 @@ namespace Nuwa
 
 	private:
 		uint64 uuid;
+		bool isActive;
 		// <typename, component>
 		std::unordered_multimap<std::string, Component*> components;
 	};

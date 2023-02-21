@@ -1,6 +1,7 @@
 #include "Renderer.h"
 
 #include "../Transform.h"
+#include "../GameObject.h"
 #include "../Graphics/VertexArray.h"
 #include "../Graphics/VertexBuffer.h"
 #include "../Graphics/IndexBuffer.h"
@@ -27,6 +28,9 @@ namespace Nuwa
 	void Renderer::InternalRender()
 	{
 		if (!drawCamera)
+			return;
+		
+		if (!gameObject->IsActive())
 			return;
 
 		Draw();

@@ -4,13 +4,13 @@
 namespace Nuwa
 {
 	GameObject::GameObject()
-		: name("game object"), uuid(UUID::Generate()), transform(Transform())
+		: name("game object"), isActive(true), uuid(UUID::Generate()), transform(Transform())
 	{
 
 	}
 
 	GameObject::GameObject(std::string name)
-		: name(name), uuid(UUID::Generate()), transform(Transform())
+		: name(name), isActive(true), uuid(UUID::Generate()), transform(Transform())
 	{
 
 	}
@@ -19,6 +19,16 @@ namespace Nuwa
 	{
 		//for (auto& pCom : components)
 		//	pCom.reset();
+	}
+
+	void GameObject::SetActive(bool active)
+	{
+		isActive = active;
+	}
+
+	bool GameObject::IsActive() const
+	{
+		return isActive;
 	}
 
 	void GameObject::AddComponent(Component* component)

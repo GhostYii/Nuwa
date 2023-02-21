@@ -1,10 +1,14 @@
 #include "BehaviorComponent.h"
 #include "imgui/imgui.h"
+#include "../GameObject.h"
 
 namespace Nuwa
 {
 	void BehaviorComponent::InternalUpdate()
 	{
+		if (!gameObject->IsActive())
+			return;
+
 		if (enable)
 			Update();
 
@@ -17,6 +21,9 @@ namespace Nuwa
 
 	void BehaviorComponent::InternalLateUpdate()
 	{
+		if (!gameObject->IsActive())
+			return;
+
 		if (enable)
 			LateUpdate();
 

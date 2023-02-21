@@ -25,8 +25,11 @@ namespace Nuwa
 
 			if (!currentGameObject)
 				return;
-
+			
+			ImGui::Checkbox("##active", &currentGameObject->isActive);
+			ImGui::SameLine();
 			ImGui::Text("Properties(%s)", currentGameObject->name.c_str());
+
 			DrawTransform(currentGameObject->transform);
 
 			for (auto& iter : currentGameObject->components)
@@ -51,7 +54,7 @@ namespace Nuwa
 				ImGui::Indent();
 
 				EditorGUI::DrawDragVector3("Position", transform.position);
-				
+
 				auto euler = glm::eulerAngles(transform.rotation);
 				euler.x = glm::degrees(euler.x);
 				euler.y = glm::degrees(euler.y);
@@ -62,7 +65,7 @@ namespace Nuwa
 
 				EditorGUI::DrawDragVector3("Scale", transform.scale);
 
-				ImGui::Unindent();				
+				ImGui::Unindent();
 			}
 		}
 	}
