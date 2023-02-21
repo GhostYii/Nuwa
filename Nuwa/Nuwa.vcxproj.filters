@@ -129,6 +129,9 @@
     <ClCompile Include="Source\Graphics\ToyRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Component\SpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Utils.h">
@@ -329,9 +332,15 @@
     <ClInclude Include="Source\Graphics\ToyRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Component\SpriteRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\SpriteVertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Default.shader" />
-    <None Include="Resources\Shaders\Light.shader" />
+    <None Include="Resources\Shaders\Sprite.shader" />
   </ItemGroup>
 </Project>

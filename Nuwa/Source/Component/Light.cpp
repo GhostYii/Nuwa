@@ -35,7 +35,13 @@ namespace Nuwa
 		{
 			auto renderList = obj->GetBaseComponents<Renderer>();
 			for (auto render : renderList) if (render && render->GetShader())
-				render->GetShader()->SetColor("lightColor", Vector4(color * intensity, 1.0f));
+			{
+				auto shaer = render->GetShader();
+				shaer->SetFloat("intensity", intensity);
+				shaer->SetColor("lightColor", color);
+				shaer->SetVector3("lightPos", transform->position);
+			}
+
 		}
 	}
 
@@ -46,7 +52,12 @@ namespace Nuwa
 		{
 			auto renderList = obj->GetBaseComponents<Renderer>();
 			for (auto render : renderList) if (render && render->GetShader())
-				render->GetShader()->SetColor("lightColor", Vector4(1.0f));
+			{
+				auto shaer = render->GetShader();
+				shaer->SetFloat("intensity", intensity);
+				shaer->SetColor("lightColor", color);
+				shaer->SetVector3("lightPos", transform->position);
+			}
 		}
 	}
 
@@ -73,8 +84,6 @@ namespace Nuwa
 			ImGui::Text("Not Implement.");
 			break;
 		}
-
-
 	}
 
 

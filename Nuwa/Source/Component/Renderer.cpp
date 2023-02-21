@@ -47,9 +47,8 @@ namespace Nuwa
 		if (shader)
 		{
 			shader->Bind();
-
-			Matrix4x4 mvp = drawCamera->GetProjectMatrix() * drawCamera->GetViewMatrix() * transform->GetModelMatrix();
-			shader->SetMatrix4x4("mvp", mvp);
+			shader->SetMatrix4x4("model", transform->GetModelMatrix());
+			shader->SetMatrix4x4("camMatrix", drawCamera->GetProjectMatrix() * drawCamera->GetViewMatrix());			
 		}
 
 		if (vao)

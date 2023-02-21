@@ -11,6 +11,7 @@
 #include "Mesh.h"
 #include "Component/MeshRenderer.h"
 #include "Component/Light.h"
+#include "Component/SpriteRenderer.h"
 //#include "Component/Camera.h"
 
 namespace Nuwa
@@ -88,23 +89,35 @@ namespace Nuwa
 			mesh->LoadFromObj("Resources/Geometry/sphere.obj");
 
 			MeshRenderer* mr = new MeshRenderer();
-			mr->SetMesh(mesh, "Resources/shaders/Default.shader", "Resources/Textures/nuwa.png");
+			mr->SetMesh(mesh, "Resources/Shaders/Default.shader", "Resources/Textures/nuwa.png");
 			mr->SetCamera(cam);
-
 			test->AddComponent(mr);
 
 			// create light gameobject
 			GameObject* light = new GameObject("light");
-
+			
 			auto lightComp = new Light();
 			lightComp->SetGameScene(scene);
-
 			light->AddComponent(lightComp);
-			
+
+			//SpriteRenderer* sr = new SpriteRenderer();
+			//sr->SetSprite("Resources/Textures/light_icon.png");
+			//light->AddComponent(sr);
+
+			GameObject* obj = new GameObject("New GameObject");
+			MeshRenderer* meshRenerer = new MeshRenderer();
+			Mesh* objMesh = new Mesh();
+			objMesh->LoadFromObj("Resources/Geometry/sphere.obj");
+
+			meshRenerer->SetMesh(objMesh, "Resources/Shaders/Default.shader", "Resources/Textures/nuwa_outline.png");
+			meshRenerer->SetCamera(cam);
+			obj->AddComponent(meshRenerer);
+
 
 			scene->AddGameObject(camera);
 			scene->AddGameObject(light);
 			scene->AddGameObject(test);
+			scene->AddGameObject(obj);
 		}
 	}
 

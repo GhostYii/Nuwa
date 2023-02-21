@@ -24,32 +24,85 @@ namespace Nuwa
 
 	void Shader::SetInt(const std::string& name, int value)
 	{
+		if (!HasUniform(name))
+			return;		
+
 		GL_ASSERT(glUniform1i(GetUniformLocation(name), value));
+	}
+
+	void Shader::SetFloat(const std::string& name, float value)
+	{
+		if (!HasUniform(name))
+			return;
+
+		GL_ASSERT(glUniform1f(GetUniformLocation(name), value));
+	}
+
+	void Shader::SetVector3(const std::string& name, Vector3 value)
+	{
+		if (!HasUniform(name))
+			return;
+
+		GL_ASSERT(glUniform3f(GetUniformLocation(name), value.x, value.y, value.z));
 	}
 
 	void Shader::SetColor(const std::string& name, Vector4 color)
 	{
+		if (!HasUniform(name))
+			return;
+
 		GL_ASSERT(glUniform4f(GetUniformLocation(name), color.r, color.g, color.b, color.a));
+	}
+
+	void Shader::SetColor(const std::string& name, Vector3 color)
+	{
+		if (!HasUniform(name))
+			return;
+
+		GL_ASSERT(glUniform3f(GetUniformLocation(name), color.x, color.y, color.z));
 	}
 
 	void Shader::SetMatrix4x4(const std::string& name, Matrix4x4 mat)
 	{
+		if (!HasUniform(name))
+			return;
+
 		GL_ASSERT(glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(mat)));
 	}
 
 	int Shader::GetInt(const std::string& name) const
 	{
+		int loc = GetUniformLocation(name);
+		if (loc == -1)
+			return 0;
+
 		int value = 0;
-		GL_ASSERT(glGetUniformiv(rendererID, GetUniformLocation(name), &value));
+		GL_ASSERT(glGetUniformiv(rendererID, loc, &value));
 		return value;
 	}
 
 	Vector3 Shader::GetColor(const std::string& name) const
 	{
+		int loc = GetUniformLocation(name);
+		if (loc == -1)
+			return Vector3(0);
+
 		Vector3 color;
-		GL_ASSERT(glGetUniformfv(rendererID, GetUniformLocation(name), glm::value_ptr(color)));
+		GL_ASSERT(glGetUniformfv(rendererID, loc, glm::value_ptr(color)));
 		return color;
 		
+	}
+
+	bool Shader::HasUniform(const std::string& name)
+	{
+		if (uniformLocationMap.count(name))
+			return true;
+
+		int location = glGetUniformLocation(rendererID, name.c_str());
+		if (location == -1)		
+			return false;
+		
+		return true;
 	}
 
 	void Shader::Bind() const
@@ -128,7 +181,7 @@ namespace Nuwa
 
 			GL_ASSERT(glGetShaderInfoLog(id, length, &length, msg));
 
-			spdlog::error("Compile {} shader error: {}.\n", type, msg);
+			spdlog::error("Compile {} shader error: {}.", type, msg);
 			GL_ASSERT(glDeleteShader(id));
 			return GL_FALSE;
 		}
@@ -143,7 +196,10 @@ namespace Nuwa
 
 		int location = glGetUniformLocation(rendererID, name.c_str());
 		if (location == -1)
-			spdlog::warn("uniform {} doesnt exist.\n", name);
+		{
+			spdlog::warn("uniform {} doesnt exist.", name);
+			return location;
+		}
 
 		uniformLocationMap[name] = location;
 		return location;

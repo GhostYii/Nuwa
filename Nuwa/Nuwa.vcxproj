@@ -150,6 +150,7 @@
     <ClCompile Include="Source\Component\Light.cpp" />
     <ClCompile Include="Source\Component\MeshRenderer.cpp" />
     <ClCompile Include="Source\Component\Renderer.cpp" />
+    <ClCompile Include="Source\Component\SpriteRenderer.cpp" />
     <ClCompile Include="Source\Editor\Editor.cpp" />
     <ClCompile Include="Source\Editor\EditorGUI.cpp" />
     <ClCompile Include="Source\Editor\Hierarchy.cpp" />
@@ -190,11 +191,13 @@
     <ClInclude Include="Source\Component\Light.h" />
     <ClInclude Include="Source\Component\MeshRenderer.h" />
     <ClInclude Include="Source\Component\Renderer.h" />
+    <ClInclude Include="Source\Component\SpriteRenderer.h" />
     <ClInclude Include="Source\Editor\Editor.h" />
     <ClInclude Include="Source\Editor\EditorGUI.h" />
     <ClInclude Include="Source\Editor\Hierarchy.h" />
     <ClInclude Include="Source\Editor\Inspector.h" />
     <ClInclude Include="Source\GameScene.h" />
+    <ClInclude Include="Source\Graphics\SpriteVertex.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\Component\Component.h" />
@@ -254,7 +257,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Default.shader" />
-    <None Include="Resources\Shaders\Light.shader" />
+    <None Include="Resources\Shaders\Sprite.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

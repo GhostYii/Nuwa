@@ -39,7 +39,7 @@ namespace Nuwa
 		// TODO: 验证文件是否存在
 		if (shaderPath != "")
 		{
-			shader = std::make_unique<Shader>(shaderPath);
+			shader = std::make_shared<Shader>(shaderPath);
 			shader->Bind();
 			shader->SetInt("tex", 0);
 		}
