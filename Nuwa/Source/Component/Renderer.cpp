@@ -29,7 +29,7 @@ namespace Nuwa
 	{
 		if (!drawCamera)
 			return;
-		
+
 		if (!gameObject->IsActive())
 			return;
 
@@ -52,7 +52,8 @@ namespace Nuwa
 		{
 			shader->Bind();
 			shader->SetMatrix4x4("model", transform->GetModelMatrix());
-			shader->SetMatrix4x4("camMatrix", drawCamera->GetProjectMatrix() * drawCamera->GetViewMatrix());			
+			shader->SetMatrix4x4("camMatrix", drawCamera->GetProjectMatrix() * drawCamera->GetViewMatrix());
+			shader->SetVector3("camPos", drawCamera->transform->position);
 		}
 
 		if (vao)

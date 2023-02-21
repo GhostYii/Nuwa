@@ -70,23 +70,9 @@ namespace Nuwa
 			GameObject* test = new GameObject("sphere");
 			test->transform.rotation = Quaternion(glm::radians(Vector3(-90, 45, 0)));
 
-			//std::vector<MeshVertex> vertices =
-			//{
-			//	{ { -1.0f, -1.0f, 0.0f }, { 0.0f, 0.0f }, { 0.0f, 0.0f, 1.0f } },
-			//	{ {  1.0f, -1.0f, 0.0f }, { 1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f } },
-			//	{ {  1.0f,  1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.0f, 1.0f } },
-			//	{ { -1.0f,  1.0f, 0.0f }, { 0.0f, 1.0f }, { 0.0f, 0.0f, 1.0f } }
-			//};
-
-			//std::vector<uint> indices =
-			//{
-			//	0, 1, 2,
-			//	2, 3, 0
-			//};
-
 			Mesh* mesh = new Mesh();
-			//mesh->SetMeshVertices(vertices, indices);
-			mesh->LoadFromObj("Resources/Geometry/sphere.obj");
+			//mesh->LoadFromObj("Resources/Geometry/sphere.obj");
+			mesh->LoadFromObj("Resources/Models/wall_block.obj");
 
 			MeshRenderer* mr = new MeshRenderer();
 			mr->SetMesh(mesh, "Resources/Shaders/Default.shader", "Resources/Textures/nuwa.png");
@@ -100,24 +86,9 @@ namespace Nuwa
 			lightComp->SetGameScene(scene);
 			light->AddComponent(lightComp);
 
-			//SpriteRenderer* sr = new SpriteRenderer();
-			//sr->SetSprite("Resources/Textures/light_icon.png");
-			//light->AddComponent(sr);
-
-			GameObject* obj = new GameObject("New GameObject");
-			MeshRenderer* meshRenerer = new MeshRenderer();
-			Mesh* objMesh = new Mesh();
-			objMesh->LoadFromObj("Resources/Geometry/sphere.obj");
-
-			meshRenerer->SetMesh(objMesh, "Resources/Shaders/Default.shader", "Resources/Textures/nuwa_outline.png");
-			meshRenerer->SetCamera(cam);
-			obj->AddComponent(meshRenerer);
-
-
 			scene->AddGameObject(camera);
 			scene->AddGameObject(light);
 			scene->AddGameObject(test);
-			scene->AddGameObject(obj);
 		}
 	}
 

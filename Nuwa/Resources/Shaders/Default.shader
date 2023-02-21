@@ -30,6 +30,8 @@ in vec2 uv;
 in vec3 normal;
 in vec3 fragPos;
 
+uniform vec3 camPos;
+
 //uniform int lightType;
 uniform float intensity;
 uniform vec3 lightPos;
@@ -46,5 +48,10 @@ void main()
 	float diff = max(dot(norm, lightDir), 0.0);
 	vec3 diffuse = diff * lightColor;
 
-	fragColor = vec4((ambient + diffuse), 1.0) * texture(tex, uv);
+	vec3 viewDir = normalize(camPos - fragPos);
+	vec3 reflectDir = reflect(-lightDir, norm);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 128);
+	vec3 specular = spec * lightColor;
+
+	fragColor = vec4((ambient + diffuse + specular), 1.0) * texture(tex, uv);
 }

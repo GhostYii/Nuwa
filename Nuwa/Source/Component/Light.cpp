@@ -36,10 +36,10 @@ namespace Nuwa
 			auto renderList = obj->GetBaseComponents<Renderer>();
 			for (auto render : renderList) if (render && render->GetShader())
 			{
-				auto shaer = render->GetShader();
-				shaer->SetFloat("intensity", intensity);
-				shaer->SetColor("lightColor", color);
-				shaer->SetVector3("lightPos", transform->position);
+				auto shader = render->GetShader();
+				shader->SetFloat("intensity", intensity);
+				shader->SetColor("lightColor", color);
+				shader->SetVector3("lightPos", transform->position);
 			}
 
 		}
@@ -53,10 +53,10 @@ namespace Nuwa
 			auto renderList = obj->GetBaseComponents<Renderer>();
 			for (auto render : renderList) if (render && render->GetShader())
 			{
-				auto shaer = render->GetShader();
-				shaer->SetFloat("intensity", intensity);
-				shaer->SetColor("lightColor", color);
-				shaer->SetVector3("lightPos", transform->position);
+				auto shader = render->GetShader();
+				shader->SetFloat("intensity", 1.0f);
+				shader->SetColor("lightColor", Vector3(1));
+				shader->SetVector3("lightPos", Vector3(0));
 			}
 		}
 	}

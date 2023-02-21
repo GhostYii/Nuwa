@@ -37,6 +37,8 @@ namespace Nuwa
 
 		inline std::string Filepath() const { return filepath; }
 
+		inline uint id() { return rendererID; }
+
 	private:
 		std::string filepath;
 		mutable std::unordered_map<std::string, int> uniformLocationMap;
