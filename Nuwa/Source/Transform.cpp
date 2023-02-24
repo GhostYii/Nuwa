@@ -6,7 +6,8 @@ namespace Nuwa
 	Transform::Transform()
 		: position(Vector3(0, 0, 0)),
 		rotation(Quaternion(glm::radians(Vector3(0, 0, 0)))),
-		scale(Vector3(1, 1, 1))
+		scale(Vector3(1, 1, 1)),
+		eulerAngles(0)
 		//roll(0), pitch(0), yaw(0)
 	{
 	}
@@ -34,6 +35,9 @@ namespace Nuwa
 
 	Matrix4x4 Transform::GetModelMatrix() const
 	{
+		//rotation = Quaternion(glm::radians(Vector3(pitch, yaw, roll)));
+		rotation = Quaternion(glm::radians(eulerAngles));
+
 		// srt
 		Matrix4x4 model(1.0f);
 		model = glm::translate(model, position) * glm::toMat4(rotation) * glm::scale(model, scale);

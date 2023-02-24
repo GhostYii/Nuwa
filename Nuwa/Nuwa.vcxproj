@@ -156,6 +156,7 @@
     <ClCompile Include="Source\Editor\Hierarchy.cpp" />
     <ClCompile Include="Source\Editor\Inspector.cpp" />
     <ClCompile Include="Source\GameScene.cpp" />
+    <ClCompile Include="Source\Graphics\Material.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\Component\Component.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Source\Editor\Hierarchy.h" />
     <ClInclude Include="Source\Editor\Inspector.h" />
     <ClInclude Include="Source\GameScene.h" />
+    <ClInclude Include="Source\Graphics\Material.h" />
     <ClInclude Include="Source\Graphics\SpriteVertex.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\GameObject.h" />

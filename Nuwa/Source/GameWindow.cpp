@@ -67,12 +67,12 @@ namespace Nuwa
 			camera->AddComponent(cam);
 
 			// create test game object
-			GameObject* test = new GameObject("sphere");
-			test->transform.rotation = Quaternion(glm::radians(Vector3(-90, 45, 0)));
+			GameObject* test = new GameObject("game object");
+			//test->transform.rotation = Quaternion(glm::radians(Vector3(-90, 45, 0)));
 
 			Mesh* mesh = new Mesh();
-			//mesh->LoadFromObj("Resources/Geometry/sphere.obj");
-			mesh->LoadFromObj("Resources/Models/wall_block.obj");
+			mesh->LoadFromObj("Resources/Geometry/cube.obj");
+			//mesh->LoadFromObj("Resources/Models/wall_block.obj");
 
 			MeshRenderer* mr = new MeshRenderer();
 			mr->SetMesh(mesh, "Resources/Shaders/Default.shader", "Resources/Textures/nuwa.png");
