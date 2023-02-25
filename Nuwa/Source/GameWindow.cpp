@@ -6,6 +6,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+#include "Global.h"
 #include "EngineMacros.h"
 #include "Input/InputSystem.h"
 
@@ -121,6 +122,10 @@ namespace Nuwa
 
 	void GameWindow::OnFrameBufferSizeChanged(GLFWwindow* window, int width, int height)
 	{
+		Global::Resolution.x = width;
+		Global::Resolution.y = height;
 		GL_ASSERT(glViewport(0, 0, width, height));
+
+		spdlog::info("aspect: {}", GetScreenAspect());
 	}
 }

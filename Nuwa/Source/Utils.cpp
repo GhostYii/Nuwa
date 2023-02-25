@@ -1,4 +1,9 @@
 #include "Utils.h"
+#include <fstream>
+#include <mINI/ini.h>
+#include "Basic/INIConfig.h"
+#include "EngineMacros.h"
+#include "Global.h"
 
 void Nuwa::GLClearError()
 {
@@ -24,4 +29,38 @@ bool Nuwa::GLFuncCheckError(const char* func, const char* file, int line)
 		return false;
 	}
 	return true;
+}
+
+void Nuwa::TryCreateDefaultEngineConfig(const std::string& path)
+{
+    std::ifstream ifs(path.c_str());
+    if (ifs.good())
+        return;
+
+    mINI::INIFile config(path);
+    mINI::INIStructure ini;
+    config.read(ini);
+
+    ini[CFG_SECTION_WINDOW][CFG_SECTION_WIDTH] = "1366";
+    ini[CFG_SECTION_WINDOW][CFG_SECTION_HEIGHT] = "768";
+    ini[CFG_SECTION_WINDOW][CFG_SECTION_FULLSCREEN] = "false";
+
+    config.generate(ini);    
+}
+
+void Nuwa::ReadGlobalValuesByConfig(const std::string& path)
+{
+    std::ifstream ifs(path.c_str());
+    if (!ifs.good())
+        TryCreateDefaultEngineConfig(path);
+
+    INIConfig config = INIConfig(path);
+
+    Global::Resolution = Vector2Int(std::stoi(config[CFG_SECTION_WINDOW][CFG_SECTION_WIDTH]), std::stoi(config[CFG_SECTION_WINDOW][CFG_SECTION_HEIGHT]));
+    Global::IsFullScreen = config[CFG_SECTION_WINDOW][CFG_SECTION_FULLSCREEN] == "true" ? true : false;
+}
+
+float Nuwa::GetScreenAspect()
+{
+    return Global::Resolution.x / 1.0f / std::max(Global::Resolution.y, 1);
 }

@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "../Transform.h"
+#include "../Global.h"
 
 #include<glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
@@ -17,15 +18,15 @@ namespace Nuwa
 		: orthographic(false), fieldOfView(60), orthoSize(1.0),
 		orthoClipPlane({ 0, 1000 }), perspClipPlane(Vector2(0.01f, 1000.0f))
 	{
-		float left = -1366.0f / 768.0f * orthoSize;
-		float right = 1366.0f / 768.0f * orthoSize;
+		float left = -GetScreenAspect() * orthoSize;
+		float right = GetScreenAspect() * orthoSize;
 		float bottom = -orthoSize;
 		float top = orthoSize;
 
 		// TODO: width & height & radio
 		projectionMatrix = orthographic ?
 			glm::ortho(left, right, bottom, top, orthoClipPlane.x, orthoClipPlane.y) :
-			glm::perspective(glm::radians((float)fieldOfView), 1366.0f / 768.0f, perspClipPlane.x, perspClipPlane.y);
+			glm::perspective(glm::radians((float)fieldOfView), GetScreenAspect(), perspClipPlane.x, perspClipPlane.y);
 	}
 
 	Matrix4x4 Camera::GetViewMatrix() const
@@ -37,14 +38,14 @@ namespace Nuwa
 
 	Matrix4x4 Camera::GetProjectMatrix() const
 	{
-		float left = -1366.0f / 768.0f * orthoSize;
-		float right = 1366.0f / 768.0f * orthoSize;
+		float left = -GetScreenAspect() * orthoSize;
+		float right = GetScreenAspect() * orthoSize;
 		float bottom = -orthoSize;
 		float top = orthoSize;
 
 		projectionMatrix = orthographic ?
 			glm::ortho(left, right, bottom, top, orthoClipPlane.x, orthoClipPlane.y) :
-			glm::perspective(glm::radians((float)fieldOfView), 1366.0f / 768.0f, perspClipPlane.x, perspClipPlane.y);
+			glm::perspective(glm::radians((float)fieldOfView), GetScreenAspect(), perspClipPlane.x, perspClipPlane.y);
 
 		return projectionMatrix;
 	}

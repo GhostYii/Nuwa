@@ -1,11 +1,22 @@
 #include "GameWindow.h"
 #include "spdlog/spdlog.h"
+#include "Global.h"
 
 int main(int argc, char** argv)
 {
+	Nuwa::ReadGlobalValuesByConfig("nuwa.ini");
 	spdlog::info("Nuwa startup.");
 
-	Nuwa::GameWindow* window = new Nuwa::GameWindow({ 1366, 768, "Nuwa Framework", {0.0f, 0.0f, 0.0f, 1.0f} });
+	Nuwa::GameWindow* window = new Nuwa::GameWindow
+	(
+		{
+			Nuwa::Global::Resolution.x,
+			Nuwa::Global::Resolution.y,
+			Nuwa::Global::IsFullScreen,
+			"Nuwa Framework",
+			{ 0.0f, 0.0f, 0.0f, 1.0f }
+		}
+	);
 	if (!window)
 	{
 		spdlog::error("Game Window create failed.");
@@ -16,7 +27,7 @@ int main(int argc, char** argv)
 
 	spdlog::info("Game Window [{}] Created.", window->Title());
 	spdlog::info("OpenGL Version: {}", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
-	
+
 	window->Start();
 	while (window->IsRun())
 	{

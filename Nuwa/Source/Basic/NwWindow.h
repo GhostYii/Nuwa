@@ -10,6 +10,7 @@ namespace Nuwa
 	{
 		int width;
 		int height;
+		bool isFullScreen;
 		std::string title;
 		Vector4 backgroundColor;
 	};

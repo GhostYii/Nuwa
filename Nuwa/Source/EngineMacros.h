@@ -11,3 +11,8 @@
 } while (0)
 
 #define BPP_COUNT_RGBA 4
+
+#define CFG_SECTION_WINDOW "WINDOW"
+#define CFG_SECTION_WIDTH "Width"
+#define CFG_SECTION_HEIGHT "Height"
+#define CFG_SECTION_FULLSCREEN "IsFullScreen"

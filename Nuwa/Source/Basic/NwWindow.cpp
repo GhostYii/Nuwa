@@ -6,7 +6,7 @@
 #include "../EngineMacros.h"
 
 Nuwa::NwWindow::NwWindow()
-	:config({ 640, 480, "Nuwa Window", {1.0f,1.0f,1.0f,1.0f} }), window(nullptr)
+	:config({ 640, 480, false, "Nuwa Window", {1.0f,1.0f,1.0f,1.0f} }), window(nullptr)
 {
 	if (!glfwInit())
 		spdlog::error("glfw init failed.");

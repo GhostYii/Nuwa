@@ -82,6 +82,7 @@
 
 #ifndef MINI_INI_H_
 #define MINI_INI_H_
+#define MINI_CASE_SENSITIVE
 
 #include <string>
 #include <sstream>

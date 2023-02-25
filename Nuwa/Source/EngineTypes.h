@@ -17,7 +17,9 @@ namespace Nuwa
 	//typedef glm::vec4 Color;
 	typedef glm::vec4 Vector4;
 	typedef glm::vec3 Vector3;
+	typedef glm::lowp_ivec3 Vector3Int;
 	typedef glm::vec2 Vector2;
+	typedef glm::lowp_ivec2 Vector2Int;
 	typedef glm::mat3x3 Matrix3x3;
 	typedef glm::mat4x4 Matrix4x4;
 

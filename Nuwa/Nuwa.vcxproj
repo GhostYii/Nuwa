@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Basic\INIConfig.cpp" />
     <ClCompile Include="Source\Component\BehaviorComponent.cpp" />
     <ClCompile Include="Source\Component\Camera.cpp" />
     <ClCompile Include="Source\Component\Light.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="Source\Editor\Hierarchy.cpp" />
     <ClCompile Include="Source\Editor\Inspector.cpp" />
     <ClCompile Include="Source\GameScene.cpp" />
+    <ClCompile Include="Source\Global.cpp" />
     <ClCompile Include="Source\Graphics\Material.cpp" />
     <ClCompile Include="Source\Input\Input.cpp" />
     <ClCompile Include="Source\Input\InputSystem.cpp" />
@@ -189,6 +191,7 @@
     <ClCompile Include="Source\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Basic\INIConfig.h" />
     <ClInclude Include="Source\Component\BehaviorComponent.h" />
     <ClInclude Include="Source\Component\Camera.h" />
     <ClInclude Include="Source\Component\Light.h" />
@@ -200,6 +203,7 @@
     <ClInclude Include="Source\Editor\Hierarchy.h" />
     <ClInclude Include="Source\Editor\Inspector.h" />
     <ClInclude Include="Source\GameScene.h" />
+    <ClInclude Include="Source\Global.h" />
     <ClInclude Include="Source\Graphics\Material.h" />
     <ClInclude Include="Source\Graphics\SpriteVertex.h" />
     <ClInclude Include="Source\Input\Input.h" />
