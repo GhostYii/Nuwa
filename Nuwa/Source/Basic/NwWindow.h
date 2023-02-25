@@ -30,6 +30,7 @@ namespace Nuwa
 		inline int Width() const { return config.width; }
 		inline int Height() const { return config.height; }
 		inline std::string Title() const { return config.title; }
+		inline const GLFWwindow* GlfwWindow() const { return window; }
 
 	protected:
 		GLFWwindow* window;

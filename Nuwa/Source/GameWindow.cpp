@@ -7,6 +7,7 @@
 #include "glm/gtc/type_ptr.hpp"
 
 #include "EngineMacros.h"
+#include "Input/InputSystem.h"
 
 #include "Mesh.h"
 #include "Component/MeshRenderer.h"
@@ -16,7 +17,6 @@
 
 namespace Nuwa
 {
-
 	GameWindow::GameWindow(const WindowConfig& config)
 	{
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -39,10 +39,14 @@ namespace Nuwa
 			spdlog::error("glew init failed.");
 
 		GL_ASSERT(glEnable(GL_DEPTH_TEST));
+
+		// init input system
+		InputSystem::CreateInstance();
+		InputSystem::GetInstance()->Init(*this);
 	}
 
 	void GameWindow::OnStart()
-	{
+	{		
 		if (!scene)
 		{
 			scene = new GameScene("Default Scene");
@@ -98,12 +102,13 @@ namespace Nuwa
 		if (editor)
 			editor->OnEditorGUI();
 #endif // NUWA_EDITOR
-
+		
 		//ImGui::ShowDemoWindow();
 	}
 
 	void GameWindow::OnUpdate()
 	{
+		InputSystem::GetInstance()->Update(*this);
 		if (scene)
 			scene->Update();
 	}
