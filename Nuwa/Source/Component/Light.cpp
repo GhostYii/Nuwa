@@ -63,6 +63,7 @@ namespace Nuwa
 
 	void Light::OnInspectorGUI()
 	{
+#ifdef NUWA_EDITOR
 		int val = (int)type;
 		const char* items[] = { "Environment Light", "Direction Light", "Point Light" };
 		EditorGUI::DrawCombo("Type", &val, items, 3);
@@ -84,6 +85,7 @@ namespace Nuwa
 			ImGui::Text("Not Implement.");
 			break;
 		}
+#endif
 	}
 
 

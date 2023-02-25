@@ -4,6 +4,7 @@
 
 namespace Nuwa
 {
+#ifdef NUWA_EDITOR
 	namespace Editor
 	{
 		Hierarchy::Hierarchy()
@@ -39,4 +40,5 @@ namespace Nuwa
 			}
 		}
 	}
+#endif // NUWA_EDITOR
 }

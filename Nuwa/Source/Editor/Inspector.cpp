@@ -9,6 +9,7 @@
 
 namespace Nuwa
 {
+#ifdef NUWA_EDITOR
 	namespace Editor
 	{
 		Inspector::Inspector()
@@ -69,4 +70,5 @@ namespace Nuwa
 			}
 		}
 	}
+#endif // NUWA_EDITOR
 }

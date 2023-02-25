@@ -53,6 +53,8 @@ namespace Nuwa
 
 	void SpriteRenderer::OnInspectorGUI()
 	{
+#ifdef NUWA_EDITOR
 		EditorGUI::DrawLabel("Sprite Path", spritePath);
+#endif // NUWA_EDITOR
 	}
 }

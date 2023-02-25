@@ -38,6 +38,10 @@ namespace Nuwa
 
 	void Renderer::OnInspectorGUI()
 	{
+#ifdef NUWA_EDITOR
+
+#endif // NUWA_EDITOR
+
 	}
 
 	void Renderer::Draw()

@@ -52,6 +52,7 @@ namespace Nuwa
 
 	void Camera::OnInspectorGUI()
 	{
+#ifdef NUWA_EDITOR
 		if (ImGui::CollapsingHeader("Projection##projection1", ImGuiTreeNodeFlags_DefaultOpen))
 		{
 			int val = orthographic ? 1 : 0;
@@ -80,5 +81,6 @@ namespace Nuwa
 
 			SetClipPlane(zNear, zFar);
 		}
+#endif // NUWA_EDITOR
 	}
 }

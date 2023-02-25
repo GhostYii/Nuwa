@@ -52,6 +52,7 @@ namespace Nuwa
 
 	void MeshRenderer::OnInspectorGUI()
 	{
+#ifdef NUWA_EDITOR
 		if (ImGui::CollapsingHeader("Mesh Information", ImGuiTreeNodeFlags_DefaultOpen))
 		{
 			ImGui::Indent();
@@ -69,5 +70,6 @@ namespace Nuwa
 			EditorGUI::DrawLabel("Texture", texture->Filepath());
 			ImGui::Unindent();
 		}
+#endif // NUWA_EDITOR
 	}
 }
