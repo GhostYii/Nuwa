@@ -25,7 +25,8 @@ namespace Nuwa
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 		this->config = config;
-		window = glfwCreateWindow(config.width, config.height, config.title.c_str(), nullptr, nullptr);
+		GLFWmonitor* monitor = config.isFullScreen ? glfwGetPrimaryMonitor() : nullptr;
+		window = glfwCreateWindow(config.width, config.height, config.title.c_str(), monitor, nullptr);
 
 		if (!window)
 		{
@@ -47,7 +48,7 @@ namespace Nuwa
 	}
 
 	void GameWindow::OnStart()
-	{		
+	{
 		if (!scene)
 		{
 			scene = new GameScene("Default Scene");
@@ -86,7 +87,7 @@ namespace Nuwa
 
 			// create light gameobject
 			GameObject* light = new GameObject("light");
-			
+
 			auto lightComp = new Light();
 			lightComp->SetGameScene(scene);
 			light->AddComponent(lightComp);
@@ -103,7 +104,7 @@ namespace Nuwa
 		if (editor)
 			editor->OnEditorGUI();
 #endif // NUWA_EDITOR
-		
+
 		//ImGui::ShowDemoWindow();
 	}
 
