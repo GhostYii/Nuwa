@@ -12,7 +12,7 @@ namespace Nuwa
 	{
 	}
 
-	Vector3 Transform::Front()
+	Vector3 Transform::Forward()
 	{
 		Matrix4x4 mat = GetModelMatrix();
 		Vector3 back = mat[2];

@@ -97,4 +97,9 @@ namespace Nuwa
 	{
 		InputSystem::GetInstance()->SetCursorVisible(visible);
 	}
+
+	void Input::SetCursorMode(CursorMode mode)
+	{
+		InputSystem::GetInstance()->SetCursorMode(mode);
+	}
 }

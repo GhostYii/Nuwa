@@ -19,8 +19,9 @@ namespace Nuwa
 		void Update(const NwWindow& window);
 
 		void SetCursorVisible(bool visible);
-
+		void SetCursorMode(CursorMode mode);
 	private:
+		
 		static InputSystem* instance;
 
 		bool isInited;

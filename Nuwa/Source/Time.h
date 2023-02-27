@@ -8,8 +8,11 @@ namespace Nuwa
 	public:
 		static float GetTime();
 		static std::string GetLocalTimeStr();
-	//private:
-	//	Time();
-	//	~Time();
+
+		static float deltaTime;
+
+	private:
+		Time() = default;
+		~Time() = default;
 	};
 }

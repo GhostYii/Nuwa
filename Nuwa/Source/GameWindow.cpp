@@ -14,6 +14,7 @@
 #include "Component/MeshRenderer.h"
 #include "Component/Light.h"
 #include "Component/SpriteRenderer.h"
+#include "Component/CameraView.h"
 //#include "Component/Camera.h"
 
 namespace Nuwa
@@ -72,13 +73,17 @@ namespace Nuwa
 			Camera* cam = new Camera();
 			camera->AddComponent(cam);
 
+			CameraView* cv = new CameraView(cam);
+			camera->AddComponent(cv);
+
 			// create test game object
 			GameObject* test = new GameObject("game object");
 			//test->transform.rotation = Quaternion(glm::radians(Vector3(-90, 45, 0)));
 
 			Mesh* mesh = new Mesh();
-			mesh->LoadFromObj("Resources/Geometry/cube.obj");
-			//mesh->LoadFromObj("Resources/Models/wall_block.obj");
+			//mesh->LoadFromObj("Resources/Geometry/cube.obj");
+			mesh->LoadFromObj("Resources/Models/Lowpoly_tree_sample.obj");
+
 
 			MeshRenderer* mr = new MeshRenderer();
 			mr->SetMesh(mesh, "Resources/Shaders/Default.shader", "Resources/Textures/nuwa.png");
@@ -127,6 +132,6 @@ namespace Nuwa
 		Global::Resolution.y = height;
 		GL_ASSERT(glViewport(0, 0, width, height));
 
-		spdlog::info("aspect: {}", GetScreenAspect());
+		//spdlog::info("aspect: {}", GetScreenAspect());
 	}
 }

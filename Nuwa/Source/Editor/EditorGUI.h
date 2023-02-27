@@ -58,6 +58,8 @@ namespace Nuwa
 			static void DrawEditColor3(std::string name, Vector3& color);
 			static void DrawPickColor3(std::string name, Vector3& color);
 
+			static void DrawToggle(std::string name, bool& isOn);
+
 		};
 	}
 }

@@ -1,12 +1,12 @@
 #pragma once
 #include "../EngineMacros.h"
 #include "../EngineTypes.h"
+#include "../Transform.h"
 
 namespace Nuwa
 {
 	class GameObject;
-	class Transform;
-
+	
 	class Component
 	{
 	public:

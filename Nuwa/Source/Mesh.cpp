@@ -16,7 +16,7 @@ namespace Nuwa
 		std::vector<tinyobj::material_t> materials;
 		std::string err;
 
-		std::string mtlDir = objPath.substr(0, objPath.find_last_of("\\/"));
+		std::string mtlDir = objPath.substr(0, objPath.find_last_of("\\/")) + "/";
 
 		bool isLoaded = tinyobj::LoadObj(&attribs, &shapes, &materials, &err, objPath.c_str(), mtlDir.c_str());
 

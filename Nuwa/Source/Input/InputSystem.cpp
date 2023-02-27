@@ -4,7 +4,7 @@
 
 namespace Nuwa
 {
-	InputSystem* InputSystem::instance = nullptr;
+	InputSystem* InputSystem::instance = nullptr;	
 
 	InputSystem::InputSystem()
 		: currentCursorMode(CursorMode::Normal), isInited(false)
@@ -96,6 +96,11 @@ namespace Nuwa
 		}
 
 		currentCursorMode = visible ? CursorMode::Normal : CursorMode::Hidden;
+	}
+
+	void InputSystem::SetCursorMode(CursorMode mode)
+	{
+		currentCursorMode = mode;
 	}
 
 	void InputSystem::OnGLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)

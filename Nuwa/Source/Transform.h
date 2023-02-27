@@ -20,7 +20,7 @@ namespace Nuwa
 		//Vector3 localRotation;
 		//Vector3 localScale;
 
-		Vector3 Front();
+		Vector3 Forward();
 		Vector3 Right();
 		Vector3 Up();
 

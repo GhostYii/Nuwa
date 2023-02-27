@@ -194,6 +194,21 @@ namespace Nuwa
 			ImGui::Columns();
 			ImGui::PopID();
 		}
+
+		void EditorGUI::DrawToggle(std::string name, bool& isOn)
+		{
+			ImGui::PushID(name.c_str());
+
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, EDITOR_DEFAULT_TITLE_WIDTH);
+			ImGui::Text(name.c_str());
+			ImGui::NextColumn();
+
+			ImGui::Checkbox(("##" + name).c_str(), &isOn);
+
+			ImGui::Columns();
+			ImGui::PopID();
+		}
 	}
 }
 

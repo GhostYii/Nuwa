@@ -14,11 +14,11 @@ uniform mat4 camMatrix;
 //uniform mat4 mvp;
 
 void main()
-{
+{	
+	gl_Position = camMatrix * model * vec4(position, 1.0);
 	uv = texcoord;
 	normal = normals;
-	fragPos = vec3(model * vec4(position, 1.0));
-	gl_Position = camMatrix * model * vec4(position, 1.0);
+	fragPos = vec3(model * vec4(position, 1.0));	
 }
 
 $Subshader Fragment

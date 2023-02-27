@@ -37,8 +37,10 @@ namespace Nuwa
 		static Vector2 GetMousePosition();
 		static bool IsMouseMove();
 
+		// TODO: Cursor static class
 		static void SetCursorVisble(bool visible);
+		static void SetCursorMode(CursorMode mode);
 
-		inline static KeyStatePair get_pair(KeyCode key) { return keyStates[key]; }
+		// TODO: Axis Input
 	};
 }

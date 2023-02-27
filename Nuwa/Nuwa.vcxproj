@@ -148,6 +148,7 @@
     <ClCompile Include="Source\Basic\INIConfig.cpp" />
     <ClCompile Include="Source\Component\BehaviorComponent.cpp" />
     <ClCompile Include="Source\Component\Camera.cpp" />
+    <ClCompile Include="Source\Component\CameraView.cpp" />
     <ClCompile Include="Source\Component\Light.cpp" />
     <ClCompile Include="Source\Component\MeshRenderer.cpp" />
     <ClCompile Include="Source\Component\Renderer.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Source\Basic\INIConfig.h" />
     <ClInclude Include="Source\Component\BehaviorComponent.h" />
     <ClInclude Include="Source\Component\Camera.h" />
+    <ClInclude Include="Source\Component\CameraView.h" />
     <ClInclude Include="Source\Component\Light.h" />
     <ClInclude Include="Source\Component\MeshRenderer.h" />
     <ClInclude Include="Source\Component\Renderer.h" />

@@ -3,6 +3,7 @@
 #include <spdlog/spdlog.h>
 
 #include "../GUI.h"
+#include "../Time.h"
 #include "../EngineMacros.h"
 
 Nuwa::NwWindow::NwWindow()
@@ -43,6 +44,8 @@ void Nuwa::NwWindow::Update()
 	if (!window)
 		return;
 
+	float t = Time::GetTime();
+
 	GL_ASSERT(glClearColor(config.backgroundColor.r, config.backgroundColor.g, config.backgroundColor.b, config.backgroundColor.a));
 	renderer->Clear();
 
@@ -56,6 +59,8 @@ void Nuwa::NwWindow::Update()
 
 	glfwSwapBuffers(window);
 	glfwPollEvents();
+
+	Time::deltaTime = Time::GetTime() - t;
 }
 
 void Nuwa::NwWindow::Close()

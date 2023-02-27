@@ -33,7 +33,7 @@ namespace Nuwa
 	{
 		return orthographic ?
 			glm::translate(glm::mat4(1.0f), transform->position) :
-			glm::lookAt(transform->position, transform->position + transform->Front(), transform->Up());
+			glm::lookAt(transform->position, transform->position + transform->Forward(), transform->Up());
 	}
 
 	Matrix4x4 Camera::GetProjectMatrix() const
