@@ -10,6 +10,7 @@ namespace Nuwa
 	{
 	public:
 		Shader(const std::string& filepath);
+		Shader(const std::string& vertFilePath, const std::string& fragFilePath);
 		virtual ~Shader();
 
 		//template<typename T>
@@ -46,7 +47,9 @@ namespace Nuwa
 		ShaderSource Parse();
 		uint CreateShader(const std::string& vertex, const std::string& fragment);
 		uint Compile(uint type, const std::string& source);
-		int GetUniformLocation(const std::string& name) const;
+		void Link(uint program);
+		void Validate(uint program);
+		int GetUniformLocation(const std::string& name) const;		
 	};
 }
 

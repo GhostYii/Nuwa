@@ -14,7 +14,7 @@ uniform mat4 camMatrix;
 //uniform mat4 mvp;
 
 void main()
-{	
+{
 	gl_Position = camMatrix * model * vec4(position, 1.0);
 	uv = texcoord;
 	normal = normals;
@@ -40,8 +40,8 @@ uniform vec3 lightColor;
 uniform sampler2D tex;
 
 void main()
-{
-	vec3 ambient = intensity * lightColor;	
+{	
+	vec3 ambient = intensity * lightColor;
 
 	vec3 norm = normalize(normal);
 	vec3 lightDir = normalize(lightPos - fragPos);

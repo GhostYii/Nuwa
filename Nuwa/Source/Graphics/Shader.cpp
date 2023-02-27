@@ -17,6 +17,12 @@ namespace Nuwa
 		rendererID = CreateShader(source.vertex, source.fragment);
 	}
 
+	Shader::Shader(const std::string& vertFilePath, const std::string& fragFilePath)
+		: filepath("")
+	{
+		rendererID = CreateShader(GetAllText(vertFilePath), GetAllText(fragFilePath));
+	}
+
 	Shader::~Shader()
 	{
 		GL_ASSERT(glDeleteProgram(rendererID));
@@ -25,8 +31,9 @@ namespace Nuwa
 	void Shader::SetInt(const std::string& name, int value)
 	{
 		if (!HasUniform(name))
-			return;		
+			return;
 
+		Bind();
 		GL_ASSERT(glUniform1i(GetUniformLocation(name), value));
 	}
 
@@ -35,6 +42,7 @@ namespace Nuwa
 		if (!HasUniform(name))
 			return;
 
+		Bind();
 		GL_ASSERT(glUniform1f(GetUniformLocation(name), value));
 	}
 
@@ -42,7 +50,8 @@ namespace Nuwa
 	{
 		if (!HasUniform(name))
 			return;
-
+		
+		Bind();
 		GL_ASSERT(glUniform3f(GetUniformLocation(name), value.x, value.y, value.z));
 	}
 
@@ -50,7 +59,8 @@ namespace Nuwa
 	{
 		if (!HasUniform(name))
 			return;
-
+		
+		Bind();
 		GL_ASSERT(glUniform4f(GetUniformLocation(name), color.r, color.g, color.b, color.a));
 	}
 
@@ -58,7 +68,8 @@ namespace Nuwa
 	{
 		if (!HasUniform(name))
 			return;
-
+		
+		Bind();
 		GL_ASSERT(glUniform3f(GetUniformLocation(name), color.x, color.y, color.z));
 	}
 
@@ -67,6 +78,7 @@ namespace Nuwa
 		if (!HasUniform(name))
 			return;
 
+		Bind();
 		GL_ASSERT(glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(mat)));
 	}
 
@@ -90,18 +102,18 @@ namespace Nuwa
 		Vector3 color;
 		GL_ASSERT(glGetUniformfv(rendererID, loc, glm::value_ptr(color)));
 		return color;
-		
 	}
 
 	bool Shader::HasUniform(const std::string& name)
-	{
-		if (uniformLocationMap.count(name))
+	{		
+		if (uniformLocationMap.find(name) != uniformLocationMap.end())
 			return true;
 
-		int location = glGetUniformLocation(rendererID, name.c_str());
-		if (location == -1)		
+		int location = -1;
+		GL_ASSERT(location = glGetUniformLocation(rendererID, name.c_str()));
+		if (location == -1)
 			return false;
-		
+
 		return true;
 	}
 
@@ -153,9 +165,9 @@ namespace Nuwa
 
 		GL_ASSERT(glAttachShader(program, vs));
 		GL_ASSERT(glAttachShader(program, fs));
-
-		GL_ASSERT(glLinkProgram(program));
-		GL_ASSERT(glValidateProgram(program));
+		
+		Link(program);
+		Validate(program);
 
 		GL_ASSERT(glDeleteShader(vs));
 		GL_ASSERT(glDeleteShader(fs));
@@ -178,10 +190,9 @@ namespace Nuwa
 			int length;
 			GL_ASSERT(glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length));
 			char* msg = (char*)_malloca(length * sizeof(char));
-
 			GL_ASSERT(glGetShaderInfoLog(id, length, &length, msg));
-
 			spdlog::error("Compile {} shader error: {}.", type, msg);
+			delete[] msg;
 			GL_ASSERT(glDeleteShader(id));
 			return GL_FALSE;
 		}
@@ -189,12 +200,47 @@ namespace Nuwa
 		return id;
 	}
 
+	void Shader::Link(uint program)
+	{
+		GL_ASSERT(glLinkProgram(program));
+		GLint progStatus;
+		glGetProgramiv(program, GL_LINK_STATUS, &progStatus);
+		if (progStatus == GL_FALSE)
+		{
+			int length;
+			GL_ASSERT(glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length));
+			char* msg = (char*)_malloca(length * sizeof(char));
+			GL_ASSERT(glGetProgramInfoLog(program, length, &length, msg));
+			spdlog::error("Shader Program Link error: {}", msg);
+			delete[] msg;
+			GL_ASSERT(glDeleteShader(program));
+		}
+	}
+
+	void Shader::Validate(uint program)
+	{
+		GL_ASSERT(glValidateProgram(program));
+		GLint progValidate;
+		GL_ASSERT(glGetProgramiv(program, GL_VALIDATE_STATUS, &progValidate));
+		if (progValidate == GL_FALSE)
+		{
+			int length;
+			GL_ASSERT(glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length));
+			char* msg = (char*)_malloca(length * sizeof(char));
+			GL_ASSERT(glGetProgramInfoLog(program, length, &length, msg));
+			spdlog::error("Shader Program Validate error: {}", msg);
+			delete[] msg;
+			GL_ASSERT(glDeleteShader(program));
+		}
+	}
+
 	int Shader::GetUniformLocation(const std::string& name) const
 	{
-		if (uniformLocationMap.count(name))
+		if (uniformLocationMap.find(name) != uniformLocationMap.end())
 			return uniformLocationMap[name];
 
-		int location = glGetUniformLocation(rendererID, name.c_str());
+		int location = -1;
+		GL_ASSERT(location = glGetUniformLocation(rendererID, name.c_str()));
 		if (location == -1)
 		{
 			spdlog::warn("uniform {} doesnt exist.", name);

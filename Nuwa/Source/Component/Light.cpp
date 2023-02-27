@@ -3,6 +3,11 @@
 #include "../Graphics/Shader.h"
 #include "../GameScene.h"
 #include "Renderer.h"
+#include "../Global.h"
+
+#ifdef NUWA_EDITOR
+#include "../Editor/Component/GizmosRenderer.h"
+#endif // NUWA_EDITOR
 
 namespace Nuwa
 {
@@ -12,10 +17,13 @@ namespace Nuwa
 	{
 	}
 
-	//void Light::Awake()
-	//{
-	//	
-	//}
+	void Light::Start()
+	{
+#ifdef NUWA_EDITOR
+		GizmosRenderer* gizmos = new GizmosRenderer("Resources/Editor/Icon/light_point.png");
+		gameObject->AddComponent(gizmos);
+#endif // NUWA_EDITOR
+	}
 
 	void Light::SetGameScene(GameScene* gameScene)
 	{
@@ -36,10 +44,16 @@ namespace Nuwa
 			auto renderList = obj->GetBaseComponents<Renderer>();
 			for (auto render : renderList) if (render && render->GetShader())
 			{
+				//spdlog::info("{}({}) render {} call.", obj->name, obj->GetInstanceID(), typeid(render).name());				
 				auto shader = render->GetShader();
+				
 				shader->SetFloat("intensity", intensity);
 				shader->SetColor("lightColor", color);
 				shader->SetVector3("lightPos", transform->position);
+
+#ifdef NUWA_EDITOR
+				shader->SetColor("gizmos.displayColor", Vector4(color, 1.0f));
+#endif // NUWA_EDITOR
 			}
 
 		}
@@ -57,6 +71,10 @@ namespace Nuwa
 				shader->SetFloat("intensity", 1.0f);
 				shader->SetColor("lightColor", Vector3(1));
 				shader->SetVector3("lightPos", Vector3(0));
+
+#ifdef NUWA_EDITOR
+				shader->SetColor("gizmos.displayColor", Vector4(1));
+#endif // NUWA_EDITOR
 			}
 		}
 	}

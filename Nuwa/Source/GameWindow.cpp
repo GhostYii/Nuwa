@@ -15,7 +15,7 @@
 #include "Component/Light.h"
 #include "Component/SpriteRenderer.h"
 #include "Component/CameraView.h"
-//#include "Component/Camera.h"
+
 
 namespace Nuwa
 {
@@ -87,8 +87,22 @@ namespace Nuwa
 
 			MeshRenderer* mr = new MeshRenderer();
 			mr->SetMesh(mesh, "Resources/Shaders/Default.shader", "Resources/Textures/nuwa.png");
-			mr->SetCamera(cam);
+			//mr->SetCamera(cam);
 			test->AddComponent(mr);
+
+
+			GameObject* test2 = new GameObject("game object");
+			//test->transform.rotation = Quaternion(glm::radians(Vector3(-90, 45, 0)));
+
+			Mesh* mesh2 = new Mesh();
+			//mesh->LoadFromObj("Resources/Geometry/cube.obj");
+			mesh2->LoadFromObj("Resources/Models/wall_block.obj");
+
+
+			MeshRenderer* mr2 = new MeshRenderer();
+			mr2->SetMesh(mesh2, "Resources/Shaders/Default.shader", "Resources/Textures/nuwa.png");
+			//mr2->SetCamera(cam);
+			test2->AddComponent(mr2);
 
 			// create light gameobject
 			GameObject* light = new GameObject("light");
@@ -97,9 +111,14 @@ namespace Nuwa
 			lightComp->SetGameScene(scene);
 			light->AddComponent(lightComp);
 
+#ifdef NUWA_EDITOR
+
+#endif // NUWA_EDITOR
+
 			scene->AddGameObject(camera);
 			scene->AddGameObject(light);
 			scene->AddGameObject(test);
+			scene->AddGameObject(test2);
 		}
 	}
 

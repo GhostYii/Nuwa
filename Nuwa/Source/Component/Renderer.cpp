@@ -1,7 +1,7 @@
 #include "Renderer.h"
+#include "Camera.h"
 
-#include "../Transform.h"
-#include "../GameObject.h"
+#include "../GameScene.h"
 #include "../Graphics/VertexArray.h"
 #include "../Graphics/VertexBuffer.h"
 #include "../Graphics/IndexBuffer.h"
@@ -15,10 +15,10 @@ namespace Nuwa
 	{
 	}
 
-	void Renderer::SetCamera(Camera* camera)
-	{
-		drawCamera = std::shared_ptr<Camera>(camera);
-	}
+	//void Renderer::SetCamera(Camera* camera)
+	//{
+	//	drawCamera = std::shared_ptr<Camera>(camera);
+	//}
 
 	Shader* Renderer::GetShader() const
 	{
@@ -27,7 +27,7 @@ namespace Nuwa
 
 	void Renderer::InternalRender()
 	{
-		if (!drawCamera)
+		if (!GameScene::mainCamera)
 			return;
 
 		if (!gameObject->IsActive())
@@ -46,7 +46,7 @@ namespace Nuwa
 
 	void Renderer::Draw()
 	{
-		//if (!drawCamera)
+		//if (!GameScene::mainCamera)
 		//	return;
 
 		if (texture)
@@ -56,8 +56,15 @@ namespace Nuwa
 		{
 			shader->Bind();
 			shader->SetMatrix4x4("model", transform->GetModelMatrix());
-			shader->SetMatrix4x4("camMatrix", drawCamera->GetProjectMatrix() * drawCamera->GetViewMatrix());
-			shader->SetVector3("camPos", drawCamera->transform->position);
+			shader->SetMatrix4x4("camMatrix", GameScene::mainCamera->GetProjectMatrix() * GameScene::mainCamera->GetViewMatrix());
+			shader->SetVector3("camPos", GameScene::mainCamera->transform->position);
+
+#ifdef NUWA_EDITOR
+			shader->SetMatrix4x4("mvp.model", transform->GetModelMatrix());
+			shader->SetMatrix4x4("mvp.view", GameScene::mainCamera->GetViewMatrix());
+			shader->SetMatrix4x4("mvp.proj", GameScene::mainCamera->GetProjectMatrix());
+#endif // NUWA_EDITOR
+
 		}
 
 		if (vao)

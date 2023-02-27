@@ -1,4 +1,6 @@
 #pragma once
+#ifdef NUWA_EDITOR
+
 #include "../EngineTypes.h"
 #include "../EngineMacros.h"
 #include "../Basic/UUID.h"
@@ -36,3 +38,5 @@ namespace Nuwa
 		};
 	}
 }
+
+#endif // NUWA_EDITOR

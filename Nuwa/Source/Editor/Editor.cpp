@@ -1,3 +1,5 @@
+#ifdef NUWA_EDITOR
+
 #include "Editor.h"
 #include "../GameScene.h"
 #include "../Component/BehaviorComponent.h"
@@ -69,3 +71,5 @@ namespace Nuwa
 		}
 	}
 }
+
+#endif // NUWA_EDITOR

@@ -27,6 +27,7 @@ namespace Nuwa
 		Vector3 color;
 
 		//virtual void Awake() override;
+		virtual void Start() override;
 		void SetGameScene(GameScene* gameScene);
 
 	private:

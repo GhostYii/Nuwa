@@ -9,6 +9,7 @@
 namespace Nuwa
 {
 	class Light;
+	class Camera;
 
 	class GameScene
 	{		
@@ -40,6 +41,10 @@ namespace Nuwa
 		uint64 id;
 
 		std::vector<GameObject*> allObjs;
-		std::unordered_map<uint64, GameObject*> objMap;		
+		std::unordered_map<uint64, GameObject*> objMap;
+
+	public:
+		static Camera* mainCamera;
+		
 	};
 }

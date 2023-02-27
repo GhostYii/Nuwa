@@ -42,6 +42,9 @@ namespace Nuwa
 			shader = std::make_shared<Shader>(shaderPath);
 			shader->Bind();
 			shader->SetInt("tex", 0);
+			shader->SetFloat("intensity", 1.0f);
+			shader->SetColor("lightColor", Vector3(1.0f));
+			shader->SetVector3("lightPos", Vector3(0.0f));
 		}
 		// TODO: 验证文件是否存在
 		if (texturePath != "")

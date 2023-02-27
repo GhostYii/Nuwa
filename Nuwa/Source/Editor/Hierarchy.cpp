@@ -1,10 +1,11 @@
+#ifdef NUWA_EDITOR
+
 #include "Editor.h"
 #include "Hierarchy.h"
 #include "../GameScene.h"
 
 namespace Nuwa
 {
-#ifdef NUWA_EDITOR
 	namespace Editor
 	{
 		Hierarchy::Hierarchy()
@@ -27,7 +28,7 @@ namespace Nuwa
 				{
 					//if (!selection.count(obj->GetInstanceID()))
 					//	selection[obj->GetInstanceID()] = false;
-					if (ImGui::Selectable(obj->name.c_str(), EditorMode::currentSelectionID == obj->GetInstanceID()))
+					if (ImGui::Selectable((obj->name + "##" + std::to_string(obj->GetInstanceID())).c_str(), EditorMode::currentSelectionID == obj->GetInstanceID()))
 					{
 						//if (!ImGui::GetIO().KeyCtrl)    // Clear selection when CTRL is not held
 						//	memset(selection, 0, sizeof(selection));
@@ -40,5 +41,6 @@ namespace Nuwa
 			}
 		}
 	}
-#endif // NUWA_EDITOR
 }
+
+#endif // NUWA_EDITOR

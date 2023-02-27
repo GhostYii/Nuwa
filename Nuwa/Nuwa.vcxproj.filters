@@ -150,6 +150,9 @@
     <ClCompile Include="Source\Component\CameraView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Editor\Component\GizmosRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Utils.h">
@@ -377,9 +380,13 @@
     <ClInclude Include="Source\Component\CameraView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Editor\Component\GizmosRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Default.shader" />
-    <None Include="Resources\Shaders\Sprite.shader" />
+    <None Include="Resources\Editor\Shader\gizmos.vert" />
+    <None Include="Resources\Editor\Shader\gizmos.frag" />
   </ItemGroup>
 </Project>

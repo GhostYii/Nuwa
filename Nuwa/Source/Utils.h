@@ -11,5 +11,7 @@ namespace Nuwa
 	void TryCreateDefaultEngineConfig(const std::string& path);
 	void ReadGlobalValuesByConfig(const std::string& path);
 
+	std::string GetAllText(const std::string& path);
+
 	float GetScreenAspect();
 }

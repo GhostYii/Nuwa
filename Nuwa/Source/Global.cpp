@@ -4,4 +4,5 @@ namespace Nuwa
 {	
 	Vector2Int Global::Resolution;
 	bool Global::IsFullScreen;
+	bool Global::IsEditor;
 }

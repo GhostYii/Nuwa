@@ -2,7 +2,7 @@
 #include "BehaviorComponent.h"
 #include "../Mesh.h"
 #include "../Graphics/ToyRenderer.h"
-#include "Camera.h"
+//#include "Camera.h"
 
 namespace Nuwa
 {
@@ -18,7 +18,7 @@ namespace Nuwa
 		Renderer();
 		virtual ~Renderer() = default;
 
-		void SetCamera(Camera* camera);
+		//void SetCamera(Camera* camera);
 		Shader* GetShader() const;
 
 	protected:
@@ -28,7 +28,7 @@ namespace Nuwa
 		// TODO: Material
 		ToyRenderer renderer;
 
-		std::shared_ptr<Camera> drawCamera;
+		//std::shared_ptr<Camera> drawCamera;
 		std::shared_ptr<Shader> shader;
 
 		std::unique_ptr<VertexArray> vao;

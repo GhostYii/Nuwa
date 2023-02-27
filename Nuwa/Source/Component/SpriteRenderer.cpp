@@ -42,7 +42,7 @@ namespace Nuwa
 
 		ibo = std::make_unique<IndexBuffer>(indices.data(), sizeof(uint) * indices.size());
 
-		shader = std::make_shared<Shader>("Resources/Shaders/Default.shader");
+		shader = std::make_shared<Shader>("Resources/Shaders/Default.glsl");
 		shader->Bind();
 		shader->SetInt("tex", 0);
 

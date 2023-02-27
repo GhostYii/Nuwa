@@ -1,3 +1,5 @@
+#ifdef NUWA_EDITOR
+
 #include "EditorGUI.h"
 #include "glm/gtc/type_ptr.hpp"
 
@@ -212,3 +214,4 @@ namespace Nuwa
 	}
 }
 
+#endif // NUWA_EDITOR

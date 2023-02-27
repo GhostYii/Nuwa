@@ -7,6 +7,11 @@ int main(int argc, char** argv)
 	Nuwa::ReadGlobalValuesByConfig("nuwa.ini");
 	spdlog::info("Nuwa startup.");
 
+	Nuwa::Global::IsEditor = false;
+#ifdef NUWA_EDITOR
+	Nuwa::Global::IsEditor = true;
+#endif // NUWA_EDITOR
+
 	Nuwa::GameWindow* window = new Nuwa::GameWindow
 	(
 		{

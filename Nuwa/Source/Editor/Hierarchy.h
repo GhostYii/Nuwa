@@ -1,4 +1,6 @@
 #pragma once
+#ifdef NUWA_EDITOR
+
 #include "EditorGUI.h"
 
 namespace Nuwa
@@ -19,3 +21,5 @@ namespace Nuwa
 		};
 	}
 }
+
+#endif // NUWA_EDITOR

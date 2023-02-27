@@ -1,6 +1,7 @@
 #include "Camera.h"
 #include "../Transform.h"
 #include "../Global.h"
+#include "../GameScene.h"
 
 #include<glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
@@ -48,6 +49,12 @@ namespace Nuwa
 			glm::perspective(glm::radians((float)fieldOfView), GetScreenAspect(), perspClipPlane.x, perspClipPlane.y);
 
 		return projectionMatrix;
+	}
+
+	void Camera::Awake()
+	{
+		if (!GameScene::mainCamera)
+			GameScene::mainCamera = this;
 	}
 
 	void Camera::OnInspectorGUI()

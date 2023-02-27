@@ -33,6 +33,8 @@ namespace Nuwa
 				perspClipPlane = Vector2(zNear, zFar);
 		}
 
+		virtual void Awake() override;
+
 	protected:
 		virtual void OnInspectorGUI() override;
 

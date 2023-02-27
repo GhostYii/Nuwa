@@ -5,6 +5,8 @@
 
 namespace Nuwa
 {
+	Camera* GameScene::mainCamera;
+
 	GameScene::GameScene()
 		: name("New Game Scene"), id(UUID::Generate()), objMap(std::unordered_map<uint64, GameObject*>())
 	{

@@ -1,3 +1,5 @@
+#ifdef NUWA_EDITOR
+
 #include "Editor.h"
 #include "Inspector.h"
 #include "../GameScene.h"
@@ -9,7 +11,7 @@
 
 namespace Nuwa
 {
-#ifdef NUWA_EDITOR
+
 	namespace Editor
 	{
 		Inspector::Inspector()
@@ -70,5 +72,6 @@ namespace Nuwa
 			}
 		}
 	}
-#endif // NUWA_EDITOR
 }
+
+#endif // NUWA_EDITOR

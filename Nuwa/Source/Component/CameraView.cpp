@@ -7,7 +7,7 @@
 namespace Nuwa
 {
 	CameraView::CameraView(Camera* camera)
-		: speed(5.0f), sensitivity(0.5f), target(camera), isActive(true)
+		: speed(5.0f), sensitivity(0.1f), target(camera), isActive(true)
 	{
 	}
 
