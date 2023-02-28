@@ -273,7 +273,9 @@
   <ItemGroup>
     <None Include="Resources\Editor\Shader\gizmos.frag" />
     <None Include="Resources\Editor\Shader\gizmos.vert" />
+    <None Include="Resources\Shaders\Default.frag" />
     <None Include="Resources\Shaders\Default.shader" />
+    <None Include="Resources\Shaders\Default.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

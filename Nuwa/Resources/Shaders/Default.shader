@@ -18,7 +18,7 @@ void main()
 	gl_Position = camMatrix * model * vec4(position, 1.0);
 	uv = texcoord;
 	normal = normals;
-	fragPos = vec3(model * vec4(position, 1.0));	
+	fragPos = vec3(model * vec4(position, 1.0));
 }
 
 $Subshader Fragment
@@ -40,7 +40,7 @@ uniform vec3 lightColor;
 uniform sampler2D tex;
 
 void main()
-{	
+{
 	vec3 ambient = intensity * lightColor;
 
 	vec3 norm = normalize(normal);

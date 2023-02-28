@@ -2,7 +2,7 @@
 #include "../Graphics/VertexArray.h"
 #include "../Graphics/VertexBuffer.h"
 #include "../Graphics/IndexBuffer.h"
-#include "../Graphics/Shader.h"
+#include "../Graphics/Material.h"
 #include "../Graphics/Texture.h"
 #include "../Graphics/SpriteVertex.h"
 
@@ -41,12 +41,12 @@ namespace Nuwa
 		vao->AddBuffer(*vbo, layout);
 
 		ibo = std::make_unique<IndexBuffer>(indices.data(), sizeof(uint) * indices.size());
+		
+		// TODO: sprite shader
+		material = std::make_shared<Material>(new Shader("Resources/Shaders/Default.shader"));
+		material->SetUniformValue<int>("tex", 0);
 
-		shader = std::make_shared<Shader>("Resources/Shaders/Default.glsl");
-		shader->Bind();
-		shader->SetInt("tex", 0);
-
-		texture = std::make_unique<Texture>(path);
+		//texture = std::make_unique<Texture>(path);
 
 		spritePath = path;
 	}

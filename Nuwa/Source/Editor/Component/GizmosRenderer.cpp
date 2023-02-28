@@ -4,7 +4,7 @@
 #include "../../Graphics/VertexArray.h"
 #include "../../Graphics/VertexBuffer.h"
 #include "../../Graphics/IndexBuffer.h"
-#include "../../Graphics/Shader.h"
+#include "../../Graphics/Material.h"
 #include "../../Graphics/Texture.h"
 #include "../../Graphics/SpriteVertex.h"
 
@@ -46,16 +46,22 @@ namespace Nuwa
 
 			ibo = std::make_unique<IndexBuffer>(indices.data(), sizeof(uint) * indices.size());
 
-			shader = std::make_shared<Shader>("Resources/Editor/Shader/gizmos.vert", "Resources/Editor/Shader/gizmos.frag");
-			shader->Bind();
-			shader->SetInt("gizmos.tex", 0);
-			shader->SetColor("gizmos.displayColor", Vector4(1.0));
+			material = std::make_shared<Material>(new Shader("Resources/Editor/Shader/gizmos.vert", "Resources/Editor/Shader/gizmos.frag"));
+			material->SetUniformValue<int>("gizmos.tex", 0);
+			material->SetUniformValue<Vector4>("gizmos.displayColor", Vector4(1.0));			
+			
+			material->SetAlbedoMap(iconPath);
+
+			//shader = std::make_shared<Shader>("Resources/Editor/Shader/gizmos.vert", "Resources/Editor/Shader/gizmos.frag");
+			//shader->Bind();
+			//shader->SetInt("gizmos.tex", 0);
+			//shader->SetColor("gizmos.displayColor", Vector4(1.0));
 
 			//shader->SetMatrix4x4("mvp.model", Matrix4x4(1));
 			//shader->SetMatrix4x4("mvp.view", Matrix4x4(1));
 			//shader->SetMatrix4x4("mvp.proj", Matrix4x4(1));
 
-			texture = std::make_unique<Texture>(path);
+			//texture = std::make_unique<Texture>(path);
 		}
 
 		GizmosRenderer::~GizmosRenderer()

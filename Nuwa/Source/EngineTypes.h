@@ -58,8 +58,8 @@ namespace Nuwa
 
 	enum class LightType : uint
 	{
-		Environment = 0,
-		Direction,
+		//Environment = 0,
+		Direction = 0,
 		Point
 	};
 

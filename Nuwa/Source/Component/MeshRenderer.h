@@ -18,7 +18,8 @@ namespace Nuwa
 		MeshRenderer();
 		virtual ~MeshRenderer() = default;
 
-		void SetMesh(Mesh* mesh, const std::string& shaderPath, const std::string& texturePath);
+		void SetMesh(Mesh* mesh, const std::string& shaderPath);
+		void SetMesh(Mesh* mesh, const std::string& vertShader, const std::string& fragShader);
 
 	protected:
 		virtual void OnInspectorGUI() override;

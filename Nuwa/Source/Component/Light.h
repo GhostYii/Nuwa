@@ -28,6 +28,10 @@ namespace Nuwa
 
 		//virtual void Awake() override;
 		virtual void Start() override;
+
+		virtual void OnEnable() override;
+		virtual void OnDisable() override;
+
 		void SetGameScene(GameScene* gameScene);
 
 	private:
@@ -39,7 +43,7 @@ namespace Nuwa
 		virtual void InternalRender() override;
 		virtual void OnInspectorGUI() override;
 		
-		virtual void OnDisable() override;
+		
 	};
 
 }

@@ -5,13 +5,14 @@
 #include "../Graphics/VertexArray.h"
 #include "../Graphics/VertexBuffer.h"
 #include "../Graphics/IndexBuffer.h"
-#include "../Graphics/Shader.h"
+//#include "../Graphics/Shader.h"
+#include "../Graphics/Material.h"
 #include "../Graphics/Texture.h"
 
 namespace Nuwa
 {
 	Renderer::Renderer()
-		:renderer(ToyRenderer())
+		//:renderer(ToyRenderer())
 	{
 	}
 
@@ -20,9 +21,14 @@ namespace Nuwa
 	//	drawCamera = std::shared_ptr<Camera>(camera);
 	//}
 
-	Shader* Renderer::GetShader() const
+	//Shader* Renderer::GetShader() const
+	//{
+	//	return shader.get();
+	//}
+
+	Material* Renderer::GetMaterial() const
 	{
-		return shader.get();
+		return material.get();
 	}
 
 	void Renderer::InternalRender()
@@ -49,22 +55,22 @@ namespace Nuwa
 		//if (!GameScene::mainCamera)
 		//	return;
 
-		if (texture)
-			texture->Bind();
+		//if (texture)
+		//	texture->Bind();
 
-		if (shader)
+		if (material)
 		{
-			shader->Bind();
-			shader->SetMatrix4x4("model", transform->GetModelMatrix());
-			shader->SetMatrix4x4("camMatrix", GameScene::mainCamera->GetProjectMatrix() * GameScene::mainCamera->GetViewMatrix());
-			shader->SetVector3("camPos", GameScene::mainCamera->transform->position);
+			material->SetUniformValue<Matrix4x4>("model", transform->GetModelMatrix());			
+			material->SetUniformValue<Matrix4x4>("camMatrix", GameScene::mainCamera->GetProjectMatrix() * GameScene::mainCamera->GetViewMatrix());
+			material->SetUniformValue<Vector3>("camPos", GameScene::mainCamera->transform->position);
 
 #ifdef NUWA_EDITOR
-			shader->SetMatrix4x4("mvp.model", transform->GetModelMatrix());
-			shader->SetMatrix4x4("mvp.view", GameScene::mainCamera->GetViewMatrix());
-			shader->SetMatrix4x4("mvp.proj", GameScene::mainCamera->GetProjectMatrix());
+			material->SetUniformValue<Matrix4x4>("mvp.model", transform->GetModelMatrix());
+			material->SetUniformValue<Matrix4x4>("mvp.view", GameScene::mainCamera->GetViewMatrix());
+			material->SetUniformValue<Matrix4x4>("mvp.proj", GameScene::mainCamera->GetProjectMatrix());
 #endif // NUWA_EDITOR
 
+			material->Apply();
 		}
 
 		if (vao)

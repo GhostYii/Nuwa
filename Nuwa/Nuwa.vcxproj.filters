@@ -388,5 +388,7 @@
     <None Include="Resources\Shaders\Default.shader" />
     <None Include="Resources\Editor\Shader\gizmos.vert" />
     <None Include="Resources\Editor\Shader\gizmos.frag" />
+    <None Include="Resources\Shaders\Default.vert" />
+    <None Include="Resources\Shaders\Default.frag" />
   </ItemGroup>
 </Project>
