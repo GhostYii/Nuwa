@@ -17,7 +17,7 @@ namespace Nuwa
 		GizmosRenderer::GizmosRenderer(std::string iconPath)
 			: path(iconPath)
 		{
-			float vPos = 0.1f;
+			float vPos = 0.2f;
 			std::vector<SpriteVertex> vertices =
 			{
 				{ {  vPos,  vPos, 0.0f }, { 1.0f, 1.0f } },
@@ -47,21 +47,10 @@ namespace Nuwa
 			ibo = std::make_unique<IndexBuffer>(indices.data(), sizeof(uint) * indices.size());
 
 			material = std::make_shared<Material>(new Shader("Resources/Editor/Shader/gizmos.vert", "Resources/Editor/Shader/gizmos.frag"));
-			material->SetUniformValue<int>("gizmos.tex", 0);
+			material->SetUniformValue<int>("gizmos.tex", ALBEDO_MAP_INDEX);
 			material->SetUniformValue<Vector4>("gizmos.displayColor", Vector4(1.0));			
 			
 			material->SetAlbedoMap(iconPath);
-
-			//shader = std::make_shared<Shader>("Resources/Editor/Shader/gizmos.vert", "Resources/Editor/Shader/gizmos.frag");
-			//shader->Bind();
-			//shader->SetInt("gizmos.tex", 0);
-			//shader->SetColor("gizmos.displayColor", Vector4(1.0));
-
-			//shader->SetMatrix4x4("mvp.model", Matrix4x4(1));
-			//shader->SetMatrix4x4("mvp.view", Matrix4x4(1));
-			//shader->SetMatrix4x4("mvp.proj", Matrix4x4(1));
-
-			//texture = std::make_unique<Texture>(path);
 		}
 
 		GizmosRenderer::~GizmosRenderer()

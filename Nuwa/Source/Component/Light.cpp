@@ -12,8 +12,7 @@
 namespace Nuwa
 {
 	Light::Light()
-		: ambient(0.1f), diffuse(1.0f), specular(1.0f), intensity(1.0f),
-		color(Vector3(1.0f, 1.0f, 1.0f)), type(LightType::Direction)
+		: intensity(1.0f), color(Vector3(1.0f, 1.0f, 1.0f)), type(LightType::Direction)
 	{
 	}
 
@@ -31,32 +30,6 @@ namespace Nuwa
 			return;
 
 		scene = std::unique_ptr<GameScene>(gameScene);
-	}
-
-	void Light::InternalRender()
-	{
-		if (!scene)
-			return;
-
-//		auto objs = scene->GetAllGameObjects();
-//		for (auto obj : objs)
-//		{
-//			auto renderList = obj->GetBaseComponents<Renderer>();
-//			for (auto render : renderList) if (render && render->GetMaterial())
-//			{
-//				//spdlog::info("{}({}) render {} call.", obj->name, obj->GetInstanceID(), typeid(render).name());				
-//				auto material = render->GetMaterial();
-//				
-//				material->SetUniformValue<float>("intensity", intensity);
-//				material->SetUniformValue<Vector3>("lightColor", color);
-//				material->SetUniformValue<Vector3>("lightPos", transform->position);
-//
-//#ifdef NUWA_EDITOR
-//				material->SetUniformValue<Vector4>("gizmos.displayColor", Vector4(color, 1.0f));
-//#endif // NUWA_EDITOR
-//			}
-//
-//		}
 	}
 
 	void Light::OnEnable()
@@ -85,53 +58,43 @@ namespace Nuwa
 				material->RemoveLight(this);
 			}
 		}
-
-//		auto objs = scene->GetAllGameObjects();
-//		for (auto obj : objs)
-//		{
-//			auto renderList = obj->GetBaseComponents<Renderer>();
-//			for (auto render : renderList) if (render && render->GetMaterial())
-//			{
-//				auto material = render->GetMaterial();
-//
-//				material->SetUniformValue<float>("intensity", intensity);
-//				material->SetUniformValue<Vector3>("lightColor", color);
-//				material->SetUniformValue<Vector3>("lightPos", transform->position);
-//
-//#ifdef NUWA_EDITOR
-//				material->SetUniformValue<Vector4>("gizmos.displayColor", Vector4(color, 1.0f));
-//#endif // NUWA_EDITOR
-//			}
-//		}
 	}
 
 	void Light::OnInspectorGUI()
 	{
-#ifdef NUWA_EDITOR
-		EditorGUI::DrawEditColor3("Ambient Color", Global::AmbientColor);
-
+#ifdef NUWA_EDITOR		
 		int val = (int)type;
 		const char* items[] = { "Direction Light", "Point Light" };
 		EditorGUI::DrawCombo("Type", &val, items, 2);
 		type = (LightType)val;
 
+		EditorGUI::DrawDragFloat("Intensity", intensity);
+		EditorGUI::DrawEditColor3("Color", color);
+
 		switch (type)
 		{
-		//case LightType::Environment:
-		//	EditorGUI::DrawEditColor3("Color", color);
-		//	EditorGUI::DrawSlideFloat("Intensity", intensity, 0, 10);
-		//	break;
-		case LightType::Direction:
-			//ImGui::Text("Not Implement.");
-			EditorGUI::DrawEditColor3("Color", color);
+		case Nuwa::LightType::Direction:
+			gameObject->GetComponent<GizmosRenderer>()->GetMaterial()->SetAlbedoMap("Resources/Editor/Icon/light_direction.png");
 			break;
-		case LightType::Point:			
-			EditorGUI::DrawEditColor3("Color", color);
+		case Nuwa::LightType::Point:
+			gameObject->GetComponent<GizmosRenderer>()->GetMaterial()->SetAlbedoMap("Resources/Editor/Icon/light_point.png");
 			break;
 		default:
-			ImGui::Text("Not Implement.");
 			break;
 		}
+		//switch (type)
+		//{
+		//case LightType::Direction:
+		//	EditorGUI::DrawDragFloat("Intensity", intensity);
+		//	EditorGUI::DrawEditColor3("Color", color);
+		//	break;
+		//case LightType::Point:
+		//	EditorGUI::DrawEditColor3("Color", color);
+		//	break;
+		//default:
+		//	ImGui::Text("Not Implement.");
+		//	break;
+		//}
 #endif
 	}
 

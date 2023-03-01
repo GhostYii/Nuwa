@@ -10,7 +10,8 @@
 #include "EngineMacros.h"
 #include "Input/InputSystem.h"
 
-#include "Mesh.h"
+#include "Graphics/Material.h"
+
 #include "Component/MeshRenderer.h"
 #include "Component/Light.h"
 #include "Component/SpriteRenderer.h"
@@ -78,19 +79,21 @@ namespace Nuwa
 			CameraView* cv = new CameraView(cam);
 			camera->AddComponent(cv);
 
-			//// create test game object
-			//GameObject* test = new GameObject("game object");
-			////test->transform.rotation = Quaternion(glm::radians(Vector3(-90, 45, 0)));
+			// create test game object
+			GameObject* test = new GameObject("game object");
+			//test->transform.rotation = Quaternion(glm::radians(Vector3(-90, 45, 0)));
 
-			//Mesh* mesh = new Mesh();
-			////mesh->LoadFromObj("Resources/Geometry/cube.obj");
+			Mesh* mesh = new Mesh();
+			//mesh->LoadFromObj("Resources/Geometry/cube.obj");
 			//mesh->LoadFromObj("Resources/Models/Lowpoly_tree_sample.obj");
+			mesh->LoadFromObj("Resources/Models/niuniu.obj");
 
 
-			//MeshRenderer* mr = new MeshRenderer();
-			//mr->SetMesh(mesh, "Resources/Shaders/Default.shader");
-			////mr->SetCamera(cam);
-			//test->AddComponent(mr);
+			MeshRenderer* mr = new MeshRenderer();
+			mr->SetMesh(mesh, "Resources/Shaders/Default.vert", "Resources/Shaders/Default.frag");
+			mr->GetMaterial()->SetAlbedoMap("Resources/Textures/niuniu.png");
+			//mr->SetCamera(cam);
+			test->AddComponent(mr);
 
 
 			GameObject* test2 = new GameObject("game object");
@@ -126,7 +129,7 @@ namespace Nuwa
 			scene->AddGameObject(camera);
 			scene->AddGameObject(light);
 			scene->AddGameObject(light2);
-			//scene->AddGameObject(test);
+			scene->AddGameObject(test);
 			scene->AddGameObject(test2);
 		}
 	}

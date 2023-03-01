@@ -36,12 +36,12 @@ namespace Nuwa
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
-		inline std::string Filepath() const { return filepath; }
+		inline std::vector<std::string> Filepaths() const { return filepaths; }
 
 		inline uint id() { return rendererID; }
 
 	private:
-		std::string filepath;
+		std::vector<std::string> filepaths;
 		mutable std::unordered_map<std::string, int> uniformLocationMap;
 
 		ShaderSource Parse();

@@ -27,15 +27,6 @@ namespace Nuwa
 		}
 
 		modelPath = objPath;
-		//std::vector<MeshVertex> vertices;
-		//std::vector<uint> indices;
-
-		size_t vertexIndexSize = 0;
-		for (auto i = 0; i < shapes.size(); ++i)
-			vertexIndexSize += shapes[i].mesh.indices.size();
-
-		vertices.reserve(vertexIndexSize);
-		indices.reserve(vertexIndexSize);
 
 		size_t indexOffset = 0;
 		size_t materialSize = materials.empty() ? 1 : materials.size();

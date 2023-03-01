@@ -11,14 +11,14 @@
 namespace Nuwa
 {
 	Shader::Shader(const std::string& filepath)
-		: filepath(filepath)
+		: filepaths({ filepath })
 	{
 		auto source = Parse();
 		rendererID = CreateShader(source.vertex, source.fragment);
 	}
 
 	Shader::Shader(const std::string& vertFilePath, const std::string& fragFilePath)
-		: filepath("")
+		: filepaths({ vertFilePath, fragFilePath })
 	{
 		rendererID = CreateShader(GetAllText(vertFilePath), GetAllText(fragFilePath));
 	}
@@ -50,7 +50,7 @@ namespace Nuwa
 	{
 		if (!HasUniform(name))
 			return;
-		
+
 		Bind();
 		GL_ASSERT(glUniform3f(GetUniformLocation(name), value.x, value.y, value.z));
 	}
@@ -59,7 +59,7 @@ namespace Nuwa
 	{
 		if (!HasUniform(name))
 			return;
-		
+
 		Bind();
 		GL_ASSERT(glUniform4f(GetUniformLocation(name), color.r, color.g, color.b, color.a));
 	}
@@ -68,7 +68,7 @@ namespace Nuwa
 	{
 		if (!HasUniform(name))
 			return;
-		
+
 		Bind();
 		GL_ASSERT(glUniform3f(GetUniformLocation(name), color.x, color.y, color.z));
 	}
@@ -105,7 +105,7 @@ namespace Nuwa
 	}
 
 	bool Shader::HasUniform(const std::string& name)
-	{		
+	{
 		if (uniformLocationMap.find(name) != uniformLocationMap.end())
 			return true;
 
@@ -129,7 +129,7 @@ namespace Nuwa
 
 	ShaderSource Shader::Parse()
 	{
-		std::ifstream stream(filepath);
+		std::ifstream stream(filepaths[0]);
 		ShaderSource source;
 		ShaderType stype = ShaderType::None;
 
@@ -165,7 +165,7 @@ namespace Nuwa
 
 		GL_ASSERT(glAttachShader(program, vs));
 		GL_ASSERT(glAttachShader(program, fs));
-		
+
 		Link(program);
 		Validate(program);
 

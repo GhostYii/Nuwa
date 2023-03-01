@@ -41,27 +41,9 @@ namespace Nuwa
 		if (shaderPath != "")
 		{
 			material = std::make_shared<Material>(new Shader(shaderPath));
-			material->SetAlbedoMap("Resources/Textures/nuwa.png");
-			material->SetSpecularMap("Resources/Textures/nuwa.png");
-
-			//material->SetUniformValue<int>("tex", 0);
-			//material->SetUniformValue<float>("intensity", 1.0f);
-			//material->SetUniformValue<Vector3>("lightColor", Vector3(1.0f));
-			//material->SetUniformValue<Vector3>("lightPos", Vector3(1.0f));
-
-			//shader = std::make_shared<Shader>(shaderPath);
-			//shader->Bind();
-			//shader->SetInt("tex", 0);
-			//shader->SetFloat("intensity", 1.0f);
-			//shader->SetColor("lightColor", Vector3(1.0f));
-			//shader->SetVector3("lightPos", Vector3(0.0f));
+			material->SetAlbedoMap("Resources/Textures/albedo.jpg");
+			material->SetSpecularMap("Resources/Textures/albedo.jpg");
 		}
-
-		//// TODO: 验证文件是否存在
-		//if (texturePath != "")
-		//{
-		//	texture = std::make_unique<Texture>(texturePath);
-		//}
 	}
 
 	void MeshRenderer::SetMesh(Mesh* mesh, const std::string& vertShader, const std::string& fragShader)
@@ -86,31 +68,38 @@ namespace Nuwa
 		// TODO: 验证文件是否存在
 		if (vertShader != "" && fragShader != "")
 		{
-			material = std::make_shared<Material>(new Shader(vertShader, fragShader));
-			material->SetAlbedoMap("Resources/Textures/nuwa.png");
-			material->SetSpecularMap("Resources/Textures/black.png");
+			material = std::make_shared<Material>(new Shader(vertShader, fragShader));	
+			material->SetAlbedoMap("Resources/Textures/albedo.jpg");
+			material->SetSpecularMap("Resources/Textures/albedo.jpg");
 		}
 	}
 
 	void MeshRenderer::OnInspectorGUI()
 	{
 #ifdef NUWA_EDITOR
-		if (ImGui::CollapsingHeader("Mesh Information", ImGuiTreeNodeFlags_DefaultOpen))
+		if (ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_DefaultOpen))
 		{
 			ImGui::Indent();
 			if (mesh->GetModelPath() != "")
-				EditorGUI::DrawLabel("Model Path", mesh->GetModelPath());
+				EditorGUI::DrawLabel("Path", mesh->GetModelPath());
 			EditorGUI::DrawLabel("Vertex Size", std::to_string(mesh->GetVerticesSize()));
 			//EditorGUI::DrawLabel("Index Size", std::to_string(mesh->GetIndicesSize()));
 			ImGui::Unindent();
 		}
 
-		if (ImGui::CollapsingHeader("Material Information (temp)", ImGuiTreeNodeFlags_DefaultOpen))
+		if (ImGui::CollapsingHeader("Material", ImGuiTreeNodeFlags_DefaultOpen))
 		{
 			ImGui::Indent();
-			//EditorGUI::DrawLabel("Shader", material->GetShaderPath());
-			EditorGUI::DrawLabel("Albedo Map", material->albedoMap);
-			EditorGUI::DrawEditColor3("Base Color", Global::DiffuseColor);
+			std::string filepaths;
+			for (auto path : material->GetShaderPaths())
+			{
+				filepaths += path;
+				if (path != material->GetShaderPaths().back())
+					filepaths += ",";
+			}
+			
+			EditorGUI::DrawLabel("Shader", filepaths);
+			EditorGUI::DrawLabel("Albedo Map", material->albedoMap);			
 			EditorGUI::DrawLabel("Specular Map", material->specularMap);
 			// more...
 			ImGui::Unindent();

@@ -20,20 +20,17 @@ namespace Nuwa
 		virtual ~Material();
 
 	public:
-		Vector4 baseColor;
+		//Vector4 baseColor;
 		std::string albedoMap;
 
-		// [0, 1]
-		float matallic;
-		// [0, 1]
-		float smoothness;
-		std::string metallicMap;
-
+		//// [0, 1]
+		//float matallic;
+		//// [0, 1]
+		//float smoothness;
+		//std::string metallicMap;
 		std::string specularMap;
-
-		std::string normalMap;
-
-		std::string emissionMap;
+		//std::string normalMap;
+		//std::string emissionMap;
 
 		//Vector2 tiling;
 		//Vector2 offset;
@@ -44,7 +41,7 @@ namespace Nuwa
 		//void SetNormalMap(std::string path);
 		//void SetEmissionMap(std::string path);
 
-		std::string GetShaderPath() const;
+		std::vector<std::string> GetShaderPaths() const;
 		
 #pragma region SetUniformValue
 		template<typename T>
@@ -95,7 +92,6 @@ namespace Nuwa
 #pragma endregion
 	private:
 		Shader* shader;
-		//std::vector<Texture*> textures;
 		Texture* textures[MAX_TEXTURE_COUNT];
 		std::unordered_map<LightType, std::unordered_set<Light*>> lights;
 

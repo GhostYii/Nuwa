@@ -6,7 +6,7 @@
 namespace Nuwa
 {
 	namespace Editor
-	{		
+	{
 		class GizmosRenderer : public Renderer
 		{
 		public:

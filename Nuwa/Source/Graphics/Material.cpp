@@ -8,28 +8,27 @@ namespace Nuwa
 {
 	Material::Material()
 		: shader(nullptr),
-		baseColor(Vector4(1)), albedoMap(""),
-		matallic(0.5f), smoothness(0.5f), metallicMap(""),
-		specularMap(""),
-		normalMap(""),
-		emissionMap("")
+		/*baseColor(Vector4(1)),*/ albedoMap(""),
+		//matallic(0.5f), smoothness(0.5f), metallicMap(""),
+		specularMap("")
+		//normalMap(""),
+		//emissionMap("")
 	{
-		//textures.reserve(MAX_TEXTURE_COUNT);
 		for (int i = 0; i < MAX_TEXTURE_COUNT; i++)
 			textures[i] = nullptr;
 	}
 
 	Material::Material(Shader* shader)
 		:shader(shader),
-		baseColor(Vector4(1)), albedoMap(""),
-		matallic(0.5f), smoothness(0.5f), metallicMap(""),
-		specularMap(""),
-		normalMap(""),
-		emissionMap("")
+		/*baseColor(Vector4(1)),*/ albedoMap(""),
+		//matallic(0.5f), smoothness(0.5f), metallicMap(""),
+		specularMap("")
+		//normalMap(""),
+		//emissionMap("")
 	{
-		//textures.reserve(MAX_TEXTURE_COUNT);
 		for (int i = 0; i < MAX_TEXTURE_COUNT; i++)
 			textures[i] = nullptr;
+
 		SetShader(shader);
 	}
 
@@ -46,6 +45,11 @@ namespace Nuwa
 
 		shader->SetInt("material.diffuseMap", ALBEDO_MAP_INDEX);
 		shader->SetInt("material.specularMap", SPECULAR_MAP_INDEX);
+		shader->SetColor("material.plm.ambient", Global::AmbientColor);
+		shader->SetFloat("material.plm.ambientAmount", 0.2f);
+		shader->SetColor("material.plm.diffuse", Global::DiffuseColor);
+		shader->SetFloat("material.plm.diffuseAmount", 1.0f);
+		shader->SetColor("material.plm.specular", Global::SpecularColor);
 		//shader->SetInt("material.normalMap", NORMAL_MAP_INDEX);
 		//shader->SetInt("material.emissionMap", EMISSION_MAP_INDEX);
 		shader->SetFloat("material.shininess", 128);
@@ -53,34 +57,45 @@ namespace Nuwa
 
 	void Material::SetAlbedoMap(std::string path)
 	{
-		//if (textures.capacity() != MAX_TEXTURE_COUNT)
-		//	textures.reserve(MAX_TEXTURE_COUNT);
-
+		if (!shader)
+			return;
+		
 		textures[ALBEDO_MAP_INDEX] = new Texture(path);
+		shader->SetInt("material.diffuseMap", ALBEDO_MAP_INDEX);
 		albedoMap = path;
 	}
 
 	void Material::SetSpecularMap(std::string path)
 	{
-		//if (textures.capacity() != MAX_TEXTURE_COUNT)
-		//	textures.reserve(MAX_TEXTURE_COUNT);
-
+		if (!shader)
+			return;
+		
 		textures[SPECULAR_MAP_INDEX] = new Texture(path);
+		shader->SetInt("material.specularMap", SPECULAR_MAP_INDEX);
 		specularMap = path;
 	}
 
-	std::string Material::GetShaderPath() const
+	std::vector<std::string> Material::GetShaderPaths() const
 	{
 		if (shader)
-			return shader->Filepath();
+			return shader->Filepaths();
 		else
-			return "";
+			return {};
 	}
 
 	void Material::Apply()
 	{
 		if (!shader)
 			return;
+
+		shader->SetColor("material.plm.ambient", Global::AmbientColor);
+		//shader->SetFloat("material.plm.ambientAmount", 0.2f);
+		shader->SetColor("material.plm.diffuse", Global::DiffuseColor);
+		//shader->SetFloat("material.plm.diffuseAmount", 1.0f);
+		shader->SetColor("material.plm.specular", Global::SpecularColor);
+
+		shader->SetFloat("material.diffuseAmount", 1.0f);
+		//shader->SetFloat("material.shininess", 128);
 
 		for (int i = 0; i < MAX_TEXTURE_COUNT; i++)
 		{
@@ -95,35 +110,27 @@ namespace Nuwa
 			auto attached = iter.second;
 			int pidx = 0, didx = 0;
 			for (auto light : attached)
-			{				
+			{			
 				if (type == LightType::Point)
-				{					
-					std::string perfix = "pLights[" + std::to_string(pidx++) + "].";					
+				{
+					std::string perfix = "pLights[" + std::to_string(pidx++) + "].";
 					shader->SetVector3(perfix + "position", light->transform->position);
+					shader->SetVector3(perfix + "color", light->color);
+					shader->SetFloat(perfix + "intensity", light->intensity);
 					shader->SetFloat(perfix + "kc", 1.0f);
 					shader->SetFloat(perfix + "kl", 0.09f);
 					shader->SetFloat(perfix + "kq", 0.032f);
-
-					shader->SetVector3(perfix + "color", light->color);
-
-					shader->SetColor(perfix + "plm.ambient", Global::AmbientColor);
-					shader->SetColor(perfix + "plm.diffuse", Global::DiffuseColor);
-					shader->SetColor(perfix + "plm.specular", Global::SpecularColor);
 				}
 				else if (type == LightType::Direction)
 				{
 					std::string perfix = "dLights[" + std::to_string(didx++) + "].";
-					shader->SetVector3(perfix + "direction", light->transform->eulerAngles);
-
+					shader->SetVector3(perfix + "direction", light->transform->Right());
 					shader->SetVector3(perfix + "color", light->color);
-
-					shader->SetColor(perfix + "plm.ambient", Global::AmbientColor);
-					shader->SetColor(perfix + "plm.diffuse", Global::DiffuseColor);
-					shader->SetColor(perfix + "plm.specular", Global::SpecularColor);
+					shader->SetFloat(perfix + "intensity", light->intensity);
 				}
 
 #ifdef NUWA_EDITOR
-				shader->SetColor("gizmos.displayColor", Vector4(light->color, 1.0f));
+				shader->SetColor("gizmos.displayColor", Vector4(light->color, 1.0));
 #endif // NUWA_EDITOR
 			}
 		}
