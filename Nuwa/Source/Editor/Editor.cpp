@@ -25,7 +25,7 @@ namespace Nuwa
 			}
 		}
 
-		void EditorMode::AddEditorGUI(EditorGUI* editorGUI)
+		void EditorMode::AddEditorGUI(EditorGUI* editorGUI, bool isOpen)
 		{
 			if (!editorGUI)
 				return;
@@ -35,22 +35,28 @@ namespace Nuwa
 				return;
 
 			editorGUI->Start();
+			editorGUI->isOpen = isOpen;
 			editorGUIs.push_back(editorGUI);
+
 		}
 
 		void EditorMode::OnEditorGUI()
 		{
 			if (Input::GetKeyDown(KeyCode::H))
 			{
-				for (auto iter : editorGUIs)
-					if (iter->title == "Hierarchy")
-						iter->isOpen = !iter->isOpen;
+				for (auto iter : editorGUIs) if (iter->title == "Hierarchy")
+				{
+					iter->isOpen = !iter->isOpen;
+					break;
+				}
 			}
 			else if (Input::GetKeyDown(KeyCode::I))
 			{
-				for (auto iter : editorGUIs)
-					if (iter->title == "Inspector")
-						iter->isOpen = !iter->isOpen;
+				for (auto iter : editorGUIs) if (iter->title == "Inspector")
+				{
+					iter->isOpen = !iter->isOpen;
+					break;
+				}
 			}
 			else if (Input::GetKeyDown(KeyCode::C))
 			{
@@ -59,10 +65,17 @@ namespace Nuwa
 					iter->isOpen = isOpen;
 				isOpen = !isOpen;
 			}
+			else if (Input::GetKeyDown(KeyCode::L))
+			{
+				for (auto iter : editorGUIs) if (iter->title == "Light Setting")
+				{
+					iter->isOpen = !iter->isOpen;
+					break;
+				}
+			}
 
 			for (auto iter : editorGUIs)
 				iter->RenderGUI();
-
 
 		}
 

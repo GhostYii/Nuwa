@@ -21,7 +21,7 @@ namespace Nuwa
 			EditorMode();
 			~EditorMode();
 
-			void AddEditorGUI(EditorGUI* editorGUI);
+			void AddEditorGUI(EditorGUI* editorGUI, bool isOpen = true);
 
 			void OnEditorGUI();
 
