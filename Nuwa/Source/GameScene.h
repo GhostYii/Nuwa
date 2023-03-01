@@ -2,8 +2,7 @@
 #include "GameObject.h"
 
 #ifdef NUWA_EDITOR
-#include "Editor/Inspector.h"
-#include "Editor/Hierarchy.h"
+#include "Editor/EditorViewTypes.h"
 #endif
 
 namespace Nuwa

@@ -3,6 +3,7 @@
 #include "Editor.h"
 #include "../GameScene.h"
 #include "../Component/BehaviorComponent.h"
+#include "../Input/Input.h"
 
 namespace Nuwa
 {
@@ -39,19 +40,19 @@ namespace Nuwa
 
 		void EditorMode::OnEditorGUI()
 		{
-			if (ImGui::IsKeyPressed(ImGuiKey::ImGuiKey_H))
+			if (Input::GetKeyDown(KeyCode::H))
 			{
 				for (auto iter : editorGUIs)
 					if (iter->title == "Hierarchy")
 						iter->isOpen = !iter->isOpen;
 			}
-			else if (ImGui::IsKeyPressed(ImGuiKey::ImGuiKey_I))
+			else if (Input::GetKeyDown(KeyCode::I))
 			{
 				for (auto iter : editorGUIs)
 					if (iter->title == "Inspector")
 						iter->isOpen = !iter->isOpen;
 			}
-			else if (ImGui::IsKeyPressed(ImGuiKey::ImGuiKey_C))
+			else if (Input::GetKeyDown(KeyCode::C))
 			{
 				static bool isOpen = false;
 				for (auto iter : editorGUIs)
