@@ -32,11 +32,6 @@ namespace Nuwa
 			return;
 		
 		mesh = std::make_shared<Mesh>(*(filter->GetMesh()));
-		if (!mesh->GetIndicesSize())
-		{
-			spdlog::error("fuck");
-			return;
-		}
 		vao = std::make_unique<VertexArray>();
 		vbo = std::make_unique<VertexBuffer>(mesh->GetVertices().data(), mesh->GetVerticesSize());
 
