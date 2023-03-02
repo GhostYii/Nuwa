@@ -5,7 +5,10 @@
 #include "../GameScene.h"
 #include "../Component/Camera.h"
 #include "../Global.h"
-#include "glm/gtc/type_ptr.hpp"
+#include<glm/gtc/matrix_transform.hpp>
+#include<glm/gtc/type_ptr.hpp>
+//#include<glm/gtx/rotate_vector.hpp>
+//#include<glm/gtx/vector_angle.hpp>
 #include "../Input/Input.h"
 
 namespace Nuwa
@@ -41,7 +44,9 @@ namespace Nuwa
 			if (!currentGameObject)
 				return;
 
-			if (Input::GetKeyDown(KeyCode::W))
+			if (Input::GetKeyDown(KeyCode::Q))
+				EditorMode::currentGizmosOperation = ImGuizmo::UNIVERSAL;
+			else if (Input::GetKeyDown(KeyCode::W))
 				EditorMode::currentGizmosOperation = ImGuizmo::TRANSLATE;
 			else if (Input::GetKeyDown(KeyCode::E))
 				EditorMode::currentGizmosOperation = ImGuizmo::ROTATE;

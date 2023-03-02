@@ -66,7 +66,7 @@ namespace Nuwa
 			editor->AddEditorGUI(new Editor::Inspector());
 			editor->AddEditorGUI(new Editor::Hierarchy());
 			editor->AddEditorGUI(new Editor::LightSetting(), false);
-			editor->AddEditorGUI(new Editor::GameView());			
+			editor->AddEditorGUI(new Editor::GameView(), false);			
 #endif // NUWA_EDITOR
 		}
 
