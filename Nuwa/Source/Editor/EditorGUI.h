@@ -46,12 +46,13 @@ namespace Nuwa
 		public:
 			static void DrawDragFloat(std::string name, float& value);
 			static void DrawSlideFloat(std::string name, float& value, float min, float max);
-			//static void DrawDragInt(std::string name, int& value);
+			static void DrawDragInt(std::string name, int& value);
 			static void DrawSlideInt(std::string name, int& value, int min, int max);
 
 			//static void DrawDragVector2(std::string name, Vector2& value);
 			static void DrawDragVector3(std::string name, Vector3& value);
 
+			static void DrawSingleText(const char* fmt, ...);
 			static void DrawLabel(std::string name, std::string value);
 			static void DrawInputText(std::string name, char* buf, size_t bufSize = 1024);
 

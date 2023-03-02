@@ -11,6 +11,7 @@ namespace Nuwa
 
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
+		virtual void Clear() = 0;
 
 	protected:
 		uint rendererID;

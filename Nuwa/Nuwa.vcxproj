@@ -150,6 +150,7 @@
     <ClCompile Include="Source\Component\Camera.cpp" />
     <ClCompile Include="Source\Component\CameraView.cpp" />
     <ClCompile Include="Source\Component\Light.cpp" />
+    <ClCompile Include="Source\Component\MeshFilter.cpp" />
     <ClCompile Include="Source\Component\MeshRenderer.cpp" />
     <ClCompile Include="Source\Component\Renderer.cpp" />
     <ClCompile Include="Source\Component\SpriteRenderer.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Source\Component\Camera.h" />
     <ClInclude Include="Source\Component\CameraView.h" />
     <ClInclude Include="Source\Component\Light.h" />
+    <ClInclude Include="Source\Component\MeshFilter.h" />
     <ClInclude Include="Source\Component\MeshRenderer.h" />
     <ClInclude Include="Source\Component\Renderer.h" />
     <ClInclude Include="Source\Component\SpriteRenderer.h" />

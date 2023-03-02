@@ -6,7 +6,6 @@
 using namespace Nuwa::Editor;
 #endif // NUWA_EDITOR
 
-
 namespace Nuwa
 {
 	class BehaviorComponent : public Component
@@ -36,9 +35,9 @@ namespace Nuwa
 		virtual void InternalLateUpdate();
 		virtual void InternalRender() {}
 
-		virtual void InternalOnInspectorGUI();
+		virtual void InternalOnInspectorGUI() override;
 
-		virtual void OnInspectorGUI() {}
+		virtual void OnInspectorGUI() override {}
 
 	private:
 		bool prevEnable;

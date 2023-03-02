@@ -13,6 +13,7 @@ namespace Nuwa
 		// Inherited via IBindable
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
+		virtual void Clear() override;
 
 		void Bind(uint slot) const;
 

@@ -14,11 +14,13 @@ namespace Nuwa
 		VertexArray();
 		virtual ~VertexArray();
 
+		void Reset();
 		void AddBuffer(const VertexBuffer& buffer, const VertexLayout& layout);
 
 		// Inherited via IBindable
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
+		virtual void Clear() override;
 	};
 
 }

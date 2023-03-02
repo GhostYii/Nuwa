@@ -31,13 +31,13 @@ namespace Nuwa
 
 			ImGuizmo::SetRect(Global::WindowPosition.x, Global::WindowPosition.y, Global::Resolution.x, Global::Resolution.y);
 			ImGuizmo::SetOrthographic(GameScene::mainCamera->orthographic);
-			ImGuizmo::DrawGrid
-			(
-				glm::value_ptr(GameScene::mainCamera->GetViewMatrix()),
-				glm::value_ptr(GameScene::mainCamera->GetProjectMatrix()),
-				glm::value_ptr(Matrix4x4(1.0f)),
-				GameScene::mainCamera->GetFarClipPlane()
-			);
+			//ImGuizmo::DrawGrid
+			//(
+			//	glm::value_ptr(GameScene::mainCamera->GetViewMatrix()),
+			//	glm::value_ptr(GameScene::mainCamera->GetProjectMatrix()),
+			//	glm::value_ptr(Matrix4x4(1.0f)),
+			//	GameScene::mainCamera->GetFarClipPlane()
+			//);
 
 			GameObject* currentGameObject = EditorMode::currentScene->Find(EditorMode::currentSelectionID);
 

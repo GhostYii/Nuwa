@@ -16,6 +16,7 @@
 #include "Component/Light.h"
 #include "Component/SpriteRenderer.h"
 #include "Component/CameraView.h"
+#include "Component/MeshFilter.h"
 
 
 namespace Nuwa
@@ -66,7 +67,7 @@ namespace Nuwa
 			editor->AddEditorGUI(new Editor::Inspector());
 			editor->AddEditorGUI(new Editor::Hierarchy());
 			editor->AddEditorGUI(new Editor::LightSetting(), false);
-			editor->AddEditorGUI(new Editor::GameView(), false);			
+			editor->AddEditorGUI(new Editor::GameView(), false);
 #endif // NUWA_EDITOR
 		}
 
@@ -83,17 +84,24 @@ namespace Nuwa
 			CameraView* cv = new CameraView(cam);
 			camera->AddComponent(cv);
 
-			// create test game object
-			GameObject* test = new GameObject("game object");			
+			// create material
+			Material* material = new Material(new Shader("Resources/Shaders/Default.vert", "Resources/Shaders/Default.frag"));
+			material->SetAlbedoMap("Resources/Textures/niuniu.png");
 
-			Mesh* mesh = new Mesh();
-			//mesh->LoadFromObj("Resources/Geometry/cube.obj");
-			//mesh->LoadFromObj("Resources/Models/Lowpoly_tree_sample.obj");
-			mesh->LoadFromObj("Resources/Models/niuniu.obj");
+			// create test game object
+			GameObject* test = new GameObject("game object");
+
+			//Mesh* mesh = new Mesh();
+			////mesh->LoadFromObj("Resources/Geometry/cube.obj");
+			////mesh->LoadFromObj("Resources/Models/Lowpoly_tree_sample.obj");
+			//mesh->LoadFromObj("Resources/Models/niuniu.obj");			
+
+			MeshFilter* mf = new MeshFilter();
+			mf->LoadMeshFromFile("Resources/Models/niuniu.obj");
+			test->AddComponent(mf);
 
 			MeshRenderer* mr = new MeshRenderer();
-			mr->SetMesh(mesh, "Resources/Shaders/Default.vert", "Resources/Shaders/Default.frag");
-			mr->GetMaterial()->SetAlbedoMap("Resources/Textures/niuniu.png");			
+			mr->SetMaterial(material);
 			test->AddComponent(mr);
 
 			//GameObject* test2 = new GameObject("game object");

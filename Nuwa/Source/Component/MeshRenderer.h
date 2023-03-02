@@ -1,8 +1,9 @@
 #pragma once
 #include "Renderer.h"
+#include "Camera.h"
+#include "MeshFilter.h"
 #include "../Mesh.h"
 #include "../Graphics/ToyRenderer.h"
-#include "Camera.h"
 
 namespace Nuwa
 {
@@ -14,17 +15,19 @@ namespace Nuwa
 
 	class MeshRenderer : public Renderer
 	{
+		friend class MeshFilter;
 	public:
 		MeshRenderer();
 		virtual ~MeshRenderer() = default;
 
-		void SetMesh(Mesh* mesh, const std::string& shaderPath);
-		void SetMesh(Mesh* mesh, const std::string& vertShader, const std::string& fragShader);
-
+		void SetMaterial(Material* material);
+		
 	protected:
+		virtual void Start() override;
 		virtual void OnInspectorGUI() override;
 
 	private:
 		std::shared_ptr<Mesh> mesh;
+		void ResetMeshDrawData(MeshFilter* filter);
 	};
 }

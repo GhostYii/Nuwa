@@ -37,7 +37,7 @@ namespace Nuwa
 
 	Texture::~Texture()
 	{
-		GL_ASSERT(glDeleteTextures(1, &rendererID));
+		Clear();
 	}
 
 	void Texture::Bind() const
@@ -49,6 +49,11 @@ namespace Nuwa
 	void Texture::Unbind() const
 	{
 		GL_ASSERT(glBindTexture(GL_TEXTURE_2D, 0));
+	}
+
+	void Texture::Clear()
+	{
+		GL_ASSERT(glDeleteTextures(1, &rendererID));
 	}
 
 	void Texture::Bind(uint slot) const

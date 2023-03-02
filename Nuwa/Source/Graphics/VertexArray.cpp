@@ -1,40 +1,56 @@
 #include "VertexArray.h"
 #include "../EngineMacros.h"
 
-Nuwa::VertexArray::VertexArray()
+namespace Nuwa
 {
-	GL_ASSERT(glGenVertexArrays(1, &rendererID));
-}
-
-Nuwa::VertexArray::~VertexArray()
-{
-	GL_ASSERT(glDeleteVertexArrays(1, &rendererID));
-}
-
-void Nuwa::VertexArray::AddBuffer(const VertexBuffer& buffer, const VertexLayout& layout)
-{
-	Bind();
-
-	buffer.Bind();
-	const auto& elements = layout.Elements();
-
-	uint offset = 0;
-	for (uint i = 0; i < elements.size(); ++i)
+	VertexArray::VertexArray()
 	{
-		const auto& elem = elements[i];
-		GL_ASSERT(glEnableVertexAttribArray(i));
-		GL_ASSERT(glVertexAttribPointer(i, elem.count, elem.type, elem.normalized, layout.Stride(), (const void*)offset));
+		GL_ASSERT(glGenVertexArrays(1, &rendererID));
+	}
 
-		offset += elem.count * VertexElement::GetTypeSize(elem.type);
-	}	
-}
+	VertexArray::~VertexArray()
+	{
+		Clear();
+	}
 
-void Nuwa::VertexArray::Bind() const
-{
-	GL_ASSERT(glBindVertexArray(rendererID));
-}
+	void VertexArray::Reset()
+	{
+		if (rendererID)
+			Clear();
 
-void Nuwa::VertexArray::Unbind() const
-{
-	GL_ASSERT(glBindVertexArray(0));
+		GL_ASSERT(glGenVertexArrays(1, &rendererID));
+	}
+
+	void VertexArray::AddBuffer(const VertexBuffer& buffer, const VertexLayout& layout)
+	{
+		Bind();
+
+		buffer.Bind();
+		const auto& elements = layout.Elements();
+
+		uint offset = 0;
+		for (uint i = 0; i < elements.size(); ++i)
+		{
+			const auto& elem = elements[i];
+			GL_ASSERT(glEnableVertexAttribArray(i));
+			GL_ASSERT(glVertexAttribPointer(i, elem.count, elem.type, elem.normalized, layout.Stride(), (const void*)offset));
+
+			offset += elem.count * VertexElement::GetTypeSize(elem.type);
+		}
+	}
+
+	void VertexArray::Bind() const
+	{
+		GL_ASSERT(glBindVertexArray(rendererID));
+	}
+
+	void VertexArray::Unbind() const
+	{
+		GL_ASSERT(glBindVertexArray(0));
+	}
+
+	void VertexArray::Clear()
+	{
+		GL_ASSERT(glDeleteVertexArrays(1, &rendererID));
+	}
 }

@@ -25,7 +25,7 @@ namespace Nuwa
 
 	Shader::~Shader()
 	{
-		GL_ASSERT(glDeleteProgram(rendererID));
+		Clear();
 	}
 
 	void Shader::SetInt(const std::string& name, int value)
@@ -125,6 +125,11 @@ namespace Nuwa
 	void Shader::Unbind() const
 	{
 		GL_ASSERT(glUseProgram(NULL));
+	}
+
+	void Shader::Clear()
+	{
+		GL_ASSERT(glDeleteProgram(rendererID));
 	}
 
 	ShaderSource Shader::Parse()

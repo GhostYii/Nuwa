@@ -11,8 +11,6 @@ namespace Nuwa
 		Mesh();
 		virtual ~Mesh() = default;
 
-		void LoadFromObj(std::string objPath);
-
 		void SetMeshVertices(std::vector<MeshVertex> vertices, std::vector<uint> indices);
 
 		inline std::vector<MeshVertex> GetVertices() { return vertices; }
@@ -21,13 +19,12 @@ namespace Nuwa
 		uint GetVerticesSize();
 		uint GetIndicesSize();
 
-		const std::string GetModelPath() const;
+		uint GetVerticesCount();
+		uint GetIndicesCount();
 
 	private:
 		std::vector<MeshVertex> vertices;
-		std::vector<uint> indices;
-
-		std::string modelPath;
+		std::vector<uint> indices;	
 	};
 }
 

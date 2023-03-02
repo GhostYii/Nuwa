@@ -70,6 +70,21 @@ namespace Nuwa
 			ImGui::DragFloat(("##" + name).c_str(), &value, 0.1f, min, max, "%.2f");			
 		}
 
+		void EditorGUI::DrawDragInt(std::string name, int& value)
+		{
+			ImGui::PushID(name.c_str());
+
+			ImGui::Columns(2);
+			ImGui::SetColumnWidth(0, EDITOR_DEFAULT_TITLE_WIDTH);
+			ImGui::Text(name.c_str());
+			ImGui::NextColumn();
+
+			ImGui::DragInt(("##" + name).c_str(), &value);
+
+			ImGui::Columns();
+			ImGui::PopID();
+		}
+
 		void EditorGUI::DrawSlideInt(std::string name, int& value, int min, int max)
 		{
 			ImGui::PushID(name.c_str());
@@ -122,6 +137,14 @@ namespace Nuwa
 			ImGui::Columns();
 			ImGui::PopID();
 
+		}
+
+		void EditorGUI::DrawSingleText(const char* fmt, ...)
+		{
+			va_list args;
+			va_start(args, fmt);
+			ImGui::Text(fmt, args);
+			va_end(args);
 		}
 
 		void EditorGUI::DrawLabel(std::string name, std::string value)

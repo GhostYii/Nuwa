@@ -3,7 +3,7 @@
 #include "Editor.h"
 #include "Inspector.h"
 #include "../GameScene.h"
-#include "../Component/BehaviorComponent.h"
+#include "../Component/Component.h"
 #include<glm/gtc/type_ptr.hpp>
 
 #include "../Transform.h"
@@ -37,15 +37,12 @@ namespace Nuwa
 
 			for (auto& iter : currentGameObject->components)
 			{
-				if (dynamic_cast<BehaviorComponent*>(iter.second))
+				//auto comp = dynamic_cast<Component*>(iter.second);
+				std::string name = typeid(*iter.second).name();
+				name.erase(name.begin(), name.begin() + 6);
+				if (ImGui::CollapsingHeader(name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
 				{
-					auto comp = dynamic_cast<BehaviorComponent*>(iter.second);
-					std::string name = typeid(*comp).name();
-					name.erase(name.begin(), name.begin() + 6);
-					if (ImGui::CollapsingHeader(name.c_str(), ImGuiTreeNodeFlags_DefaultOpen))
-					{
-						comp->InternalOnInspectorGUI();
-					}
+					iter.second->InternalOnInspectorGUI();
 				}
 			}
 		}

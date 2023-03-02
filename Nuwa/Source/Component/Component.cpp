@@ -21,4 +21,13 @@ namespace Nuwa
 	{
 		return instanceID;
 	}
+
+	void Component::InternalOnInspectorGUI()
+	{
+#ifdef NUWA_EDITOR
+		ImGui::Indent();
+		OnInspectorGUI();
+		ImGui::Unindent();
+#endif // NUWA_EDITOR
+	}
 }
