@@ -30,8 +30,10 @@ namespace Nuwa
 					ImGui::AlignTextToFramePadding();
 					OnGUI();
 					ImGui::End();
-				}
+				}				
 			}
+
+			OnGizmos();
 		}
 
 		void EditorGUI::DrawDragFloat(std::string name, float& value)

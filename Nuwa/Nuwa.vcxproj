@@ -156,6 +156,7 @@
     <ClCompile Include="Source\Editor\Component\GizmosRenderer.cpp" />
     <ClCompile Include="Source\Editor\Editor.cpp" />
     <ClCompile Include="Source\Editor\EditorGUI.cpp" />
+    <ClCompile Include="Source\Editor\GameView.cpp" />
     <ClCompile Include="Source\Editor\Hierarchy.cpp" />
     <ClCompile Include="Source\Editor\Inspector.cpp" />
     <ClCompile Include="Source\Editor\LightSetting.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Source\Editor\Editor.h" />
     <ClInclude Include="Source\Editor\EditorGUI.h" />
     <ClInclude Include="Source\Editor\EditorViewTypes.h" />
+    <ClInclude Include="Source\Editor\GameView.h" />
     <ClInclude Include="Source\Editor\Hierarchy.h" />
     <ClInclude Include="Source\Editor\Inspector.h" />
     <ClInclude Include="Source\Editor\LightSetting.h" />

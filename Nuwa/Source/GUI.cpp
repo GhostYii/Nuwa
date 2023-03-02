@@ -3,6 +3,7 @@
 #include "GLFW/glfw3.h"
 
 #include "GUI.h"
+#include "imgui/ImGuizmo.h"
 
 void Nuwa::InitImGui(GLFWwindow* window, std::string glslVersionStr)
 {
@@ -29,7 +30,7 @@ void Nuwa::InitImGui(GLFWwindow* window, std::string glslVersionStr)
 
 	// Setup Platform/Renderer backends
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
-	ImGui_ImplOpenGL3_Init(glslVersionStr.c_str());	
+	ImGui_ImplOpenGL3_Init(glslVersionStr.c_str());
 
 	spdlog::info("ImGui inited.");
 }
@@ -40,6 +41,7 @@ void Nuwa::BeginImGui()
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
+	ImGuizmo::BeginFrame();	
 }
 
 void Nuwa::RenderImGui(GLFWwindow* window, ImVec4 clearColor)

@@ -25,6 +25,7 @@ namespace Nuwa
 		virtual void OnRenderObject() override;
 
 		static void OnFrameBufferSizeChanged(GLFWwindow* window, int width, int height);
+		static void OnWindowPositionChanged(GLFWwindow* window, int xpos, int ypos);
 
 	private:
 		GameScene* scene;

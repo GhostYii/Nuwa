@@ -11,6 +11,7 @@ namespace Nuwa
 
 	public:
 		static Vector2Int Resolution;
+		static Vector2Int WindowPosition;
 		static bool IsFullScreen;
 
 		static bool IsEditor;

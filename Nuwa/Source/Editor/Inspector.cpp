@@ -57,7 +57,7 @@ namespace Nuwa
 				ImGui::Indent();
 
 				EditorGUI::DrawDragVector3("Position", transform.position);
-				EditorGUI::DrawDragVector3("Rotation", transform.eulerAngles);				
+				EditorGUI::DrawDragVector3("Rotation", transform.eulerAngles);
 				// TODO: abs>360
 				//if (std::fabs(transform.eulerAngles.x) > 360.0f)
 				//	transform.eulerAngles.x -= (transform.eulerAngles.x / 360.0f) * 360.0f;

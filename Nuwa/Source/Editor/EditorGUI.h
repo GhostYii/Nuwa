@@ -37,11 +37,11 @@ namespace Nuwa
 
 			virtual void Start() {}
 			virtual void OnGUI() {}
+			virtual void OnGizmos() {}
 			virtual void Destory() {}
 
 		private:
 			void RenderGUI();
-
 
 		public:
 			static void DrawDragFloat(std::string name, float& value);

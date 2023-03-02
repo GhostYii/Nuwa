@@ -11,6 +11,7 @@ namespace Nuwa
 	{
 		Nuwa::GameScene* EditorMode::currentScene = nullptr;
 		uint64 EditorMode::currentSelectionID = 0;
+		ImGuizmo::OPERATION EditorMode::currentGizmosOperation = ImGuizmo::TRANSLATE;
 
 		EditorMode::EditorMode()
 		{

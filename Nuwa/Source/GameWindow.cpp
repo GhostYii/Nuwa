@@ -36,7 +36,10 @@ namespace Nuwa
 			return;
 		}
 
+		glfwGetWindowPos(window, &Global::WindowPosition.x, &Global::WindowPosition.y);
+
 		glfwMakeContextCurrent(window);
+		glfwSetWindowPosCallback(window, OnWindowPositionChanged);
 		glfwSetFramebufferSizeCallback(window, OnFrameBufferSizeChanged);
 
 		if (glewInit() != GLEW_OK)
@@ -63,6 +66,7 @@ namespace Nuwa
 			editor->AddEditorGUI(new Editor::Inspector());
 			editor->AddEditorGUI(new Editor::Hierarchy());
 			editor->AddEditorGUI(new Editor::LightSetting(), false);
+			editor->AddEditorGUI(new Editor::GameView());			
 #endif // NUWA_EDITOR
 		}
 
@@ -80,32 +84,25 @@ namespace Nuwa
 			camera->AddComponent(cv);
 
 			// create test game object
-			GameObject* test = new GameObject("game object");
-			//test->transform.rotation = Quaternion(glm::radians(Vector3(-90, 45, 0)));
+			GameObject* test = new GameObject("game object");			
 
 			Mesh* mesh = new Mesh();
 			//mesh->LoadFromObj("Resources/Geometry/cube.obj");
 			//mesh->LoadFromObj("Resources/Models/Lowpoly_tree_sample.obj");
 			mesh->LoadFromObj("Resources/Models/niuniu.obj");
 
-
 			MeshRenderer* mr = new MeshRenderer();
 			mr->SetMesh(mesh, "Resources/Shaders/Default.vert", "Resources/Shaders/Default.frag");
-			mr->GetMaterial()->SetAlbedoMap("Resources/Textures/niuniu.png");
-			//mr->SetCamera(cam);
+			mr->GetMaterial()->SetAlbedoMap("Resources/Textures/niuniu.png");			
 			test->AddComponent(mr);
 
+			//GameObject* test2 = new GameObject("game object");
+			//Mesh* mesh2 = new Mesh();
+			//mesh2->LoadFromObj("Resources/Models/wall_block.obj");
 
-			GameObject* test2 = new GameObject("game object");
-
-			Mesh* mesh2 = new Mesh();
-			mesh2->LoadFromObj("Resources/Models/wall_block.obj");
-
-
-			MeshRenderer* mr2 = new MeshRenderer();
-			mr2->SetMesh(mesh2, "Resources/Shaders/Default.vert", "Resources/Shaders/Default.frag");
-			//mr2->SetCamera(cam);
-			test2->AddComponent(mr2);
+			//MeshRenderer* mr2 = new MeshRenderer();
+			//mr2->SetMesh(mesh2, "Resources/Shaders/Default.vert", "Resources/Shaders/Default.frag");			
+			//test2->AddComponent(mr2);
 
 			// create light gameobject
 			GameObject* light = new GameObject("direction light");
@@ -122,15 +119,11 @@ namespace Nuwa
 			pointLight->SetGameScene(scene);
 			light2->AddComponent(pointLight);
 
-#ifdef NUWA_EDITOR
-
-#endif // NUWA_EDITOR
-
 			scene->AddGameObject(camera);
 			scene->AddGameObject(light);
 			scene->AddGameObject(light2);
 			scene->AddGameObject(test);
-			scene->AddGameObject(test2);
+			//scene->AddGameObject(test2);
 		}
 	}
 
@@ -164,5 +157,11 @@ namespace Nuwa
 		GL_ASSERT(glViewport(0, 0, width, height));
 
 		//spdlog::info("aspect: {}", GetScreenAspect());
+	}
+
+	void GameWindow::OnWindowPositionChanged(GLFWwindow* window, int xpos, int ypos)
+	{
+		Global::WindowPosition.x = xpos;
+		Global::WindowPosition.y = ypos;
 	}
 }

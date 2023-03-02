@@ -29,6 +29,8 @@ namespace Nuwa
 			//void RegisterHierarchy(Hierarchy* panel);
 			//void RegisterInspector(Inspector* panel);
 
+			static ImGuizmo::OPERATION currentGizmosOperation;
+
 			static uint64 currentSelectionID;
 			static GameScene* currentScene;
 			static void SetCurrentScene(Nuwa::GameScene* scene);
