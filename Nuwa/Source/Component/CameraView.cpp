@@ -26,8 +26,7 @@ namespace Nuwa
 		if (!target)
 			return;
 
-		if (Input::GetKeyDown(KeyCode::LeftAlt))
-			isActive = !isActive;
+		isActive = Input::GetMouseKey(MouseButton::Right);		
 
 		Input::SetCursorMode(isActive ? CursorMode::Disabled : CursorMode::Normal);
 		if (!isActive)
