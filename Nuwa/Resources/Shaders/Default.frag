@@ -111,8 +111,8 @@ void main()
 
 vec3 CreateDirectionLight(DirectionLight light, vec3 normal, vec3 viewDir)
 {
-	vec3 dir = normalize(-light.direction);	
-	float diffuseAmount = max(dot(dir, normal), 0.0);
+	vec3 dir = normalize(-light.direction);
+	float diffuseAmount = max(dot(normal, dir), 0.0);
 	vec3 reflectDir = reflect(-dir, normal);
 	float specularAmount = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 	

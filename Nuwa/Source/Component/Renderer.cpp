@@ -60,8 +60,10 @@ namespace Nuwa
 
 		if (material)
 		{
-			material->SetUniformValue<Matrix4x4>("model", transform->GetModelMatrix());			
-			material->SetUniformValue<Matrix4x4>("camMatrix", GameScene::mainCamera->GetProjectMatrix() * GameScene::mainCamera->GetViewMatrix());
+			material->SetUniformValue<Matrix4x4>("model", transform->GetModelMatrix());
+			material->SetUniformValue<Matrix4x4>("view", GameScene::mainCamera->GetViewMatrix());
+			material->SetUniformValue<Matrix4x4>("proj", GameScene::mainCamera->GetProjectMatrix());
+			//material->SetUniformValue<Matrix4x4>("camMatrix", GameScene::mainCamera->GetProjectMatrix() * GameScene::mainCamera->GetViewMatrix());
 			material->SetUniformValue<Vector3>("camPos", GameScene::mainCamera->transform->position);
 
 #ifdef NUWA_EDITOR
