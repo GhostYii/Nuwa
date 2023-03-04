@@ -116,12 +116,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NUWA_EDITOR;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Nuwa\ThirdParty;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\spdlog\include;$(SolutionDir)Dependencies\assimp\include;$(SolutionDir)Dependencies\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Nuwa\ThirdParty;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\spdlog\include;$(SolutionDir)Dependencies\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\spdlog\lib;$(SolutionDir)Dependencies\assimp\lib;$(SolutionDir)Dependencies\fmt\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2019;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\spdlog\lib;$(SolutionDir)Dependencies\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp-vc142-mt.lib;glew32s.lib;glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -163,7 +163,10 @@
     <ClCompile Include="Source\Editor\LightSetting.cpp" />
     <ClCompile Include="Source\GameScene.cpp" />
     <ClCompile Include="Source\Global.cpp" />
+    <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Material.cpp" />
+    <ClCompile Include="Source\Graphics\RenderBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\RenderTexture.cpp" />
     <ClCompile Include="Source\Input\Input.cpp" />
     <ClCompile Include="Source\Input\InputSystem.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
@@ -215,7 +218,11 @@
     <ClInclude Include="Source\Editor\LightSetting.h" />
     <ClInclude Include="Source\GameScene.h" />
     <ClInclude Include="Source\Global.h" />
+    <ClInclude Include="Source\Graphics\GraphicTypes.h" />
+    <ClInclude Include="Source\Graphics\FrameBuffer.h" />
     <ClInclude Include="Source\Graphics\Material.h" />
+    <ClInclude Include="Source\Graphics\RenderBuffer.h" />
+    <ClInclude Include="Source\Graphics\RenderTexture.h" />
     <ClInclude Include="Source\Graphics\SpriteVertex.h" />
     <ClInclude Include="Source\Input\Input.h" />
     <ClInclude Include="Source\Input\InputSystem.h" />
