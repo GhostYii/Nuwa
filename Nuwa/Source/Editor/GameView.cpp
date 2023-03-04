@@ -53,6 +53,9 @@ namespace Nuwa
 			else if (Input::GetKeyDown(KeyCode::R))
 				EditorMode::currentGizmosOperation = ImGuizmo::SCALE;
 
+			if (GameScene::mainCamera->gameObject->GetInstanceID() == currentGameObject->GetInstanceID())
+				return;
+
 			Matrix4x4 objMatrix = currentGameObject->transform.GetModelMatrix();
 			ImGuizmo::Manipulate
 			(
@@ -64,14 +67,17 @@ namespace Nuwa
 				NULL,
 				NULL
 			);
-			ImGuizmo::DecomposeMatrixToComponents
-			(
-				glm::value_ptr(objMatrix),
-				glm::value_ptr(currentGameObject->transform.position),
-				glm::value_ptr(currentGameObject->transform.eulerAngles),
-				glm::value_ptr(currentGameObject->transform.scale)
-			);
 
+			if (ImGuizmo::IsUsing())
+			{
+				ImGuizmo::DecomposeMatrixToComponents
+				(
+					glm::value_ptr(objMatrix),
+					glm::value_ptr(currentGameObject->transform.position),
+					glm::value_ptr(currentGameObject->transform.eulerAngles),
+					glm::value_ptr(currentGameObject->transform.scale)
+				);
+			}
 
 		}
 	}

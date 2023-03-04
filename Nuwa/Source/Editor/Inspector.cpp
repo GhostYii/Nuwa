@@ -55,14 +55,6 @@ namespace Nuwa
 
 				EditorGUI::DrawDragVector3("Position", transform.position);
 				EditorGUI::DrawDragVector3("Rotation", transform.eulerAngles);
-				// TODO: abs>360
-				//if (std::fabs(transform.eulerAngles.x) > 360.0f)
-				//	transform.eulerAngles.x -= (transform.eulerAngles.x / 360.0f) * 360.0f;
-				//if (std::fabs(transform.eulerAngles.y) > 360.0f)
-				//	transform.eulerAngles.y -= (transform.eulerAngles.y / 360.0f)  * 360.0f;
-				//if (std::fabs(transform.eulerAngles.z) > 360.0f)
-				//	transform.eulerAngles.z -= (transform.eulerAngles.z / 360.0f) * 360.0f;
-				transform.rotation = Quaternion(glm::radians(transform.eulerAngles));
 				EditorGUI::DrawDragVector3("Scale", transform.scale);
 
 				ImGui::Unindent();
