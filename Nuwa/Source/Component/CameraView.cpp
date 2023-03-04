@@ -7,7 +7,7 @@
 namespace Nuwa
 {
 	CameraView::CameraView(Camera* camera)
-		: speed(5.0f), sensitivity(0.1f), target(camera), isActive(true)
+		: speed(5.0f), sensitivity(15.0f), target(camera), isActive(true)
 	{
 	}
 
@@ -33,9 +33,9 @@ namespace Nuwa
 			return;
 
 		// view control
-		Vector2 viewOffset = Input::GetMouseMove() * sensitivity;
+		Vector2 viewOffset = Input::GetMouseMove() * sensitivity * Time::deltaTime;
 		Vector3 newEuler = target->transform->eulerAngles - Vector3(viewOffset.y, viewOffset.x, 0);
-		newEuler.x = newEuler.x > 89.0f ? 89.0f : (newEuler.x < -89.0f ? -89.0f : newEuler.x);
+		//newEuler.x = newEuler.x > 89.0f ? 89.0f : (newEuler.x < -89.0f ? -89.0f : newEuler.x);
 		target->transform->eulerAngles = newEuler;
 
 		// move control
@@ -61,7 +61,7 @@ namespace Nuwa
 		EditorGUI::DrawToggle("Input Enable", isActive);
 		EditorGUI::DrawLabel("Camera Target", target->gameObject->name);
 		EditorGUI::DrawDragFloat("Speed", speed);
-		EditorGUI::DrawSlideFloat("Sensitivity", sensitivity, 0.05, 1);
+		EditorGUI::DrawSlideFloat("Sensitivity", sensitivity, 1, 100);
 #endif // NUWA_EDITOR
 	}
 
