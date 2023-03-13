@@ -238,4 +238,12 @@ namespace Nuwa
 	};
 
 	typedef std::pair<KeyState, KeyState> KeyStatePair;
+
+	enum class FrameAttatchmentType : uint
+	{
+		Color0 = 0x8CE0,
+		Depth = 0x8D00,
+		Stencil = 0x8D20,
+		DepthStencil = 0x821A		
+	};
 }

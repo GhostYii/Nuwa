@@ -1,3 +1,5 @@
+#ifdef NUWA_EDITOR
+
 #include "LightSetting.h"
 #include "../Global.h"
 
@@ -20,4 +22,4 @@ namespace Nuwa
 	}
 }
 
-
+#endif // NUWA_EDITOR

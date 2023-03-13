@@ -1,10 +1,6 @@
 #include "MeshRenderer.h"
 #include "../GameObject.h"
-#include "../Graphics/VertexArray.h"
-#include "../Graphics/VertexBuffer.h"
-#include "../Graphics/IndexBuffer.h"
-#include "../Graphics/Material.h"
-#include "../Graphics/Texture.h"
+#include "../Graphics/GraphicTypes.h"
 #include "../Global.h"
 
 #ifdef NUWA_EDITOR

@@ -2,18 +2,22 @@
 #include "Basic/UUID.h"
 //#include "Component/BehaviorComponent.h"
 #include "Component/Light.h"
+#include "Graphics/FrameRenderElement.h"
+#include "Global.h"
 
 namespace Nuwa
 {
 	Camera* GameScene::mainCamera;
 
 	GameScene::GameScene()
-		: name("New Game Scene"), id(UUID::Generate()), objMap(std::unordered_map<uint64, GameObject*>())
+		: name("New Game Scene"), id(UUID::Generate()), objMap(std::unordered_map<uint64, GameObject*>()),
+		frameRenderElement(new FrameRenderElement(Global::Resolution.x, Global::Resolution.y))
 	{
 	}
 
 	GameScene::GameScene(std::string name)
-		: name(name), id(UUID::Generate()), objMap(std::unordered_map<uint64, GameObject*>())
+		: name(name), id(UUID::Generate()), objMap(std::unordered_map<uint64, GameObject*>()),
+		frameRenderElement(new FrameRenderElement(Global::Resolution.x, Global::Resolution.y))
 	{
 	}
 
@@ -39,7 +43,6 @@ namespace Nuwa
 
 		objMap[gameObject->GetInstanceID()] = gameObject;
 		allObjs.push_back(gameObject);
-
 
 		for (auto comIter = gameObject->components.begin(); comIter != gameObject->components.end(); comIter++)
 		{
@@ -91,6 +94,9 @@ namespace Nuwa
 
 	void GameScene::Render()
 	{
+		//if (frameRenderElement)
+		//	frameRenderElement->Bind();
+
 		for (auto iter = objMap.begin(); iter != objMap.end(); iter++)
 		{
 			for (auto comIter = iter->second->components.begin(); comIter != iter->second->components.end(); comIter++)
@@ -104,15 +110,12 @@ namespace Nuwa
 			}
 		}
 
+		//if (frameRenderElement)
+		//	frameRenderElement->DrawToTexture();
 	}
 
 	std::vector<GameObject*> GameScene::GetAllGameObjects() const
 	{
-		//auto res = std::vector<GameObject*>();
-
-		//for (auto iter : objMap)
-		//	res.push_back(iter.second);
-
 		return allObjs;
 	}
 }

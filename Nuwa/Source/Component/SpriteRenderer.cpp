@@ -1,10 +1,5 @@
 #include "SpriteRenderer.h"
-#include "../Graphics/VertexArray.h"
-#include "../Graphics/VertexBuffer.h"
-#include "../Graphics/IndexBuffer.h"
-#include "../Graphics/Material.h"
-#include "../Graphics/Texture.h"
-#include "../Graphics/SpriteVertex.h"
+#include "../Graphics/GraphicTypes.h"
 
 namespace Nuwa
 {

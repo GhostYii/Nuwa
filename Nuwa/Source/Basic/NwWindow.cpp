@@ -5,6 +5,7 @@
 #include "../GUI.h"
 #include "../Time.h"
 #include "../EngineMacros.h"
+#include "../Graphics/ToyRenderer.h"
 
 Nuwa::NwWindow::NwWindow()
 	:config({ 640, 480, false, "Nuwa Window", {1.0f,1.0f,1.0f,1.0f} }), window(nullptr)
@@ -12,7 +13,7 @@ Nuwa::NwWindow::NwWindow()
 	if (!glfwInit())
 		spdlog::error("glfw init failed.");
 
-	renderer = new ToyRenderer();
+	//renderer = new ToyRenderer();
 }
 
 Nuwa::NwWindow::~NwWindow()
@@ -47,7 +48,7 @@ void Nuwa::NwWindow::Update()
 	float t = Time::GetTime();
 
 	GL_ASSERT(glClearColor(config.backgroundColor.r, config.backgroundColor.g, config.backgroundColor.b, config.backgroundColor.a));
-	renderer->Clear();
+	ToyRenderer::Clear();
 
 	OnUpdate();
 	OnRenderObject();

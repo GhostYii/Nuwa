@@ -1,13 +1,7 @@
 #ifdef NUWA_EDITOR
 
 #include "GizmosRenderer.h"
-#include "../../Graphics/VertexArray.h"
-#include "../../Graphics/VertexBuffer.h"
-#include "../../Graphics/IndexBuffer.h"
-#include "../../Graphics/Material.h"
-#include "../../Graphics/Texture.h"
-#include "../../Graphics/SpriteVertex.h"
-
+#include "../../Graphics/GraphicTypes.h"
 #include "../../GameObject.h"
 
 namespace Nuwa

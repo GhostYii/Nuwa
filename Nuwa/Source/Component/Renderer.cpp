@@ -2,29 +2,13 @@
 #include "Camera.h"
 
 #include "../GameScene.h"
-#include "../Graphics/VertexArray.h"
-#include "../Graphics/VertexBuffer.h"
-#include "../Graphics/IndexBuffer.h"
-//#include "../Graphics/Shader.h"
-#include "../Graphics/Material.h"
-#include "../Graphics/Texture.h"
+#include "../Graphics/GraphicTypes.h"
 
 namespace Nuwa
 {
 	Renderer::Renderer()
-		//:renderer(ToyRenderer())
 	{
 	}
-
-	//void Renderer::SetCamera(Camera* camera)
-	//{
-	//	drawCamera = std::shared_ptr<Camera>(camera);
-	//}
-
-	//Shader* Renderer::GetShader() const
-	//{
-	//	return shader.get();
-	//}
 
 	Material* Renderer::GetMaterial() const
 	{
@@ -47,16 +31,12 @@ namespace Nuwa
 #ifdef NUWA_EDITOR
 
 #endif // NUWA_EDITOR
-
 	}
 
 	void Renderer::Draw()
 	{
 		//if (!GameScene::mainCamera)
 		//	return;
-
-		//if (texture)
-		//	texture->Bind();
 
 		if (material)
 		{

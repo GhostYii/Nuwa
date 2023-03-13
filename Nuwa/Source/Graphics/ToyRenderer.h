@@ -10,9 +10,9 @@ namespace Nuwa
 
 	class ToyRenderer
 	{
-	public:		
-		void Draw(Nuwa::VertexArray* vao, Nuwa::IndexBuffer* ibo, Shader* shader) const;
-		void Clear() const;
+	public:
+		static void Draw(VertexArray* vao, IndexBuffer* ibo, Shader* shader);
+		static void Clear();
 	};
 }
 

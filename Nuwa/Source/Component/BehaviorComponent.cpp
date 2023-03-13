@@ -1,3 +1,4 @@
+#include "spdlog/fmt/fmt.h"
 #include "BehaviorComponent.h"
 #include "imgui/imgui.h"
 #include "../GameObject.h"
@@ -34,7 +35,7 @@ namespace Nuwa
 	{
 		ImGui::Indent();
 		//ImGui::Text("memery address: %llu", this);
-		ImGui::Checkbox("Enable", &enable);
+		ImGui::Checkbox(fmt::format("Enable##{}", instanceID).c_str(), &enable);
 		if (!enable)
 		{
 			ImGui::Unindent();
@@ -45,4 +46,3 @@ namespace Nuwa
 	}
 
 }
-

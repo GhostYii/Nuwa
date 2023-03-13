@@ -1,5 +1,6 @@
 #pragma once
-#include "ToyRenderer.h"
+#include "../EngineTypes.h"
+#include "../EngineMacros.h"
 
 namespace Nuwa
 {

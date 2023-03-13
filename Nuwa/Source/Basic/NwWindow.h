@@ -2,7 +2,7 @@
 #include "../EngineTypes.h"
 #include <GLFW/glfw3.h>
 
-#include "../Graphics/ToyRenderer.h"
+//#include "../Graphics/ToyRenderer.h"
 
 namespace Nuwa
 {
@@ -36,7 +36,6 @@ namespace Nuwa
 	protected:
 		GLFWwindow* window;
 		WindowConfig config;
-		ToyRenderer* renderer = nullptr;
 
 		virtual void OnStart() {}
 		virtual void OnGUI() {}
