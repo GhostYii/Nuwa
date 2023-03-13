@@ -25,19 +25,11 @@ namespace Nuwa
 		bool CheckState();
 
 		void AttachRenderTexture(uint width, uint height);
-		void AttachRenderBuffer(uint width, uint height);		
-
-		//void Apply();
-
-		//static uint CreateTextureAttachment(int width, int height);
-		//static uint* CreateColorAttachments(int width, int height, unsigned int nColorAttachments);
-		//static uint CreateDepthTextureAttachment(int width, int height);
-		//static uint CreateDepthBufferAttachment(int width, int height);
-		//static uint CreateRenderBufferAttachment(int width, int height);
+		void AttachRenderBuffer(uint width, uint height);
 
 	private:
 		void Create();
-		
+
 	private:
 		uint width, height;
 		std::vector<RenderTexture*> textureAttachments;

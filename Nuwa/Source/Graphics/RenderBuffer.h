@@ -16,6 +16,9 @@ namespace Nuwa
 		virtual void Clear() override;
 
 		void Bind(uint w, uint h);
+
+		inline uint GetRenderID() { return rendererID };
+
 	private:
 		void Create();
 

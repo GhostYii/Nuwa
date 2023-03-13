@@ -26,7 +26,7 @@ namespace Nuwa
 		if (!isInited)
 		{
 			GL_ASSERT(glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height));
-			//GL_ASSERT(glBindRenderbuffer(GL_RENDERBUFFER, GL_ZERO));
+			GL_ASSERT(glBindRenderbuffer(GL_RENDERBUFFER, GL_ZERO));
 
 			GL_ASSERT(glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rendererID));
 			isInited = true;

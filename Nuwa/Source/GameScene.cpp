@@ -1,6 +1,5 @@
 #include "GameScene.h"
 #include "Basic/UUID.h"
-//#include "Component/BehaviorComponent.h"
 #include "Component/Light.h"
 #include "Graphics/FrameRenderElement.h"
 #include "Global.h"
@@ -94,8 +93,8 @@ namespace Nuwa
 
 	void GameScene::Render()
 	{
-		//if (frameRenderElement)
-		//	frameRenderElement->Bind();
+		if (frameRenderElement)
+			frameRenderElement->Bind();
 
 		for (auto iter = objMap.begin(); iter != objMap.end(); iter++)
 		{
@@ -110,8 +109,8 @@ namespace Nuwa
 			}
 		}
 
-		//if (frameRenderElement)
-		//	frameRenderElement->DrawToTexture();
+		if (frameRenderElement)
+			frameRenderElement->Draw();
 	}
 
 	std::vector<GameObject*> GameScene::GetAllGameObjects() const

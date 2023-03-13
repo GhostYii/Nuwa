@@ -23,7 +23,7 @@ namespace Nuwa
 		// 指定fbo
 		void Bind();
 		// 渲染到纹理
-		void DrawToTexture();
+		void Draw();
 
 	public:
 		uint width, height;

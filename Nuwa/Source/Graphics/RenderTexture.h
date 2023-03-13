@@ -17,13 +17,13 @@ namespace Nuwa
 
 		void Bind(uint slot);
 
-		//void SetPosition(uint pos);
+		inline uint GetRenderID() { return rendererID; }
 
 	public:
 		uint width;
 		uint height;
 
-	private:		
+	private:
 		uint attachIndex;
 		mutable bool isInited;
 	private:
