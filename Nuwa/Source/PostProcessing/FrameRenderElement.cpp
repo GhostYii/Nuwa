@@ -1,7 +1,7 @@
 #include "FrameRenderElement.h"
-#include "ToyRenderer.h"
+#include "../Graphics/ToyRenderer.h"
 
-#include "Texture.h"
+#include "../Graphics/Texture.h"
 
 namespace Nuwa
 {

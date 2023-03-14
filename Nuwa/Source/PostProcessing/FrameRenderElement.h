@@ -1,10 +1,10 @@
 #pragma once
-#include "VertexArray.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "VertexLayout.h"
-#include "FrameBuffer.h"
-#include "Shader.h"
+#include "../Graphics/VertexArray.h"
+#include "../Graphics/VertexBuffer.h"
+#include "../Graphics/IndexBuffer.h"
+#include "../Graphics/VertexLayout.h"
+#include "../Graphics/FrameBuffer.h"
+#include "../Graphics/Shader.h"
 
 namespace Nuwa
 {
