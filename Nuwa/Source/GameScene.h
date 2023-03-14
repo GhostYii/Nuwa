@@ -43,8 +43,6 @@ namespace Nuwa
 		std::vector<GameObject*> allObjs;
 		std::unordered_map<uint64, GameObject*> objMap;
 
-		FrameRenderElement* frameRenderElement;
-
 	public:
 		static Camera* mainCamera;
 		

@@ -9,14 +9,12 @@ namespace Nuwa
 	Camera* GameScene::mainCamera;
 
 	GameScene::GameScene()
-		: name("New Game Scene"), id(UUID::Generate()), objMap(std::unordered_map<uint64, GameObject*>()),
-		frameRenderElement(new FrameRenderElement(Global::Resolution.x, Global::Resolution.y))
+		: name("New Game Scene"), id(UUID::Generate()), objMap(std::unordered_map<uint64, GameObject*>())
 	{
 	}
 
 	GameScene::GameScene(std::string name)
-		: name(name), id(UUID::Generate()), objMap(std::unordered_map<uint64, GameObject*>()),
-		frameRenderElement(new FrameRenderElement(Global::Resolution.x, Global::Resolution.y))
+		: name(name), id(UUID::Generate()), objMap(std::unordered_map<uint64, GameObject*>())
 	{
 	}
 
@@ -93,9 +91,6 @@ namespace Nuwa
 
 	void GameScene::Render()
 	{
-		if (frameRenderElement)
-			frameRenderElement->Bind();
-
 		for (auto iter = objMap.begin(); iter != objMap.end(); iter++)
 		{
 			for (auto comIter = iter->second->components.begin(); comIter != iter->second->components.end(); comIter++)
@@ -108,9 +103,6 @@ namespace Nuwa
 				}
 			}
 		}
-
-		if (frameRenderElement)
-			frameRenderElement->Draw();
 	}
 
 	std::vector<GameObject*> GameScene::GetAllGameObjects() const

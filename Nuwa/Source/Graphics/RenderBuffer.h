@@ -17,7 +17,7 @@ namespace Nuwa
 
 		void Bind(uint w, uint h);
 
-		inline uint GetRenderID() { return rendererID };
+		inline uint GetRenderID() { return rendererID; }
 
 	private:
 		void Create();
