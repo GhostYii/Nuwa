@@ -163,6 +163,7 @@
     <ClCompile Include="Source\Editor\LightSetting.cpp" />
     <ClCompile Include="Source\GameScene.cpp" />
     <ClCompile Include="Source\Global.cpp" />
+    <ClCompile Include="Source\Graphics\CubeMap.cpp" />
     <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="Source\PostProcessing\FrameRenderElement.cpp" />
     <ClCompile Include="Source\Graphics\Material.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Source\Graphics\VertexBuffer.cpp" />
     <ClCompile Include="Source\Basic\NwWindow.cpp" />
     <ClCompile Include="Source\GUI.cpp" />
+    <ClCompile Include="Source\Skybox.cpp" />
     <ClCompile Include="Source\Time.cpp" />
     <ClCompile Include="Source\Utils.cpp" />
     <ClCompile Include="Source\Graphics\VertexLayout.cpp" />
@@ -219,6 +221,7 @@
     <ClInclude Include="Source\Editor\LightSetting.h" />
     <ClInclude Include="Source\GameScene.h" />
     <ClInclude Include="Source\Global.h" />
+    <ClInclude Include="Source\Graphics\CubeMap.h" />
     <ClInclude Include="Source\Graphics\FrameBuffer.h" />
     <ClInclude Include="Source\PostProcessing\FrameRenderElement.h" />
     <ClInclude Include="Source\Graphics\GraphicTypes.h" />
@@ -243,6 +246,7 @@
     <ClInclude Include="Source\EngineMacros.h" />
     <ClInclude Include="Source\EngineTypes.h" />
     <ClInclude Include="Source\GUI.h" />
+    <ClInclude Include="Source\Skybox.h" />
     <ClInclude Include="Source\Time.h" />
     <ClInclude Include="Source\Utils.h" />
     <ClInclude Include="Source\Graphics\VertexLayout.h" />
@@ -294,6 +298,7 @@
     <None Include="Resources\Shaders\Default.vert" />
     <None Include="Resources\Shaders\DefaultPost.frag" />
     <None Include="Resources\Shaders\DefaultPost.vert" />
+    <None Include="Resources\Shaders\Skybox.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

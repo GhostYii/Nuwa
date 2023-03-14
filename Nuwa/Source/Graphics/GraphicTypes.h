@@ -11,3 +11,5 @@
 
 #include "MeshVertex.h"
 #include "SpriteVertex.h"
+
+#include "CubeMap.h"

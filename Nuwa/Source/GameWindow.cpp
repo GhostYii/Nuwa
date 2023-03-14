@@ -59,6 +59,7 @@ namespace Nuwa
 		if (!scene)
 		{
 			scene = new GameScene("Default Scene");
+			GameScene::CreateSkybox();
 
 #ifdef NUWA_EDITOR			
 			editor = new Editor::EditorMode();

@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Skybox.h"
 
 #ifdef NUWA_EDITOR
 #include "Editor/EditorViewTypes.h"
@@ -45,6 +46,10 @@ namespace Nuwa
 
 	public:
 		static Camera* mainCamera;
-		
+
+		static void CreateSkybox(const std::string filename = "Default");
+
+	private:
+		static Skybox* skybox;		
 	};
 }

@@ -1,12 +1,12 @@
 #include "GameScene.h"
 #include "Basic/UUID.h"
 #include "Component/Light.h"
-#include "Graphics/FrameRenderElement.h"
 #include "Global.h"
 
 namespace Nuwa
 {
-	Camera* GameScene::mainCamera;
+	Camera* GameScene::mainCamera = nullptr;
+	Skybox* GameScene::skybox = nullptr;
 
 	GameScene::GameScene()
 		: name("New Game Scene"), id(UUID::Generate()), objMap(std::unordered_map<uint64, GameObject*>())
@@ -103,10 +103,20 @@ namespace Nuwa
 				}
 			}
 		}
+
+		if (skybox)
+			skybox->Draw();
 	}
 
 	std::vector<GameObject*> GameScene::GetAllGameObjects() const
 	{
 		return allObjs;
+	}
+
+	void GameScene::CreateSkybox(const std::string filename)
+	{
+		if (skybox)
+			delete skybox;
+		skybox = new Skybox(filename);
 	}
 }

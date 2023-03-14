@@ -171,7 +171,13 @@
     <ClCompile Include="Source\Graphics\RenderTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\FrameRenderElement.cpp">
+    <ClCompile Include="Source\PostProcessing\FrameRenderElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\CubeMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Skybox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -428,7 +434,13 @@
     <ClInclude Include="Source\Graphics\RenderTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\FrameRenderElement.h">
+    <ClInclude Include="Source\PostProcessing\FrameRenderElement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\CubeMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Skybox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -440,5 +452,6 @@
     <None Include="Resources\Shaders\Default.frag" />
     <None Include="Resources\Shaders\DefaultPost.vert" />
     <None Include="Resources\Shaders\DefaultPost.frag" />
+    <None Include="Resources\Shaders\Skybox.shader" />
   </ItemGroup>
 </Project>
