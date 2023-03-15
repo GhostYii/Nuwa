@@ -52,6 +52,7 @@ namespace Nuwa
 		mutable std::unordered_map<std::string, int> uniformBlockLocationMap;
 
 		ShaderSource Parse();
+		uint CreateShader(const ShaderSource& source);
 		uint CreateShader(const std::string& vertex, const std::string& fragment);
 		uint Compile(uint type, const std::string& source);
 		void Link(uint program);

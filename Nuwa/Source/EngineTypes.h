@@ -24,11 +24,13 @@ namespace Nuwa
 	typedef glm::mat3x3 Matrix3x3;
 	typedef glm::mat4x4 Matrix4x4;
 
-	typedef glm::quat Quaternion;	
+	typedef glm::quat Quaternion;
 
 	struct ShaderSource
 	{
 		std::string vertex;
+		std::string tessllation;
+		std::string geometry;
 		std::string fragment;
 	};
 
@@ -36,6 +38,8 @@ namespace Nuwa
 	{
 		None = -1,
 		Vertex,
+		Tessellation,
+		Geometry,
 		Fragment
 	};
 
@@ -245,7 +249,7 @@ namespace Nuwa
 		Color0 = 0x8CE0,
 		Depth = 0x8D00,
 		Stencil = 0x8D20,
-		DepthStencil = 0x821A		
+		DepthStencil = 0x821A
 	};
 
 	struct CamMatrix

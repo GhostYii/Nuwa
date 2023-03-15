@@ -14,7 +14,7 @@ namespace Nuwa
 		: filepaths({ filepath })
 	{
 		auto source = Parse();
-		rendererID = CreateShader(source.vertex, source.fragment);
+		rendererID = CreateShader(source);
 	}
 
 	Shader::Shader(const std::string& vertFilePath, const std::string& fragFilePath)
@@ -176,7 +176,7 @@ namespace Nuwa
 		ShaderSource source;
 		ShaderType stype = ShaderType::None;
 
-		std::stringstream ss[2];
+		std::stringstream ss[4];
 		std::string line;
 		while (getline(stream, line))
 		{
@@ -186,6 +186,10 @@ namespace Nuwa
 					stype = ShaderType::Vertex;
 				else if (line.find("Fragment") != std::string::npos)
 					stype = ShaderType::Fragment;
+				else if (line.find("Geometry") != std::string::npos)
+					stype = ShaderType::Geometry;
+				//else if (line.find("Tessellation") != std::string::npos)
+				//	stype = ShaderType::Tessellation;
 			}
 			else
 			{
@@ -196,7 +200,37 @@ namespace Nuwa
 			}
 		}
 
-		return { ss[(int)ShaderType::Vertex].str(), ss[(int)ShaderType::Fragment].str() };
+		return
+		{
+			ss[(int)ShaderType::Vertex].str(),
+			ss[(int)ShaderType::Tessellation].str(),
+			ss[(int)ShaderType::Geometry].str(),
+			ss[(int)ShaderType::Fragment].str()
+		};
+	}
+
+	uint Shader::CreateShader(const ShaderSource& source)
+	{
+		uint program;
+
+		GL_ASSERT(program = glCreateProgram());
+		std::vector<uint> shaders;
+
+		if (!source.vertex.empty())	shaders.push_back(Compile(GL_VERTEX_SHADER, source.vertex));
+		//if (!source.tessllation.empty()) shaders.push_back(Compile(GL_TESSELLATION_SHADER, source.vertex));
+		if (!source.geometry.empty()) shaders.push_back(Compile(GL_GEOMETRY_SHADER, source.geometry));
+		if (!source.fragment.empty()) shaders.push_back(Compile(GL_FRAGMENT_SHADER, source.fragment));
+
+		for (auto& shader : shaders)
+			GL_ASSERT(glAttachShader(program, shader));
+		
+		Link(program);
+		Validate(program);
+
+		for (auto& shader : shaders)
+			GL_ASSERT(glDeleteShader(shader));
+
+		return program;
 	}
 
 	uint Shader::CreateShader(const std::string& vertex, const std::string& fragment)
