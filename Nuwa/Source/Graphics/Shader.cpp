@@ -176,7 +176,7 @@ namespace Nuwa
 		ShaderSource source;
 		ShaderType stype = ShaderType::None;
 
-		std::stringstream ss[4];
+		std::stringstream ss[(uint)ShaderType::MAX_COUNT];
 		std::string line;
 		while (getline(stream, line))
 		{
@@ -184,16 +184,20 @@ namespace Nuwa
 			{
 				if (line.find("Vertex") != std::string::npos)
 					stype = ShaderType::Vertex;
+				else if (line.find("TessControl") != std::string::npos)
+					stype = ShaderType::TessControl;
+				else if (line.find("TessEvalution") != std::string::npos)
+					stype = ShaderType::TessEvaluation;
 				else if (line.find("Fragment") != std::string::npos)
 					stype = ShaderType::Fragment;
 				else if (line.find("Geometry") != std::string::npos)
 					stype = ShaderType::Geometry;
-				//else if (line.find("Tessellation") != std::string::npos)
-				//	stype = ShaderType::Tessellation;
+				else
+					stype = ShaderType::None;
 			}
 			else
 			{
-				if (stype == ShaderType::None)
+				if (stype == ShaderType::None || stype == ShaderType::MAX_COUNT)
 					continue;
 
 				ss[(int)stype] << line << std::endl;
@@ -203,7 +207,8 @@ namespace Nuwa
 		return
 		{
 			ss[(int)ShaderType::Vertex].str(),
-			ss[(int)ShaderType::Tessellation].str(),
+			ss[(int)ShaderType::TessControl].str(),
+			ss[(int)ShaderType::TessEvaluation].str(),
 			ss[(int)ShaderType::Geometry].str(),
 			ss[(int)ShaderType::Fragment].str()
 		};
@@ -217,7 +222,8 @@ namespace Nuwa
 		std::vector<uint> shaders;
 
 		if (!source.vertex.empty())	shaders.push_back(Compile(GL_VERTEX_SHADER, source.vertex));
-		//if (!source.tessllation.empty()) shaders.push_back(Compile(GL_TESSELLATION_SHADER, source.vertex));
+		if (!source.tesscontrol.empty()) shaders.push_back(Compile(GL_TESS_CONTROL_SHADER, source.vertex));
+		if (!source.tessevaluation.empty()) shaders.push_back(Compile(GL_TESS_EVALUATION_SHADER, source.vertex));
 		if (!source.geometry.empty()) shaders.push_back(Compile(GL_GEOMETRY_SHADER, source.geometry));
 		if (!source.fragment.empty()) shaders.push_back(Compile(GL_FRAGMENT_SHADER, source.fragment));
 

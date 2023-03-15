@@ -29,7 +29,8 @@ namespace Nuwa
 	struct ShaderSource
 	{
 		std::string vertex;
-		std::string tessllation;
+		std::string tesscontrol;
+		std::string tessevaluation;
 		std::string geometry;
 		std::string fragment;
 	};
@@ -38,9 +39,11 @@ namespace Nuwa
 	{
 		None = -1,
 		Vertex,
-		Tessellation,
+		TessControl,
+		TessEvaluation,
 		Geometry,
-		Fragment
+		Fragment,
+		MAX_COUNT
 	};
 
 	struct VertexElement
