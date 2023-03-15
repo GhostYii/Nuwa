@@ -31,6 +31,11 @@ namespace Nuwa
 		Vector3 GetColor(const std::string& name) const;
 
 		bool HasUniform(const std::string& name);
+		bool HasUniformBlock(const std::string& name);
+
+		int GetUniformBlockIndex(const std::string& blockName) const;
+
+		void BindBlock(const std::string& blockName, const uint bindingPoint);
 
 		// Inherited via IBindable
 		virtual void Bind() const override;
@@ -44,6 +49,7 @@ namespace Nuwa
 	private:
 		std::vector<std::string> filepaths;
 		mutable std::unordered_map<std::string, int> uniformLocationMap;
+		mutable std::unordered_map<std::string, int> uniformBlockLocationMap;
 
 		ShaderSource Parse();
 		uint CreateShader(const std::string& vertex, const std::string& fragment);

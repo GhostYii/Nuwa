@@ -171,6 +171,7 @@
     <ClCompile Include="Source\Global.cpp" />
     <ClCompile Include="Source\Graphics\CubeMap.cpp" />
     <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\UniformBuffer.cpp" />
     <ClCompile Include="Source\PostProcessing\FrameRenderElement.cpp" />
     <ClCompile Include="Source\Graphics\Material.cpp" />
     <ClCompile Include="Source\Graphics\RenderBuffer.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="Source\Global.h" />
     <ClInclude Include="Source\Graphics\CubeMap.h" />
     <ClInclude Include="Source\Graphics\FrameBuffer.h" />
+    <ClInclude Include="Source\Graphics\UniformBuffer.h" />
     <ClInclude Include="Source\PostProcessing\FrameRenderElement.h" />
     <ClInclude Include="Source\Graphics\GraphicTypes.h" />
     <ClInclude Include="Source\Graphics\Material.h" />

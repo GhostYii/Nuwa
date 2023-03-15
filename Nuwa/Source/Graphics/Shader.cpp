@@ -117,6 +117,44 @@ namespace Nuwa
 		return true;
 	}
 
+	bool Shader::HasUniformBlock(const std::string& name)
+	{
+		if (uniformBlockLocationMap.find(name) != uniformBlockLocationMap.end())
+			return true;
+
+		int location = -1;
+		GL_ASSERT(location = glGetUniformBlockIndex(rendererID, name.c_str()));
+		if (location == -1)
+			return false;
+
+		return true;
+	}
+
+	int Shader::GetUniformBlockIndex(const std::string& blockName) const
+	{
+		if (uniformBlockLocationMap.find(blockName) != uniformBlockLocationMap.end())
+			return uniformBlockLocationMap[blockName];
+
+		int location = -1;
+		GL_ASSERT(location = glGetUniformBlockIndex(rendererID, blockName.c_str()));
+		if (location == -1)
+		{
+			spdlog::warn("uniform block {} doesnt exist.", blockName);
+			return location;
+		}
+
+		uniformBlockLocationMap[blockName] = location;
+		return location;
+	}
+
+	void Shader::BindBlock(const std::string& blockName, const uint bindingPoint)
+	{
+		if (!HasUniformBlock(blockName))
+			return;
+
+		GL_ASSERT(glUniformBlockBinding(rendererID, GetUniformBlockIndex(blockName), bindingPoint));
+	}
+
 	void Shader::Bind() const
 	{
 		GL_ASSERT(glUseProgram(rendererID));
