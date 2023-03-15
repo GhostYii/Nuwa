@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/matrix.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace Nuwa
 {
@@ -245,5 +246,11 @@ namespace Nuwa
 		Depth = 0x8D00,
 		Stencil = 0x8D20,
 		DepthStencil = 0x821A		
+	};
+
+	struct CamMatrix
+	{
+		Matrix4x4 proj;
+		Matrix4x4 view;
 	};
 }

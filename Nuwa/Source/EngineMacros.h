@@ -1,4 +1,10 @@
 #pragma once
+#ifdef NUWA_EXPORT
+#define NUWA_API __declspec(dllexport)
+#else
+#define NUWA_API __declspec(dllimport)
+#endif
+
 #include "Utils.h"
 
 #define ASSERT(x) if (!(x)) __debugbreak();
@@ -17,7 +23,9 @@
 #define NORMAL_MAP_INDEX 2
 #define EMISSION_MAP_INDEX 3
 
-//#define BPP_COUNT_RGBA 4
+#define UB_NAME_CAM_MAT "CameraMatrix"
+// uniform binding point - camera matrix
+#define UB_POINT_CAM_MAT 0
 
 #define CFG_SECTION_WINDOW "WINDOW"
 #define CFG_WIDTH "width"

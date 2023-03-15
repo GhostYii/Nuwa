@@ -55,7 +55,7 @@ namespace Nuwa
 	{
 		Bind();
 		// 注意：使用glBufferSubData之前必须先调用glBufferData
-		glBufferSubData(GL_UNIFORM_BUFFER, offset, size, data);
+		GL_ASSERT(glBufferSubData(GL_UNIFORM_BUFFER, offset, size, data));
 		Unbind();
 	}
 	

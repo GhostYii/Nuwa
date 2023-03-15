@@ -43,6 +43,8 @@ namespace Nuwa
 		if (!shader)
 			return;
 
+		shader->BindBlock(UB_NAME_CAM_MAT, UB_POINT_CAM_MAT);
+
 		shader->SetInt("material.diffuseMap", ALBEDO_MAP_INDEX);
 		shader->SetInt("material.specularMap", SPECULAR_MAP_INDEX);
 		shader->SetColor("material.plm.ambient", Global::AmbientColor);

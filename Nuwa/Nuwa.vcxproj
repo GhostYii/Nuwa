@@ -256,6 +256,7 @@
     <ClInclude Include="Source\GUI.h" />
     <ClInclude Include="Source\Skybox.h" />
     <ClInclude Include="Source\Time.h" />
+    <ClInclude Include="Source\UBO.h" />
     <ClInclude Include="Source\Utils.h" />
     <ClInclude Include="Source\Graphics\VertexLayout.h" />
     <ClInclude Include="Source\Graphics\Texture.h" />

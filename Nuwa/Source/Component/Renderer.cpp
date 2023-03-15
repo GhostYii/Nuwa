@@ -4,10 +4,16 @@
 #include "../GameScene.h"
 #include "../Graphics/GraphicTypes.h"
 
+#include "../UBO.h"
+
 namespace Nuwa
 {
+	//std::unique_ptr<UniformBuffer> Renderer::camMatUbo;
+
 	Renderer::Renderer()
 	{
+		if (!CameraMatrix)
+			CameraMatrix = std::make_unique<UniformBuffer>(sizeof(CamMatrix), UB_POINT_CAM_MAT);
 	}
 
 	Material* Renderer::GetMaterial() const
@@ -22,6 +28,12 @@ namespace Nuwa
 
 		if (!gameObject->IsActive())
 			return;
+
+		if (CameraMatrix)
+		{
+			CameraMatrix->SetData(0, glm::value_ptr(GameScene::mainCamera->GetProjectMatrix()), sizeof(Matrix4x4));
+			CameraMatrix->SetData(sizeof(Matrix4x4), glm::value_ptr(GameScene::mainCamera->GetViewMatrix()), sizeof(Matrix4x4));
+		}
 
 		Draw();
 	}
@@ -40,10 +52,7 @@ namespace Nuwa
 
 		if (material)
 		{
-			material->SetUniformValue<Matrix4x4>("model", transform->GetModelMatrix());
-			material->SetUniformValue<Matrix4x4>("view", GameScene::mainCamera->GetViewMatrix());
-			material->SetUniformValue<Matrix4x4>("proj", GameScene::mainCamera->GetProjectMatrix());
-			//material->SetUniformValue<Matrix4x4>("camMatrix", GameScene::mainCamera->GetProjectMatrix() * GameScene::mainCamera->GetViewMatrix());
+			material->SetUniformValue<Matrix4x4>("model", transform->GetModelMatrix());			
 			material->SetUniformValue<Vector3>("camPos", GameScene::mainCamera->transform->position);
 
 #ifdef NUWA_EDITOR
