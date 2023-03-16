@@ -10,6 +10,7 @@ namespace Nuwa
 	{
 	public:
 		Shader(const std::string& filepath);
+		Shader(const std::unordered_map<ShaderType, std::string> paths);
 		Shader(const std::string& vertFilePath, const std::string& fragFilePath);
 		virtual ~Shader();
 

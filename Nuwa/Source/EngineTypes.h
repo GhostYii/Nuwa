@@ -24,16 +24,7 @@ namespace Nuwa
 	typedef glm::mat3x3 Matrix3x3;
 	typedef glm::mat4x4 Matrix4x4;
 
-	typedef glm::quat Quaternion;
-
-	struct ShaderSource
-	{
-		std::string vertex;
-		std::string tesscontrol;
-		std::string tessevaluation;
-		std::string geometry;
-		std::string fragment;
-	};
+	typedef glm::quat Quaternion;	
 
 	enum class ShaderType
 	{
@@ -44,6 +35,30 @@ namespace Nuwa
 		Geometry,
 		Fragment,
 		MAX_COUNT
+	};
+
+	struct ShaderSource
+	{
+		std::string vertex;
+		std::string tesscontrol;
+		std::string tessevaluation;
+		std::string geometry;
+		std::string fragment;
+
+		void SetSource(ShaderType type, std::string source)
+		{
+			switch (type)
+			{
+				case ShaderType::None: break;
+				case ShaderType::Vertex: vertex = source;	break;
+				case ShaderType::TessControl: tesscontrol = source; break;
+				case ShaderType::TessEvaluation: tessevaluation = source; break;
+				case ShaderType::Geometry: geometry = source;	break;
+				case ShaderType::Fragment: fragment = source;	break;
+				case ShaderType::MAX_COUNT: break;
+				default: break;
+			}
+		}
 	};
 
 	struct VertexElement

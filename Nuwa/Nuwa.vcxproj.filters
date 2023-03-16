@@ -452,6 +452,9 @@
     <ClInclude Include="Source\UBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Nuwa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Default.shader" />

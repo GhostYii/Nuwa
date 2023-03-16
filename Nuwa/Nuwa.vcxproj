@@ -231,6 +231,7 @@
     <ClInclude Include="Source\Graphics\CubeMap.h" />
     <ClInclude Include="Source\Graphics\FrameBuffer.h" />
     <ClInclude Include="Source\Graphics\UniformBuffer.h" />
+    <ClInclude Include="Source\Nuwa.h" />
     <ClInclude Include="Source\PostProcessing\FrameRenderElement.h" />
     <ClInclude Include="Source\Graphics\GraphicTypes.h" />
     <ClInclude Include="Source\Graphics\Material.h" />

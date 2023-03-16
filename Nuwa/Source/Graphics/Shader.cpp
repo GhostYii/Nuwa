@@ -17,6 +17,14 @@ namespace Nuwa
 		rendererID = CreateShader(source);
 	}
 
+	Shader::Shader(const std::unordered_map<ShaderType, std::string> paths)
+	{
+		ShaderSource source;
+		for (auto iter : paths)
+			source.SetSource(iter.first, GetAllText(iter.second));
+		rendererID = CreateShader(source);
+	}
+
 	Shader::Shader(const std::string& vertFilePath, const std::string& fragFilePath)
 		: filepaths({ vertFilePath, fragFilePath })
 	{
@@ -229,7 +237,7 @@ namespace Nuwa
 
 		for (auto& shader : shaders)
 			GL_ASSERT(glAttachShader(program, shader));
-		
+
 		Link(program);
 		Validate(program);
 
