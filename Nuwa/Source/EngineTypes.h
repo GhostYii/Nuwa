@@ -11,6 +11,7 @@ namespace Nuwa
 {
 	typedef unsigned int uint;
 	typedef unsigned char uchar;
+	typedef unsigned char byte;
 	typedef unsigned short ushort;
 	typedef long long int64;
 	typedef unsigned long long uint64;

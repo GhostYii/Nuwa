@@ -191,6 +191,7 @@
     <ClCompile Include="Source\Basic\NwWindow.cpp" />
     <ClCompile Include="Source\GUI.cpp" />
     <ClCompile Include="Source\Skybox.cpp" />
+    <ClCompile Include="Source\Terrain\Terrain.cpp" />
     <ClCompile Include="Source\Time.cpp" />
     <ClCompile Include="Source\Utils.cpp" />
     <ClCompile Include="Source\Graphics\VertexLayout.cpp" />
@@ -256,6 +257,8 @@
     <ClInclude Include="Source\EngineTypes.h" />
     <ClInclude Include="Source\GUI.h" />
     <ClInclude Include="Source\Skybox.h" />
+    <ClInclude Include="Source\Terrain\Terrain.h" />
+    <ClInclude Include="Source\Terrain\TerrainVertex.h" />
     <ClInclude Include="Source\Time.h" />
     <ClInclude Include="Source\UBO.h" />
     <ClInclude Include="Source\Utils.h" />
@@ -309,6 +312,10 @@
     <None Include="Resources\Shaders\DefaultPost.frag" />
     <None Include="Resources\Shaders\DefaultPost.vert" />
     <None Include="Resources\Shaders\Skybox.shader" />
+    <None Include="Resources\Shaders\Terrain.frag" />
+    <None Include="Resources\Shaders\Terrain.tesc" />
+    <None Include="Resources\Shaders\Terrain.tese" />
+    <None Include="Resources\Shaders\Terrain.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

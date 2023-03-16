@@ -18,6 +18,7 @@
 #include "Component/CameraView.h"
 #include "Component/MeshFilter.h"
 
+#include "Terrain/Terrain.h"
 
 namespace Nuwa
 {
@@ -48,6 +49,7 @@ namespace Nuwa
 
 		GL_ASSERT(glEnable(GL_DEPTH_TEST));
 		GL_ASSERT(glEnable(GL_CULL_FACE));
+		//GL_ASSERT(glCullFace(GL_CCW));
 
 		// init input system
 		InputSystem::CreateInstance();
@@ -60,6 +62,8 @@ namespace Nuwa
 		{
 			scene = new GameScene("Default Scene");
 			GameScene::CreateSkybox();
+
+			//GL_ASSERT(glPolygonMode(GL_FRONT_AND_BACK, GL_LINE));
 
 #ifdef NUWA_EDITOR			
 			editor = new Editor::EditorMode();
@@ -128,11 +132,17 @@ namespace Nuwa
 			pointLight->SetGameScene(scene);
 			light2->AddComponent(pointLight);
 
+			GameObject* terrainObj = new GameObject("terrain");
+
+			auto terrainComp = new Terrain("Resources/Textures/iceland_heightmap.png", "Resources/Textures/terrain_grass.png");
+			terrainObj->AddComponent(terrainComp);
+
 			scene->AddGameObject(camera);
 			scene->AddGameObject(light);
 			scene->AddGameObject(light2);
 			scene->AddGameObject(test);
 			//scene->AddGameObject(test2);
+			scene->AddGameObject(terrainObj);
 		}
 	}
 
