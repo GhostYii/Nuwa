@@ -15,3 +15,4 @@
 #include "Skybox.h"
 
 #include "Graphics/GraphicTypes.h"
+#include "Graphics/ToyRenderer.h"

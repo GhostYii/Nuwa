@@ -1,7 +1,9 @@
 #ifdef NUWA_EDITOR
 
+#include "Editor.h"
 #include "EditorGUI.h"
 #include "glm/gtc/type_ptr.hpp"
+#include "../GameScene.h"
 
 namespace Nuwa
 {
@@ -19,6 +21,14 @@ namespace Nuwa
 
 		void EditorGUI::RenderGUI()
 		{
+			switch (EditorMode::currentDrawMode)
+			{
+				case 0: GL_ASSERT(glPolygonMode(GL_FRONT_AND_BACK, GL_POINT)); break;
+				case 1: GL_ASSERT(glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)); break;
+				case 2: GL_ASSERT(glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)); break;
+				default:GL_ASSERT(glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)); break;
+			}
+
 			if (isOpen)
 			{
 				if (!ImGui::Begin(title.c_str(), &isOpen, ImGuiWindowFlags_NoCollapse))
@@ -30,10 +40,11 @@ namespace Nuwa
 					ImGui::AlignTextToFramePadding();
 					OnGUI();
 					ImGui::End();
-				}				
+				}
 			}
 
-			OnGizmos();
+			if (EditorMode::isShowGizmos)
+				OnGizmos();
 		}
 
 		void EditorGUI::DrawDragFloat(std::string name, float& value)
@@ -59,15 +70,15 @@ namespace Nuwa
 			ImGui::SetColumnWidth(0, EDITOR_DEFAULT_TITLE_WIDTH);
 			ImGui::Text(name.c_str());
 			ImGui::NextColumn();
-			
+
 			ImGui::AlignTextToFramePadding();
-			ImGui::SliderFloat(("##" + name).c_str(), &value, min, max);			
+			ImGui::SliderFloat(("##" + name).c_str(), &value, min, max);
 			ImGui::Columns();
 			ImGui::PopID();
 
 			ImGui::SameLine();
 			ImGui::SetNextItemWidth(EDITOR_DEFAULT_DRAG_WIDTH);
-			ImGui::DragFloat(("##" + name).c_str(), &value, 0.1f, min, max, "%.2f");			
+			ImGui::DragFloat(("##" + name).c_str(), &value, 0.1f, min, max, "%.2f");
 		}
 
 		void EditorGUI::DrawDragInt(std::string name, int& value)

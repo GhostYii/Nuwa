@@ -15,9 +15,7 @@ namespace Nuwa
 			 
 		protected:
 			virtual void OnGizmos() override;
-
-		private:
-
+			virtual void OnGUI() override;
 		};
 	}
 }

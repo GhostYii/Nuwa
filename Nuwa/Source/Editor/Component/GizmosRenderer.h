@@ -15,6 +15,9 @@ namespace Nuwa
 
 		private:
 			std::string path;
+
+		protected:
+			virtual void InternalRender() override;
 		};
 	}
 

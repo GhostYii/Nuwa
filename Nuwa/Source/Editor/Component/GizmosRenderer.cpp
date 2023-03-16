@@ -42,13 +42,19 @@ namespace Nuwa
 
 			material = std::make_shared<Material>(new Shader("Resources/Editor/Shader/gizmos.vert", "Resources/Editor/Shader/gizmos.frag"));
 			material->SetUniformValue<int>("gizmos.tex", ALBEDO_MAP_INDEX);
-			material->SetUniformValue<Vector4>("gizmos.displayColor", Vector4(1.0));			
-			
+			material->SetUniformValue<Vector4>("gizmos.displayColor", Vector4(1.0));
+
 			material->SetAlbedoMap(iconPath);
 		}
 
 		GizmosRenderer::~GizmosRenderer()
 		{
+		}
+
+		void GizmosRenderer::InternalRender()
+		{
+			if (EditorMode::isShowGizmos)
+				Renderer::InternalRender();
 		}
 	}
 }

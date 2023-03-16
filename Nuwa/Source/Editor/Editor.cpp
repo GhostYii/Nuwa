@@ -12,6 +12,8 @@ namespace Nuwa
 		Nuwa::GameScene* EditorMode::currentScene = nullptr;
 		uint64 EditorMode::currentSelectionID = 0;
 		ImGuizmo::OPERATION EditorMode::currentGizmosOperation = ImGuizmo::TRANSLATE;
+		bool EditorMode::isShowGizmos = true;
+		int EditorMode::currentDrawMode = 2;
 
 		EditorMode::EditorMode()
 		{
@@ -69,6 +71,14 @@ namespace Nuwa
 			else if (Input::GetKeyDown(KeyCode::L))
 			{
 				for (auto iter : editorGUIs) if (iter->title == "Light Setting")
+				{
+					iter->isOpen = !iter->isOpen;
+					break;
+				}
+			}
+			else if (Input::GetKeyDown(KeyCode::V))
+			{
+				for (auto iter : editorGUIs) if (iter->title == "Game View")
 				{
 					iter->isOpen = !iter->isOpen;
 					break;

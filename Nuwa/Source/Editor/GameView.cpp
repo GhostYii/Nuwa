@@ -80,6 +80,13 @@ namespace Nuwa
 			}
 
 		}
+
+		void GameView::OnGUI()
+		{
+			const char* items[] = { "Point", "Line", "Fill" };
+			DrawCombo("Draw Mode", &EditorMode::currentDrawMode, items, 3);
+			DrawToggle("Show Gizmos", EditorMode::isShowGizmos);
+		}
 	}
 }
 

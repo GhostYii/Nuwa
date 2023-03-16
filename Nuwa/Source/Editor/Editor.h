@@ -35,6 +35,9 @@ namespace Nuwa
 			static GameScene* currentScene;
 			static void SetCurrentScene(Nuwa::GameScene* scene);
 
+			static bool isShowGizmos;
+			static int currentDrawMode;
+
 		private:
 			std::vector<EditorGUI*> editorGUIs;
 		};
