@@ -119,4 +119,9 @@ namespace Nuwa
 			delete skybox;
 		skybox = new Skybox(filename);
 	}
+
+	Skybox* GameScene::GetSkybox()
+	{
+		return skybox;
+	}
 }

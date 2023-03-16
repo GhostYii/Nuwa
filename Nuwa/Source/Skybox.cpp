@@ -35,7 +35,7 @@ namespace Nuwa
 	};
 
 	Skybox::Skybox()
-		:filename("default"), vao(nullptr), ibo(nullptr), shader(nullptr), cubemap(nullptr)
+		:filename("default"), vao(nullptr), ibo(nullptr), shader(nullptr), cubemap(nullptr), enable(true)
 	{
 		Create();
 	}
@@ -56,7 +56,7 @@ namespace Nuwa
 
 	void Skybox::Draw()
 	{
-		if (!vao || !GameScene::mainCamera)
+		if (!enable || !vao || !GameScene::mainCamera)
 			return;
 
 		GL_ASSERT(glDepthFunc(GL_LEQUAL));

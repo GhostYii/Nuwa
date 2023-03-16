@@ -19,6 +19,9 @@ namespace Nuwa
 
 		void Draw();
 
+	public:
+		bool enable;
+
 	private:
 		std::string filename;
 

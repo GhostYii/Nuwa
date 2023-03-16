@@ -48,6 +48,7 @@ namespace Nuwa
 		static Camera* mainCamera;
 
 		static void CreateSkybox(const std::string filename = "Default");
+		static Skybox* GetSkybox();
 
 	private:
 		static Skybox* skybox;		

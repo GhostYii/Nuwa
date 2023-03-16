@@ -29,6 +29,10 @@ namespace Nuwa
 				default:GL_ASSERT(glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)); break;
 			}
 
+			auto skybox = GameScene::GetSkybox();
+			if (skybox)
+				skybox->enable = EditorMode::currentDrawMode == 2;
+
 			if (isOpen)
 			{
 				if (!ImGui::Begin(title.c_str(), &isOpen, ImGuiWindowFlags_NoCollapse))
