@@ -12,8 +12,8 @@ namespace Nuwa
 
 	Renderer::Renderer()
 	{
-		if (!CameraMatrix)
-			CameraMatrix = std::make_unique<UniformBuffer>(sizeof(CamMatrix), UB_POINT_CAM_MAT);
+		if (!UBO::CameraMatrix)
+			UBO::CameraMatrix = std::make_unique<UniformBuffer>(sizeof(CamMatrix), UB_POINT_CAM_MAT);
 	}
 
 	Material* Renderer::GetMaterial() const
@@ -29,10 +29,10 @@ namespace Nuwa
 		if (!gameObject->IsActive())
 			return;
 
-		if (CameraMatrix)
+		if (UBO::CameraMatrix)
 		{
-			CameraMatrix->SetData(0, glm::value_ptr(GameScene::mainCamera->GetProjectMatrix()), sizeof(Matrix4x4));
-			CameraMatrix->SetData(sizeof(Matrix4x4), glm::value_ptr(GameScene::mainCamera->GetViewMatrix()), sizeof(Matrix4x4));
+			UBO::CameraMatrix->SetData(0, glm::value_ptr(GameScene::mainCamera->GetProjectMatrix()), sizeof(Matrix4x4));
+			UBO::CameraMatrix->SetData(sizeof(Matrix4x4), glm::value_ptr(GameScene::mainCamera->GetViewMatrix()), sizeof(Matrix4x4));
 		}
 
 		Draw();

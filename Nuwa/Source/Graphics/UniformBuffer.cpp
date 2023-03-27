@@ -13,8 +13,9 @@ namespace Nuwa
 	}
 
 	UniformBuffer::~UniformBuffer()
-	{
-		Clear();
+	{		
+		glBindBuffer(GL_UNIFORM_BUFFER, GL_ZERO);
+		glDeleteBuffers(1, &rendererID);
 	}
 
 	void UniformBuffer::Bind() const
@@ -35,7 +36,7 @@ namespace Nuwa
 	void UniformBuffer::Clear()
 	{
 		Unbind();
-		GL_ASSERT(glDeleteBuffers(1, &rendererID));
+		GL_ASSERT(glDeleteBuffers(1, &rendererID));		
 	}
 
 	void UniformBuffer::Bind(uint point)
