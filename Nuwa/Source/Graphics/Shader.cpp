@@ -42,7 +42,7 @@ namespace Nuwa
 			return;
 
 		Bind();
-		GL_ASSERT(glUniform1i(GetUniformLocation(name), value));
+		GL_ASSERT(glUniform1i(GetUniformLocation(name), value));		
 	}
 
 	void Shader::SetFloat(const std::string& name, float value)

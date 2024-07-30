@@ -20,6 +20,11 @@
 
 #include "Terrain/Terrain.h"
 
+#ifdef NUWA_EDITOR
+#include "Editor/Component/InfiniteGridRenderer.h"
+#endif // NUWA_EDITOR
+
+
 namespace Nuwa
 {
 	GameWindow::GameWindow(const WindowConfig& config)
@@ -81,7 +86,8 @@ namespace Nuwa
 		{
 			// create camera
 			GameObject* camera = new GameObject("camera");
-			camera->transform.position.z = 2.0f;
+			camera->transform.position.z = -2.0f;
+			camera->transform.eulerAngles.y = -180.0f;
 
 			Camera* cam = new Camera();
 			camera->AddComponent(cam);
@@ -137,12 +143,23 @@ namespace Nuwa
 			auto terrainComp = new Terrain("Resources/Textures/iceland_heightmap.png", "Resources/Textures/terrain_grass.png");
 			terrainObj->AddComponent(terrainComp);
 
+
+
 			scene->AddGameObject(camera);
 			scene->AddGameObject(light);
 			scene->AddGameObject(light2);
 			scene->AddGameObject(test);
 			//scene->AddGameObject(test2);
 			scene->AddGameObject(terrainObj);
+
+#ifdef NUWA_EDITOR
+			GameObject* editorGrid = new GameObject("EDITOR_GRID");
+			editorGrid->AddComponent(new InfiniteGridRenderer());
+
+			scene->AddGameObject(editorGrid);
+#endif // NUWA_EDITOR
+
+
 		}
 	}
 

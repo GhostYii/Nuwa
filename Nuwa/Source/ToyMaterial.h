@@ -1,48 +1,16 @@
 #pragma once
-#include "Shader.h"
-#include <unordered_set>
-#include "../EngineTypes.h"
-#include "../EngineMacros.h"
-#include "spdlog/spdlog.h"
+#include "Graphics/Shader.h"
 
 namespace Nuwa
 {
-	class Texture;
-	class Light;
-
-	class Material
+	class ToyMaterial
 	{
-		friend class Renderer;
-		friend class Light;
 	public:
-		Material();
-		Material(Shader* shader);
-		virtual ~Material();
+		ToyMaterial();
+		~ToyMaterial();
 
-	public:
-		//Vector4 baseColor;
-		std::string albedoMap;
+		bool HasShader() const;
 
-		//// [0, 1]
-		//float matallic;
-		//// [0, 1]
-		//float smoothness;
-		//std::string metallicMap;
-		std::string specularMap;
-		//std::string normalMap;
-		//std::string emissionMap;
-
-		//Vector2 tiling;
-		//Vector2 offset;
-
-		void SetShader(Shader* shader);
-		void SetAlbedoMap(std::string path);
-		void SetSpecularMap(std::string path);
-		//void SetNormalMap(std::string path);
-		//void SetEmissionMap(std::string path);
-
-		std::vector<std::string> GetShaderPaths() const;
-		
 #pragma region SetUniformValue
 		template<typename T>
 		inline void SetUniformValue(const std::string& name, T value)
@@ -90,15 +58,8 @@ namespace Nuwa
 			shader->SetMatrix4x4(name, value);
 		}
 #pragma endregion
+
 	private:
-		Shader* shader;
-		Texture* textures[MAX_TEXTURE_COUNT];
-		std::unordered_map<LightType, std::unordered_set<Light*>> lights;
-
-		void AddLight(Light* light);
-		void RemoveLight(Light* light);
-
-		void Apply();
-		void Cancel();
+		std::shared_ptr<Shader> shader;
 	};
 }

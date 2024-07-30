@@ -16,6 +16,6 @@ uniform MVP mvp;
 
 void main()
 {
-	gl_Position = mvp.proj * mvp.view * mvp.model * vec4(position, 1.0);
-	uv = texcoord;
+	gl_Position = mvp.proj * mvp.view * mvp.model * vec4(position, 1.0);	
+	uv = texcoord;	
 }

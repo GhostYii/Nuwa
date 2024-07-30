@@ -139,6 +139,14 @@ namespace Nuwa
 
 	}
 
+	void Material::Cancel()
+	{
+		if (!shader)
+			return;
+
+		shader->Unbind();
+	}
+
 	void Material::AddLight(Light* light)
 	{
 		if (!light)

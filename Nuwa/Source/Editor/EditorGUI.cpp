@@ -31,7 +31,7 @@ namespace Nuwa
 
 			auto skybox = GameScene::GetSkybox();
 			if (skybox)
-				skybox->enable = EditorMode::currentDrawMode == 2;
+				skybox->enable = EditorMode::currentDrawMode == 2;				
 
 			if (isOpen)
 			{

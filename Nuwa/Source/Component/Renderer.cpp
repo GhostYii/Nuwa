@@ -71,5 +71,8 @@ namespace Nuwa
 
 		if (vao && ibo)
 			GL_ASSERT(glDrawElements(GL_TRIANGLES, ibo->Count(), GL_UNSIGNED_INT, nullptr));
+
+		if (material)
+			material->Cancel();
 	}
 }

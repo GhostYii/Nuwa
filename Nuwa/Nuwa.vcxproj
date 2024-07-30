@@ -151,6 +151,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Editor\Component\InfiniteGridRenderer.cpp" />
     <ClCompile Include="Source\Basic\INIConfig.cpp" />
     <ClCompile Include="Source\Component\BehaviorComponent.cpp" />
     <ClCompile Include="Source\Component\Camera.cpp" />
@@ -210,6 +211,7 @@
     <ClCompile Include="Source\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Editor\Component\InfiniteGridRenderer.h" />
     <ClInclude Include="Source\Basic\INIConfig.h" />
     <ClInclude Include="Source\Component\BehaviorComponent.h" />
     <ClInclude Include="Source\Component\Camera.h" />
@@ -311,6 +313,7 @@
     <None Include="Resources\Shaders\Default.vert" />
     <None Include="Resources\Shaders\DefaultPost.frag" />
     <None Include="Resources\Shaders\DefaultPost.vert" />
+    <None Include="Resources\Editor\Shader\infinite_grid.shader" />
     <None Include="Resources\Shaders\Skybox.shader" />
     <None Include="Resources\Shaders\Terrain.frag" />
     <None Include="Resources\Shaders\Terrain.tesc" />

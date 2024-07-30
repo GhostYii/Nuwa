@@ -186,6 +186,9 @@
     <ClCompile Include="Source\Terrain\Terrain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Editor\Component\InfiniteGridRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Utils.h">
@@ -464,6 +467,9 @@
     <ClInclude Include="Source\Terrain\TerrainVertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Editor\Component\InfiniteGridRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Default.shader" />
@@ -478,5 +484,6 @@
     <None Include="Resources\Shaders\Terrain.tesc" />
     <None Include="Resources\Shaders\Terrain.tese" />
     <None Include="Resources\Shaders\Terrain.frag" />
+    <None Include="Resources\Editor\Shader\infinite_grid.shader" />
   </ItemGroup>
 </Project>

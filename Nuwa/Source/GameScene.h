@@ -13,7 +13,7 @@ namespace Nuwa
 	class FrameRenderElement;
 
 	class GameScene
-	{		
+	{
 		friend class GameWindow;
 	public:
 		GameScene();
@@ -32,13 +32,13 @@ namespace Nuwa
 		//void RemoveGameObject(const uint64 gameObjectID);		
 
 		//void Save();	
-		
+
 		void Update();
 		void Render();
 
 		std::vector<GameObject*> GetAllGameObjects() const;
-		
-	private:		
+
+	private:
 		uint64 id;
 
 		std::vector<GameObject*> allObjs;
@@ -51,6 +51,6 @@ namespace Nuwa
 		static Skybox* GetSkybox();
 
 	private:
-		static Skybox* skybox;		
+		static Skybox* skybox;
 	};
 }
